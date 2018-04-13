@@ -25,17 +25,7 @@ app.get('/', (req, res) => {
 
 app.post('/send', (req, res) =>{
 	const output = ` 
-	<p>You have a new contact request</p>
-	<h3> contact details</h3>
-	<ul>
-		<li>Name:${req.body.name}</li>
-		<li>Company:${req.body.company}</li>
-		<li>Email:${req.body.email}</li>
-		<li>Phone:${req.body.phone}</li>
-
-		</ul>
-		<h3>Message</h3>
-		<p>Message:${req.body.message}</p>
+	<p>This is an automated alert message from Checkpoint. ${req.body.name} is currently on the ${req.body.track}. Their estimated time of arrival was ${req.body.time}, it is now ${req.body.contactbythistime} and they have not checked in on our app. If possible, please make contact with ${req.body.name}, otherwise alert the emergency services.</p>
 	`;
 
 
@@ -51,8 +41,8 @@ var transporter = nodemailer.createTransport({
     let mailOptions = {
         from: '"Checkpoint" <checkpointapp@outlook.com>', // sender address
         to: 'kiwimade.sw@gmail.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
+        subject: 'Checkpoint App Alert', // Subject line
+        text: '', // plain text body
         html: output // html body
     };
 
