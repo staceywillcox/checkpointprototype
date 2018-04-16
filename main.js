@@ -20,14 +20,20 @@ function submitForm(e){
 	e.preventDefault();
 
 //get values
-	var name = getInputVal('name');
-	var company = getInputVal('company');
-	var email = getInputVal('email');
-	var phone = getInputVal('phone');
-	var message = getInputVal('message');
-	
+	var track = getInputVal('track');
+	var time = getInputVal('time');
+	var start = getInputVal('start');
+	var end = getInputVal('end');
+	var history = getInputVal('history');
+	var contact = getInputVal('contact');
+	var timestamp = Date.now();
+
+
+
+
+
 	//save message
-	saveMessage(name, company, email, phone, message);
+	saveMessage(track, time, start, end, history, contact, timestamp);
 
 	//Show alert
 	document.querySelector('.alert').style.display = 'block';
@@ -48,15 +54,23 @@ function getInputVal(id){
 
 //Save message to firebase
 
-function saveMessage(name, company, email, phone, message){
+function saveMessage(track, time, start, end, history, contact, timestamp){
 	var newMessageRef = messagesRef.push();
 	newMessageRef.set({
-		name:name,
-		company:company,
-		email:email,
-		phone:phone,
-		message:message
+		track:track,
+		time:time,
+		start:start,
+		end:end, 
+		history:history,
+		contact:contact,
+		timestamp: timestamp
 	});
 }
+
+
+console.log=contactForm
+
+
+
 
 
