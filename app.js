@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 app.post('/send', (req, res) =>{
 	const output = ` 
-	<p>This is an automated alert message from Checkpoint. ${req.body.name} is currently on the ${req.body.track}. Their estimated time of arrival was ${req.body.time}, it is now ${req.body.contactbythistime} and they have not checked in on our app. If possible, please make contact with ${req.body.name}, otherwise alert the emergency services.</p>
+	<p>This is an automated alert message from Checkpoint. ${req.body.name} is currently on the ${req.body.track}. Their estimated time of arrival was ${req.body.end}, it is now ${req.body.messagetime} later and they have not checked in on our app. If possible, please make contact with ${req.body.name}, otherwise alert the emergency services.</p>
 	`;
 
 
