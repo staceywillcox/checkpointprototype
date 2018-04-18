@@ -57,19 +57,41 @@ btnLogout.addEventListener('click', e => {
       newtrip.classList.remove('hide');
       loginpage.classList.add('hide');
 
+
       var user = firebase.auth().currentUser;
       if (user != null){
-        var email_id = user.email;
-        document.getElementById("user_para").innerHTML = "Welcome User: " + email_id;
+        document.getElementById("user_para").innerHTML = "Welcome User: " ;
       }
     } else {
       console.log('not logged in');
       btnLogout.classList.add('hide');
       newtrip.classList.add('hide');
       loginpage.classList.remove('hide');
+      user_data.classList.add('hide'); 
     }
  });
 
+var rootRef = firebase.database().ref();
+var tracksRef = rootRef.child("tracks");
+tracksRef.once("value", function(snapshot) {
+  snapshot.forEach(function(child) {
+    console.log(child.key+": "+child.val());
+  });
+});
+
+tracksRef.on("child_added", function(snapshot, prevChildKey) {
+  var newPost = snapshot.val();
+  console.log("Track: " + newPost.track);
+  console.log("Time: " + newPost.time);
+  console.log("Start: " + newPost.start);
+  console.log("End: " + newPost.end);
+  console.log("History: " + newPost.history);
+  console.log("Contact: " + newPost.contact);        
+  console.log("Previous Post ID: " + prevChildKey);
+  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact; 
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
 
 
   // Reference messages collection
@@ -98,6 +120,9 @@ function submitForm(e){
 	//Show alert
 	document.querySelector('.alert').style.display = 'block';
 
+  newtrip.classList.add('hide');
+  user_data.classList.remove('hide'); 
+
 	//Hide alert after 3 seconds
 	setTimeout(function(){
 	document.querySelector('.alert').style.display = 'none';	
@@ -105,6 +130,8 @@ function submitForm(e){
 
 	//Clear form
 	document.getElementById('contactForm').reset();
+
+
 }
 
 //function to get form values
