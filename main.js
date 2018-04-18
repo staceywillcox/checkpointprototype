@@ -25,7 +25,10 @@
     const auth = firebase.auth();
     //Sign in
     const promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));
+    promise.catch(e => console.log(e.message))
+    .then(function(user){
+      alert(user.uid)
+    });
   });
 
   btnSignup.addEventListener('click', e =>{
@@ -37,6 +40,8 @@
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message));
   });
+
+
 
 
 btnLogout.addEventListener('click', e => {
@@ -51,6 +56,12 @@ btnLogout.addEventListener('click', e => {
       btnLogout.classList.remove('hide');
       newtrip.classList.remove('hide');
       loginpage.classList.add('hide');
+
+      var user = firebase.auth().currentUser;
+      if (user != null){
+        var email_id = user.email;
+        document.getElementById("user_para").innerHTML = "Welcome User: " + email_id;
+      }
     } else {
       console.log('not logged in');
       btnLogout.classList.add('hide');
@@ -62,13 +73,14 @@ btnLogout.addEventListener('click', e => {
 
 
   // Reference messages collection
-  var messagesRef = firebase.database().ref('messages');
+  var messagesRef = firebase.database().ref('tracks');
 
 // listen for form submit
 document.getElementById('contactForm').addEventListener('submit', submitForm);
 
 //Submit form
 function submitForm(e){
+
 	e.preventDefault();
 //get values
 	var track = getInputVal('track');
@@ -78,6 +90,7 @@ function submitForm(e){
 	var history = getInputVal('history');
 	var contact = getInputVal('contact');
 	var timestamp = Date.now();
+
 
 	//save message
 	saveMessage(track, time, start, end, history, contact, timestamp);
@@ -111,6 +124,7 @@ function saveMessage(track, time, start, end, history, contact, timestamp){
 		history:history,
 		contact:contact,
 		timestamp: timestamp
+
 	});
 }
 
