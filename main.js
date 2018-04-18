@@ -60,14 +60,14 @@ btnLogout.addEventListener('click', e => {
 
       var user = firebase.auth().currentUser;
       if (user != null){
-        document.getElementById("user_para").innerHTML = "Welcome User: " ;
+
       }
     } else {
       console.log('not logged in');
       btnLogout.classList.add('hide');
       newtrip.classList.add('hide');
       loginpage.classList.remove('hide');
-      user_data.classList.add('hide'); 
+      mytrip.classList.add('hide'); 
     }
  });
 
@@ -121,7 +121,7 @@ function submitForm(e){
 	document.querySelector('.alert').style.display = 'block';
 
   newtrip.classList.add('hide');
-  user_data.classList.remove('hide'); 
+  mytrip.classList.remove('hide'); 
 
 	//Hide alert after 3 seconds
 	setTimeout(function(){
