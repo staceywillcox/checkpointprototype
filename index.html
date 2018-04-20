@@ -13,6 +13,7 @@
 <body>
  <div id="pagewrap"> 
   <div id="loginpage" class="container hide">
+    <input id="txtName" type="text" placeholder="Name">
     <input id="txtEmail" type="email" placeholder="Email">
 
     <input id="txtPassword" type="password" placeholder="Password">
@@ -107,39 +108,47 @@
   <div id="checkinpage" class="container hide">
     <h1 class="brand">Check In</h1>
     <div class="bodystyle">
-      <input type="checkbox">
-      <label class="checkbox">I have arrived at my destination
-      <span class="checkmark"></span>
-      </label>
-      
-        <input type="checkbox">
-        <label class="checkbox">I am taking longer than expected
-        <span class="checkmark"></span>
-      </label>
-        <input type="checkbox">
-         <label class="checkbox">I need help
-        <span class="checkmark"></span>
-      </label>
+      <form action="">
+        <div class="checkoptions">
+          <label class="checkbox">I have arrived at my destination
+            <input type="radio" name="status" value="checkin">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <br>
+        <div class="checkoptions">
+          <label class="checkbox">I am taking longer than expected
+            <input type="radio" name="status" value="longer">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <br>
+        <div class="checkoptions">
+          <label class="checkbox">I need help
+            <input type="radio" name="status" value="help">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <p class="full" id="status">
+          <button type="submit"  class="submitbutton">Update Status</button>
+        </p>  
+      </form>  
     </div>
   </div>
-  <div id="weatherpage" class="container hide">
-  <h1 class="brand">Weather</h1>
-    <div class="bodystyle">
-  </div>
 
-  <div id="weatherpage" class="container hide">
+<div id="weatherpage" class="container hide">
   <h1 class="brand">Weather</h1>
-    <div class="bodystyle">
+    <div class="bodystyle"></div>
   </div>
 
   <div id="profilepage" class="container hide">
   <h1 class="brand">Profile</h1>
-    <div class="bodystyle">
+    <div class="bodystyle"></div>
   </div>
 
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
-    <div class="bodystyle">
+    <div class="bodystyle"></div>
   </div>
 
 

@@ -7,9 +7,14 @@
     storageBucket: "checkpoint-85d60.appspot.com",
     messagingSenderId: "317796910275"
   };
+  // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+
+
   firebase.initializeApp(config);
 
+
   //Get elements
+  const txtName = document.getElementById('txtName');
   const txtEmail = document.getElementById('txtEmail');
   const txtPassword = document.getElementById('txtPassword');
   const btnLogin = document.getElementById('btnLogin');
@@ -74,11 +79,7 @@ btnLogout.addEventListener('click', e => {
 // MY TRIP PAGE
 var rootRef = firebase.database().ref();
 var tracksRef = rootRef.child("tracks");
-tracksRef.once("value", function(snapshot) {
-  snapshot.forEach(function(child) {
-    console.log(child.key+": "+child.val());
-  });
-});
+
 
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
@@ -103,7 +104,41 @@ checkinbutton.addEventListener('click', e => {
   settingspage.classList.add('hide');    
 });
 
+// NEW TRIP PAGE
+mytripbutton.addEventListener('click', e => {
+  checkinpage.classList.add('hide');
+  newtrippage.classList.remove('hide');
+  weatherpage.classList.add('hide');
+  profilepage.classList.add('hide');
+  settingspage.classList.add('hide');    
+});
 
+// WEATHER PAGE
+weatherbutton.addEventListener('click', e => {
+  checkinpage.classList.add('hide');
+  newtrippage.classList.add('hide');
+  weatherpage.classList.remove('hide');
+  profilepage.classList.add('hide');
+  settingspage.classList.add('hide');    
+});
+
+// PROFILE PAGE
+profilebutton.addEventListener('click', e => {
+  checkinpage.classList.add('hide');
+  newtrippage.classList.add('hide');
+  weatherpage.classList.add('hide');
+  profilepage.classList.remove('hide');
+  settingspage.classList.add('hide');    
+});
+
+// SETTINGS PAGE
+settingsbutton.addEventListener('click', e => {
+  checkinpage.classList.add('hide');
+  newtrippage.classList.add('hide');
+  weatherpage.classList.add('hide');
+  profilepage.classList.add('hide');
+  settingspage.classList.remove('hide');    
+});
   // Reference messages collection
   var messagesRef = firebase.database().ref('tracks');
 
@@ -164,6 +199,9 @@ function saveMessage(track, time, start, end, history, contact, timestamp){
 
 	});
 }
+
+
+
 
 
 
