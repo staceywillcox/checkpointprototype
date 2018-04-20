@@ -98,6 +98,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 // CHECKIN PAGE
 checkinbutton.addEventListener('click', e => {
   checkinpage.classList.remove('hide');
+  mytrippage.classList.add('hide');
   newtrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
@@ -108,6 +109,7 @@ checkinbutton.addEventListener('click', e => {
 mytripbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.remove('hide');
+  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
@@ -117,6 +119,7 @@ mytripbutton.addEventListener('click', e => {
 weatherbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
+  mytrippage.classList.add('hide');
   weatherpage.classList.remove('hide');
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
@@ -126,6 +129,7 @@ weatherbutton.addEventListener('click', e => {
 profilebutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
+  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.remove('hide');
   settingspage.classList.add('hide');    
@@ -135,6 +139,7 @@ profilebutton.addEventListener('click', e => {
 settingsbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
+  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
   settingspage.classList.remove('hide');    
