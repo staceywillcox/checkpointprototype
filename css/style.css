@@ -2,7 +2,14 @@
   box-sizing: border-box;
 }
 
+html{
+  height: 100%
+  margin:0;
+  padding:0;
+}
+
 body{
+  height:100%;
   background:#64BA56;
   color:#485e74;
   line-height:1.6;
@@ -10,13 +17,20 @@ body{
   padding-top:1em;
   width: 100%;
   margin:0;
+  padding:0;
+}
+
+#pagewrap{
+min-height: 100%;
+position: relative;
 }
 
 .hide{
   display: none;
 }
 
-label {
+
+#newtrippage label {
     width:25%;
     float:left;
     font-size:1em;
@@ -24,7 +38,7 @@ label {
     font-weight:bold;
 
 }
-input, textarea {
+#newtrippage input, textarea {
     width:70%;
     margin-bottom:5px;
     line-height:25px;
@@ -56,7 +70,7 @@ input, textarea {
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /*display: inline-block;*/
     font-size: 0.9em;
     width: 100px;
     cursor: pointer;
@@ -65,8 +79,10 @@ input, textarea {
 
 #loginpage{
   padding:10px;
+}
 
-
+#btnlogout{
+  display: none;
 }
 
 #loginpage input{
@@ -112,7 +128,7 @@ ul{
   padding: 1em;
 }
 
-.contact{
+.bodystyle{
   background:#f9feff;
   box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
   padding:20px;
@@ -126,6 +142,49 @@ ul{
   color: #fff;
   margin-bottom:10px;
   display: none;
+}
+/*CHECKBOXES FOR CHECK IN PAGE*/
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*FOOTER*/
+
+footer{
+  width:100%;
+  background-color: white;
+  position: absolute;
+  left:0;
+  bottom:0;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  margin:0px;
+}
+
+.wrapper li{
+  flex-basis:20%; 
+  font-size: 0.8em;
+  text-align: center;
+  align-self: flex-end;
+
 }
 
 /* LARGE SCREENS */

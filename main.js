@@ -53,8 +53,8 @@ btnLogout.addEventListener('click', e => {
  firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
       console.log(firebaseUser);
-      btnLogout.classList.remove('hide');
-      newtrip.classList.remove('hide');
+      // btnLogout.classList.remove('hide');
+      newtrippage.classList.remove('hide');
       loginpage.classList.add('hide');
 
 
@@ -64,13 +64,14 @@ btnLogout.addEventListener('click', e => {
       }
     } else {
       console.log('not logged in');
-      btnLogout.classList.add('hide');
-      newtrip.classList.add('hide');
+      // btnLogout.classList.add('hide');
+      newtrippage.classList.add('hide');
       loginpage.classList.remove('hide');
-      mytrip.classList.add('hide'); 
+      mytrippage.classList.add('hide'); 
     }
  });
 
+// MY TRIP PAGE
 var rootRef = firebase.database().ref();
 var tracksRef = rootRef.child("tracks");
 tracksRef.once("value", function(snapshot) {
@@ -91,6 +92,15 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
   document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact; 
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
+});
+
+// CHECKIN PAGE
+checkinbutton.addEventListener('click', e => {
+  checkinpage.classList.remove('hide');
+  newtrippage.classList.add('hide');
+  weatherpage.classList.add('hide');
+  profilepage.classList.add('hide');
+  settingspage.classList.add('hide');    
 });
 
 
@@ -120,8 +130,8 @@ function submitForm(e){
 	//Show alert
 	document.querySelector('.alert').style.display = 'block';
 
-  newtrip.classList.add('hide');
-  mytrip.classList.remove('hide'); 
+  newtrippage.classList.add('hide');
+  mytrippage.classList.remove('hide'); 
 
 	//Hide alert after 3 seconds
 	setTimeout(function(){

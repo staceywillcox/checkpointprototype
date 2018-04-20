@@ -11,6 +11,7 @@
 
 </head>
 <body>
+ <div id="pagewrap"> 
   <div id="loginpage" class="container hide">
     <input id="txtEmail" type="email" placeholder="Email">
 
@@ -20,16 +21,17 @@
       <button id="btnSignup" class="btn btn-secondary">Sign up</button>
     </div>
   </div>
-  <div id="mytrip" class="container hide">
+
+  <div id="mytrippage" class="container hide">
       <h1 class="brand">My Trip</h1>
     <p id="user_data"></p>
   </div>
   <button id="btnLogout" class="btn btn-action hide">Logout</button>
 
-  <div id="newtrip" class="container hide">
+  <div id="newtrippage" class="container hide">
     <h1 class="brand">New Trip</h1>
 
-      <div class="contact">
+      <div class="bodystyle">
 
         <div class="alert"> Your trip has been saved.</div>
 
@@ -102,6 +104,58 @@
         </form>
       </div>
   </div>
+  <div id="checkinpage" class="container hide">
+    <h1 class="brand">Check In</h1>
+    <div class="bodystyle">
+      <input type="checkbox">
+      <label class="checkbox">I have arrived at my destination
+      <span class="checkmark"></span>
+      </label>
+      
+        <input type="checkbox">
+        <label class="checkbox">I am taking longer than expected
+        <span class="checkmark"></span>
+      </label>
+        <input type="checkbox">
+         <label class="checkbox">I need help
+        <span class="checkmark"></span>
+      </label>
+    </div>
+  </div>
+  <div id="weatherpage" class="container hide">
+  <h1 class="brand">Weather</h1>
+    <div class="bodystyle">
+  </div>
+
+  <div id="weatherpage" class="container hide">
+  <h1 class="brand">Weather</h1>
+    <div class="bodystyle">
+  </div>
+
+  <div id="profilepage" class="container hide">
+  <h1 class="brand">Profile</h1>
+    <div class="bodystyle">
+  </div>
+
+    <div id="settingspage" class="container hide">
+  <h1 class="brand">Settings</h1>
+    <div class="bodystyle">
+  </div>
+
+
+ </div> 
+  <footer>
+    <div>
+      <ul class="wrapper">
+        <li id="mytripbutton"><img src="images/mytrip.png"><br>my trip</li>
+        <li id="checkinbutton"><img src="images/checkin.png"><br>check in</li>
+        <li id="weatherbutton"><img src="images/weather.png"><br>weather</li>
+        <li id="profilebutton"><img src="images/profile.png"><br>profile</li>
+        <li id="settingsbutton"><img src="images/settings.png"><br>settings</li>
+      </ul>
+    </div>
+  </footer>
+
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script type="text/javascript" src="main.js"></script>
 </body>
