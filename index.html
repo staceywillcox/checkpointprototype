@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
+<body >
  <div id="pagewrap"> 
   <div id="loginpage" class="container hide">
     <input id="txtName" type="text" placeholder="Name">
@@ -24,8 +24,10 @@
   </div>
 
   <div id="mytrippage" class="container hide">
-      <h1 class="brand">My Trip</h1>
-    <p id="user_data"></p>
+    <h1 class="brand">My Trip</h1>
+    <div class="bodystyle">
+      <p id="user_data"></p>
+    </div>
   </div>
 
 
@@ -40,15 +42,15 @@
         <form method="POST" id="contactForm">
           <p>
             <label>Track:</label>
-            <input type="text" name="track" id="track" required>
+            <input type="text" name="track" id="track">
           </p>
           <p>
             <label>Time:</label>
-            <input type="text" name="time" id="time" >
+            <input type="text" name="time" id="time">
           </p>
           <p>
             <label>Start:</label>
-            <input type="text" name="start" id="start" required>
+            <input type="text" name="start" id="start">
           </p>
           <p>
             <label>End:</label>

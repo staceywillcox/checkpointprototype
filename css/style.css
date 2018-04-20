@@ -123,12 +123,6 @@ ul{
   padding:0;
 }
 
-#user_data{
-  background:#f9feff;
-  box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
-  padding:20px;
-  width:100%;
-}
 
 .brand{
   text-align: left;
@@ -153,6 +147,9 @@ ul{
   padding:20px;
   width:100%;
 }
+ #clock{
+  margin-top:50px; 
+ }
 
 .alert{
   text-align: center;
