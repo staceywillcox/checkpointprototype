@@ -21,7 +21,7 @@
   const btnSignup = document.getElementById('btnSignup');
   const btnLogout = document.getElementById('btnLogout');
 
-  // Add login event
+  // LOGIN
 
   btnLogin.addEventListener('click', e =>{
     //get email and pass
@@ -36,6 +36,7 @@
     });
   });
 
+// SIGN UP
   btnSignup.addEventListener('click', e =>{
     //get email and pass
     const email = txtEmail.value;
@@ -47,12 +48,14 @@
   });
 
 
-
-
+//LOGOUT
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
 
 });
+
+//Database reference
+  var rootRef = firebase.database().ref();
 
 //Add realtime listener
  firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -61,10 +64,85 @@ btnLogout.addEventListener('click', e => {
       // btnLogout.classList.remove('hide');
       newtrippage.classList.remove('hide');
       loginpage.classList.add('hide');
+      console.log("User " + firebaseUser.uid + " is logged in with " + firebaseUser.email);
+      var userId = firebaseUser.uid;
+      var userEmail = firebaseUser.email;
 
+      //If a user already exists then console log but if the user is new then add it to the database
+      rootRef.child('users').child(userId).once("value", function(snapshot){
+        var ifExists = snapshot.exists();
+        if(ifExists){
+          console.log('already in system')
+        } else{
+          rootRef.child('users').child(userId).push({id: userId, email: userEmail});
+        }
+      })
 
       var user = firebase.auth().currentUser;
       if (user != null){
+
+// SUBMITTING DATA TO THE TRACKS DATABASE
+
+  // Reference messages collection
+  var messagesRef = firebase.database().ref('users').child(userId).child('track');
+
+// listen for form submit
+  document.getElementById('contactForm').addEventListener('submit', submitForm);
+
+//Submit form
+  function submitForm(e){
+
+  e.preventDefault();
+//get values
+  var track = getInputVal('track');
+  var time = getInputVal('time');
+  var start = getInputVal('start');
+  var end = getInputVal('end');
+  var history = getInputVal('history');
+  var contact = getInputVal('contact');
+  var timestamp = Date.now();
+
+  //save message
+  saveMessage(track, time, start, end, history, contact, timestamp);
+
+  //Show alert
+  document.querySelector('.alert').style.display = 'block';
+
+  newtrippage.classList.add('hide');
+  mytrippage.classList.remove('hide'); 
+
+  //Hide alert after 3 seconds
+  setTimeout(function(){
+  document.querySelector('.alert').style.display = 'none';  
+  },3000);
+
+  //Clear form
+  document.getElementById('contactForm').reset();
+}
+
+
+//function to get form values
+function getInputVal(id){
+  return document.getElementById(id).value;
+}
+
+//Save message to firebase
+
+function saveMessage(track, time, start, end, history, contact, timestamp){
+  var newMessageRef = messagesRef.push();
+  newMessageRef.set({
+    track:track,
+    time:time,
+    start:start,
+    end:end, 
+    history:history,
+    contact:contact,
+    timestamp: timestamp
+
+  });
+}
+
+
 
       }
     } else {
@@ -74,13 +152,13 @@ btnLogout.addEventListener('click', e => {
       loginpage.classList.remove('hide');
       mytrippage.classList.add('hide'); 
     }
- });
 
+    //RETRIEVING TRACKS DATA FROM DATABASE
 // MY TRIP PAGE
-var rootRef = firebase.database().ref();
-var tracksRef = rootRef.child("tracks");
 
+var tracksRef = firebase.database().ref('users').child(userId).child('track');
 
+// CURRENT TRACK
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
   console.log("Track: " + newPost.track);
@@ -89,11 +167,15 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
   console.log("End: " + newPost.end);
   console.log("History: " + newPost.history);
   console.log("Contact: " + newPost.contact);        
-  console.log("Previous Post ID: " + prevChildKey);
   document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact; 
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
+ });
+
+
+
+// GOING BETWEEN PAGES
 
 // CHECKIN PAGE
 checkinbutton.addEventListener('click', e => {
@@ -144,69 +226,24 @@ settingsbutton.addEventListener('click', e => {
   profilepage.classList.add('hide');
   settingspage.classList.remove('hide');    
 });
-  // Reference messages collection
-  var messagesRef = firebase.database().ref('tracks');
-
-// listen for form submit
-document.getElementById('contactForm').addEventListener('submit', submitForm);
-
-//Submit form
-function submitForm(e){
-
-	e.preventDefault();
-//get values
-	var track = getInputVal('track');
-	var time = getInputVal('time');
-	var start = getInputVal('start');
-	var end = getInputVal('end');
-	var history = getInputVal('history');
-	var contact = getInputVal('contact');
-	var timestamp = Date.now();
 
 
-	//save message
-	saveMessage(track, time, start, end, history, contact, timestamp);
+//Accordian code for profile page list menu
 
-	//Show alert
-	document.querySelector('.alert').style.display = 'block';
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-  newtrippage.classList.add('hide');
-  mytrippage.classList.remove('hide'); 
-
-	//Hide alert after 3 seconds
-	setTimeout(function(){
-	document.querySelector('.alert').style.display = 'none';	
-	},3000);
-
-	//Clear form
-	document.getElementById('contactForm').reset();
-
-
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
 }
-
-//function to get form values
-function getInputVal(id){
-	return document.getElementById(id).value;
-}
-
-//Save message to firebase
-
-function saveMessage(track, time, start, end, history, contact, timestamp){
-	var newMessageRef = messagesRef.push();
-	newMessageRef.set({
-		track:track,
-		time:time,
-		start:start,
-		end:end, 
-		history:history,
-		contact:contact,
-		timestamp: timestamp
-
-	});
-}
-
-
-
 
 
 

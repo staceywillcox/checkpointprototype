@@ -12,21 +12,22 @@
 </head>
 <body >
  <div id="pagewrap"> 
-  <div id="loginpage" class="container hide">
-    <input id="txtName" type="text" placeholder="Name">
-    <input id="txtEmail" type="email" placeholder="Email">
 
-    <input id="txtPassword" type="password" placeholder="Password">
-    <div id="loginbuttons">
-      <button id="btnLogin" class="btn btn-action">Log in</button>
-      <button id="btnSignup" class="btn btn-secondary">Sign up</button>
+    <div id="loginpage" class="container hide">
+      <input id="txtName" type="text" placeholder="Name">
+      <input id="txtEmail" type="email" placeholder="Email">
+
+      <input id="txtPassword" type="password" placeholder="Password">
+      <div id="loginbuttons">
+        <button id="btnLogin" class="btn btn-action" type="submit">Log in</button>
+        <button id="btnSignup" class="btn btn-secondary" type="submit">Sign up</button>
+      </div>
     </div>
-  </div>
 
   <div id="mytrippage" class="container hide">
     <h1 class="brand">My Trip</h1>
     <div class="bodystyle">
-      <p id="user_data"></p>
+<!--       <p id="user_data"></p> -->
     </div>
   </div>
 
@@ -107,6 +108,8 @@
         </form>
       </div>
   </div>
+
+  <!-- CHECK IN PAGE -->
   <div id="checkinpage" class="container hide">
     <h1 class="brand">Check In</h1>
     <div class="bodystyle">
@@ -138,29 +141,51 @@
     </div>
   </div>
 
+<!-- WEATHER PAGE -->
 <div id="weatherpage" class="container hide">
   <h1 class="brand">Weather</h1>
     <div class="bodystyle"></div>
   </div>
 
+<!-- PROFILE PAGE -->
   <div id="profilepage" class="container hide">
   <h1 class="brand">Profile</h1>
-    <div class="bodystyle"></div>
+    <div class="bodystyle">
+      <ul id="profilelist">
+        <li class="accordion">Current Trip</li>
+        <div class="panel">
+                <p id="user_data"></p>
+        </div>
+        <li class="accordion">Past Trips</li>
+        <div class="panel">
+          <p id="pastuserdata"></p>
+        </div>
+        <li class="accordion">My Info</li>
+        <div class="panel">
+          <p>My info here</p>
+        </div>
+        <li class="accordion">Emergency Contacts</li>
+        <div class="panel">
+          <p>Emergency contacts here</p>
+        </div>
+      </ul>
+    </div>
   </div>
 
+<!-- SETTINGS PAGE -->
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
     <div class="bodystyle">
         <button id="btnLogout" class="btn btn-action">Logout</button>
     </div>
   </div>
+ </div>
 
-
- </div> 
+  <!--FOOTER  -->
   <footer>
     <div>
       <ul class="wrapper">
-        <li id="mytripbutton"><img src="images/mytrip.png"><br>my trip</li>
+        <li id="mytripbutton"><img src="images/mytrip.png"><br>new trip</li>
         <li id="checkinbutton"><img src="images/checkin.png"><br>check in</li>
         <li id="weatherbutton"><img src="images/weather.png"><br>weather</li>
         <li id="profilebutton"><img src="images/profile.png"><br>profile</li>
