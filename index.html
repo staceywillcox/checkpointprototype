@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body >
+<body onload="startTime()">
  <div id="pagewrap"> 
 
     <div id="loginpage" class="container hide">
@@ -43,61 +43,208 @@
         <form method="POST" id="contactForm">
           <p>
             <label>Track:</label>
-            <input type="text" name="track" id="track">
+            <input type="text" name="track" id="track" placeholder="Which track are you going on?">
           </p>
           <p>
             <label>Time:</label>
-            <input type="text" name="time" id="time">
+            <input type="text" name="time" id="time" placeholder="How long does the track take?">
           </p>
           <p>
             <label>Start:</label>
-            <input type="text" name="start" id="start">
+            <input type="text" name="start" id="start" placeholder="Intended departure time">
           </p>
           <p>
-            <label>End:</label>
-            <input type="text" name="end" id="end">
+          <label>End Day:</label>
+            <input type="date" id="myDate">
+          <label>End Time:</label>
+            <input type="time" id="myTime" placeholder="time">
+            <!-- <label>End:</label>
+              <select name="day" id="day">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4"> 4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+              </select>
+
+              <select name="month" id="month">
+                <option value="Jan">Jan</option>
+                <option value="Feb">Feb</option>
+                <option value="Mar">Mar</option>
+                <option value="Apr"> Apr</option>
+                <option value="May">May</option>
+                <option value="Jun">Jun</option>
+                <option value="Jul">Jul</option>
+                <option value="Aug">Aug</option>
+                <option value="Sep">Sep</option>
+                <option value="Oct">Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec">Dec</option>
+              </select>
+
+              <select name="year" id="year">
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021"> 2021</option>
+              </select>
+              <select name="hours" id="hours">
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="00">24</option>
+              </select>  
+
+              <select name="minutes" id="minutes">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>   
+                <option value="50">10</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
+              </select> -->
+
           </p>
           <p>
             <label>History:</label>
-            <input type="text" name="history" id="history">
+            <input type="text" name="history" id="history" placeholder="Previous experience on this track">
           </p>
 
           <p>
             <label>Contact:</label>
-            <input type="text" name="contact" id="contact">
+            <input type="text" name="contact" id="contact" placeholder="Please select an emergency contact.">
           </p>
           <p>
             Wait
               <select name="messagetime" id="messagetime">
-                <option value="5 minutes">5 minutes</option>
-                <option value="10 minutes">10 minutes</option>
-                <option value="15 minutes">15 minutes</option>
-                <option value="20 minutes"> 30 minutes</option>
-                <option value="45 minutes">45 minutes</option>
-                <option value="1 hour">1 hour</option>
-                <option value="2 hours">2 hours</option>
-                <option value="3 hours">3 hours</option>
-                <option value="4 hours">4 hours</option>
-                <option value="5 hours">5 hours</option>
-                <option value="6 hours">6 hours</option>
-                <option value="7 hours">7 hours</option>
-                <option value="8 hours">8 hours</option>
-                <option value="9 hours">9 hours</option>
-                <option value="10 hours">10 hours</option>
-                <option value="11 hours">11 hours</option>
-                <option value="12 hours">12 hours</option>
-                <option value="13 hours">13 hours</option>
-                <option value="14 hours">14 hours</option>
-                <option value="15 hours">15 hours</option>
-                <option value="16 hours">16 hours</option>
-                <option value="17 hours">17 hours</option>
-                <option value="18 hours">18 hours</option>
-                <option value="19 hours">19 hours</option>
-                <option value="20 hours">20 hours</option>
-                <option value="21 hours">21 hours</option>
-                <option value="22 hours">22 hours</option>
-                <option value="23 hours">23 hours</option>
-                <option value="24 hours">24 hours</option>
+                <option value="300">5 minutes</option>
+                <option value="600">10 minutes</option>
+                <option value="900">15 minutes</option>
+                <option value="1200"> 30 minutes</option>
+                <option value="2700">45 minutes</option>
+                <option value="3600">1 hour</option>
+                <option value="6000">2 hours</option>
+                <option value="7200">3 hours</option>
+                <option value="14400">4 hours</option>
+                <option value="18000">5 hours</option>
+                <option value="21600">6 hours</option>
+                <option value="25200">7 hours</option>
+                <option value="28800">8 hours</option>
+                <option value="32400">9 hours</option>
+                <option value="36000">10 hours</option>
+                <option value="39600">11 hours</option>
+                <option value="43200">12 hours</option>
+                <option value="46800">13 hours</option>
+                <option value="50400">14 hours</option>
+                <option value="54000">15 hours</option>
+                <option value="57600">16 hours</option>
+                <option value="61200">17 hours</option>
+                <option value="64800">18 hours</option>
+                <option value="68400">19 hours</option>
+                <option value="72000">20 hours</option>
+                <option value="75600">21 hours</option>
+                <option value="79200">22 hours</option>
+                <option value="82800">23 hours</option>
+                <option value="86400">24 hours</option>
               </select>
               after estimated check in time before sending emergency message.
           </p>
@@ -155,6 +302,8 @@
         <li class="accordion">Current Trip</li>
         <div class="panel">
                 <p id="user_data"></p>
+                <p id="clocky"></p>
+
         </div>
         <li class="accordion">Past Trips</li>
         <div class="panel">
@@ -196,6 +345,25 @@
 
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="firebase-messaging-sw.js"></script>
+  <script type="text/javascript">
+    function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clocky').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+
+}
+  </script>
 </body>
 </html>
 

@@ -84,7 +84,7 @@ btnLogout.addEventListener('click', e => {
 // SUBMITTING DATA TO THE TRACKS DATABASE
 
   // Reference messages collection
-  var messagesRef = firebase.database().ref('users').child(userId).child('track');
+  var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
 
 // listen for form submit
   document.getElementById('contactForm').addEventListener('submit', submitForm);
@@ -97,19 +97,33 @@ btnLogout.addEventListener('click', e => {
   var track = getInputVal('track');
   var time = getInputVal('time');
   var start = getInputVal('start');
-  var end = getInputVal('end');
+  //var endinput = getInputVal('end');
+  // var endoutput = endinput;
+  var date = getInputVal('myDate');
+  // var month = getInputVal('month');
+  // var day = getInputVal('day');
+  // var year = getInputVal('year');
+  // var hours = getInputVal('hours');
+  // var minutes = getInputVal('minutes');
   var history = getInputVal('history');
   var contact = getInputVal('contact');
+  var timetill = getInputVal('messagetime')
   var timestamp = Date.now();
 
+ var d = new Date(date);
+ console.log(d);
+
+    var x = document.getElementById("myDate").value;
+    document.getElementById("pastuserdata").innerHTML = x;
+    console.log(x)
   //save message
-  saveMessage(track, time, start, end, history, contact, timestamp);
+  saveMessage(track, time, start, timetill, history, contact, timestamp);
 
   //Show alert
   document.querySelector('.alert').style.display = 'block';
 
-  newtrippage.classList.add('hide');
-  mytrippage.classList.remove('hide'); 
+  // newtrippage.classList.add('hide');
+  // mytrippage.classList.remove('hide'); 
 
   //Hide alert after 3 seconds
   setTimeout(function(){
@@ -128,22 +142,20 @@ function getInputVal(id){
 
 //Save message to firebase
 
-function saveMessage(track, time, start, end, history, contact, timestamp){
+function saveMessage(track, time, start, timetill, history, contact, timestamp){
   var newMessageRef = messagesRef.push();
   newMessageRef.set({
     track:track,
     time:time,
-    start:start,
-    end:end, 
+    start:start,  
+    timetill:timetill,
     history:history,
     contact:contact,
     timestamp: timestamp
 
   });
+
 }
-
-
-
       }
     } else {
       console.log('not logged in');
@@ -153,25 +165,45 @@ function saveMessage(track, time, start, end, history, contact, timestamp){
       mytrippage.classList.add('hide'); 
     }
 
-    //RETRIEVING TRACKS DATA FROM DATABASE
+
+
+
+
+//RETRIEVING TRACKS DATA FROM DATABASE
 // MY TRIP PAGE
 
-var tracksRef = firebase.database().ref('users').child(userId).child('track');
+var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 
 // CURRENT TRACK
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
-  console.log("Track: " + newPost.track);
-  console.log("Time: " + newPost.time);
-  console.log("Start: " + newPost.start);
-  console.log("End: " + newPost.end);
-  console.log("History: " + newPost.history);
-  console.log("Contact: " + newPost.contact);        
-  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact; 
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
+  // console.log("Track: " + newPost.track);
+  // console.log("Time: " + newPost.time);
+  // console.log("Start: " + newPost.start);
+  // console.log("End: " + newPost.end);
+  // console.log("History: " + newPost.history);
+  // console.log("Contact: " + newPost.contact);     
+
+ 
+
+  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
 });
- });
+
+
+
+// PAST TRACK
+    
+  tracksRef.orderByChild('track').limitToFirst(3).on("child_added", function(snapshot) {
+    var data = snapshot.val();
+    console.log(data);
+    document.getElementById("pastuserdata").innerHTML = "Track: " + data.track + "<br>Time: " +data.time + "<br>Start: " +data.start + "<br>End: " +data.end + "<br>History: " +data.history + "<br>Contact: " +data.contact;   
+
+    // document.getElementById("pastuserdata").innerHTML = data.timetill  ;
+});    
+
+
+
+
 
 
 
@@ -248,11 +280,23 @@ for (i = 0; i < acc.length; i++) {
 
 
 
+// TRYING TO FIGURE OUT THE DATE AND TIMERS
+var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
+var time = countDownDate/1000;
+console.log(time);
+
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var time2 = now/1000;
+  //console.log(time2);
+  var distance = countDownDate - now;
+  //console.log(distance);
+});
 
 
+var today = new Date();
+var timestamp = today.valueOf();
+console.log(timestamp/1000)
 
-
-  
-
-
+// END
 
