@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Checkpoint</title>
-
+<link rel="manifest" href="/manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
-<body onload="startTime()">
+<body>
  <div id="pagewrap"> 
 
     <div id="loginpage" class="container hide">
@@ -325,7 +325,14 @@
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
     <div class="bodystyle">
+      <form id="send-notification-form" class="contact">
+        <label for="notification-message" class="sr-only">Notification Message</label>
+        <textarea name="" id="notification-message" placeholder="What would you like to say?"></textarea>
+        <button type="submit" aria-label="Send" class="submitbutton">Send</button>
+      </form>
         <button id="btnLogout" class="btn btn-action">Logout</button>
+        <button id="subscribe" class="hide">Subscribe</button> 
+         <button id="unsubscribe" class="hide">Unsubscribe</button> 
     </div>
   </div>
  </div>
@@ -334,36 +341,20 @@
   <footer>
     <div>
       <ul class="wrapper">
-        <li id="mytripbutton"><img src="images/mytrip.png"><br>new trip</li>
-        <li id="checkinbutton"><img src="images/checkin.png"><br>check in</li>
-        <li id="weatherbutton"><img src="images/weather.png"><br>weather</li>
-        <li id="profilebutton"><img src="images/profile.png"><br>profile</li>
-        <li id="settingsbutton"><img src="images/settings.png"><br>settings</li>
+        <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>
+        <li id="checkinbutton"><img src="checkin.png"><br>check in</li>
+        <li id="weatherbutton"><img src="weather.png"><br>weather</li>
+        <li id="profilebutton"><img src="profile.png"><br>profile</li>
+        <li id="settingsbutton"><img src="settings.png"><br>settings</li>
       </ul>
     </div>
   </footer>
 
-  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="firebase-messaging-sw.js"></script>
-  <script type="text/javascript">
-    function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clocky').innerHTML =
-    h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
 
-}
-  </script>
+  <script type="text/javascript" src="main.js"></script>
+
 </body>
 </html>
 

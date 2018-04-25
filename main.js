@@ -14,12 +14,94 @@
 
 
   //Get elements
+  const messaging = firebase.messaging();
   const txtName = document.getElementById('txtName');
   const txtEmail = document.getElementById('txtEmail');
   const txtPassword = document.getElementById('txtPassword');
   const btnLogin = document.getElementById('btnLogin');
   const btnSignup = document.getElementById('btnSignup');
   const btnLogout = document.getElementById('btnLogout');
+  const subscribeButton = document.getElementById('subscribe');
+  const unsubscribeButton = document.getElementById('unsubscribe');
+  const sendNotificationForm = document.getElementById('send-notification-form');
+
+  const FIREBASE_DATABASE = firebase.database();
+  const FIREBASE_AUTH = firebase.auth();
+
+
+//SUBSCRIPTION CODE
+  messaging.onTokenRefresh(handleTokenRefresh);
+
+subscribeButton.addEventListener('click', e =>{
+
+    messaging.requestPermission()
+    .then(()=> handleTokenRefresh())
+    .then(() => checkSubscription())
+    .catch((err) => console.log("user didn't give permission"));
+})
+
+
+function handleTokenRefresh(){
+  return messaging.getToken()
+      .then((token) => {
+
+      FIREBASE_DATABASE.ref('/tokens').push({
+        token: token,
+        uid: FIREBASE_AUTH.currentUser.uid
+      });
+
+    });
+
+}  
+
+unsubscribeButton.addEventListener('click', e =>{
+  messaging.getToken()
+   .then((token) => messaging.deleteToken(token))
+   .then(() => FIREBASE_DATABASE.ref('/tokens').orderByChild('uid').equalTo(FIREBASE_AUTH.currentUser.uid)
+    .once('value'))
+   .then((snapshot) => {
+    console.log(snapshot.val());
+    const key = Object.keys(snapshot.val())[0];
+    return FIREBASE_DATABASE.ref('/tokens').child(key).remove();
+   })
+   .then(() => checkSubscription())
+   .catch((err) => console.log("unsubscribe failed"));
+})
+
+function checkSubscription(){
+  FIREBASE_DATABASE.ref('/tokens').orderByChild('uid').equalTo(FIREBASE_AUTH.currentUser.uid).once('value')
+  .then((snapshot) => {
+    if (snapshot.val()){
+      unsubscribeButton.classList.remove('hide');
+      subscribeButton.classList.add('hide');
+    } else{
+      unsubscribeButton.classList.add('hide');
+      subscribeButton.classList.remove('hide');
+    }
+  });
+
+}
+// END OF SUB CODE
+
+//NOTIFICATION MESSAGE CODE
+sendNotificationForm.addEventListener('submit', sendNotification);
+
+function sendNotification(e){
+  e.preventDefault();
+  const notificationMessage = document.getElementById('notification-message').value;
+
+  FIREBASE_DATABASE.ref("/notification")
+  .push({
+    user:FIREBASE_AUTH.currentUser.email,
+    message: notificationMessage,
+
+  }).then(() =>{
+     document.getElementById('notification-message').value = "";
+  })
+  }
+
+
+// END NOTIFICATION MESSAGE CODE
 
   // LOGIN
 
@@ -32,7 +114,7 @@
     const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message))
     .then(function(user){
-      alert(user.uid)
+      //alert(user.uid)
     });
   });
 
@@ -60,6 +142,7 @@ btnLogout.addEventListener('click', e => {
 //Add realtime listener
  firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
+      checkSubscription();
       console.log(firebaseUser);
       // btnLogout.classList.remove('hide');
       newtrippage.classList.remove('hide');
@@ -68,6 +151,7 @@ btnLogout.addEventListener('click', e => {
       var userId = firebaseUser.uid;
       var userEmail = firebaseUser.email;
 
+      
       //If a user already exists then console log but if the user is new then add it to the database
       rootRef.child('users').child(userId).once("value", function(snapshot){
         var ifExists = snapshot.exists();
@@ -122,8 +206,6 @@ btnLogout.addEventListener('click', e => {
   //Show alert
   document.querySelector('.alert').style.display = 'block';
 
-  // newtrippage.classList.add('hide');
-  // mytrippage.classList.remove('hide'); 
 
   //Hide alert after 3 seconds
   setTimeout(function(){
@@ -203,7 +285,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 
 
 
-
+});
 
 
 
