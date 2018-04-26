@@ -40,24 +40,26 @@
         <div class="alert"> Your trip has been saved.</div>
 
 
-        <form method="POST" id="contactForm">
-          <p>
+        <form method="POST" action="send" id="contactForm">
+          
             <label>Track:</label>
             <input type="text" name="track" id="track" placeholder="Which track are you going on?">
-          </p>
-          <p>
+         
             <label>Time:</label>
             <input type="text" name="time" id="time" placeholder="How long does the track take?">
-          </p>
-          <p>
-            <label>Start:</label>
-            <input type="text" name="start" id="start" placeholder="Intended departure time">
-          </p>
-          <p>
-          <label>End Day:</label>
-            <input type="date" id="myDate">
-          <label>End Time:</label>
-            <input type="time" id="myTime" placeholder="time">
+          
+          
+          <label>Start:</label>
+            <input type="date"  value="2018-01-01">
+            <label>Time:</label>
+            <input type="time"  value="12:00">
+          
+          
+            <label>End:</label>
+              <input type="date" id="myDate" value="2018-01-01">
+                <label>Time:</label>
+              <input type="time" id="myTime" value="12:00">
+          
             <!-- <label>End:</label>
               <select name="day" id="day">
                 <option value="1">1</option>
@@ -203,16 +205,25 @@
                 <option value="59">59</option>
               </select> -->
 
-          </p>
-          <p>
+       
+          
             <label>History:</label>
             <input type="text" name="history" id="history" placeholder="Previous experience on this track">
-          </p>
+          
 
-          <p>
+          
+<!--             <label>Contact:</label>
+            <select value="Please select an emergency contact.">
+              <option name="contact" id="contact">Stacey Willcox</option>
+              <option name="contact" id="contact">Sandra Son</option>              
+            </select> -->
             <label>Contact:</label>
-            <input type="text" name="contact" id="contact" placeholder="Please select an emergency contact.">
-          </p>
+          <form autocomplete="off" id="autoform">
+            <div class="autocomplete" style="width:100%;">
+              <input id="myInput" type="text" name="myCountry" placeholder="Emergency Contact">
+            </div>
+          </form>
+
           <p>
             Wait
               <select name="messagetime" id="messagetime">
@@ -325,17 +336,18 @@
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
     <div class="bodystyle">
+
       <form id="send-notification-form" class="contact">
         <label for="notification-message" class="sr-only">Notification Message</label>
-        <textarea name="" id="notification-message" placeholder="What would you like to say?"></textarea>
-        <button type="submit" aria-label="Send" class="submitbutton">Send</button>
+        <textarea id="notification-message" placeholder="What would you like to say?"></textarea>
+        <button type="submit" aria-label="Send" id="send-notification" class="submitbutton">Send</button>
       </form>
         <button id="btnLogout" class="btn btn-action">Logout</button>
         <button id="subscribe" class="hide">Subscribe</button> 
          <button id="unsubscribe" class="hide">Unsubscribe</button> 
     </div>
   </div>
- </div>
+
 
   <!--FOOTER  -->
   <footer>
@@ -349,9 +361,10 @@
       </ul>
     </div>
   </footer>
-
+ </div>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+
 
   <script type="text/javascript" src="main.js"></script>
 

@@ -20,6 +20,8 @@ body{
   padding:0;
 }
 
+
+
 #pagewrap{
 min-height: 100%;
 position: relative;
@@ -29,18 +31,21 @@ position: relative;
   display: none;
 }
 
+#contact{
+  width:70%;
+}
 
 #newtrippage label {
     width:25%;
     float:left;
     font-size:1em;
     line-height:24px;
-    font-weight:bold;
-
 }
+
+
 #newtrippage input, textarea {
     width:70%;
-    margin-bottom:5px;
+    margin-bottom:15px;
     line-height:25px;
     padding:2px 5px;
     -webkit-border-radius: 10px;

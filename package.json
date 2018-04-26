@@ -15,5 +15,13 @@
     "fire-mail": "0.0.0",
     "firebase-admin": "^5.12.0",
     "nodemailer": "^4.6.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staceywillcox/checkpointprototype.git"
+  },
+  "bugs": {
+    "url": "https://github.com/staceywillcox/checkpointprototype/issues"
+  },
+  "homepage": "https://github.com/staceywillcox/checkpointprototype#readme"
 }
