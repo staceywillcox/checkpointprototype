@@ -47,7 +47,10 @@
          
             <label>Time:</label>
             <input type="text" name="time" id="time" placeholder="How long does the track take?">
-          
+        
+        <ul id="">
+        <li class="accordionnewtrip">Duration:<span id="downarrow">&#9662;</span></li>
+        <div class="panelnewtrip">
           
           <label>Start:</label>
             <input type="date"  value="2018-01-01">
@@ -59,7 +62,8 @@
               <input type="date" id="myDate" value="2018-01-01">
                 <label>Time:</label>
               <input type="time" id="myTime" value="12:00">
-          
+          </div>
+        </ul>
             <!-- <label>End:</label>
               <select name="day" id="day">
                 <option value="1">1</option>
@@ -318,7 +322,8 @@
         </div>
         <li class="accordion">Past Trips</li>
         <div class="panel">
-          <p id="pastuserdata"></p>
+                <div id="pastuserdata"></div>
+          <!-- <p id="pastuserdata"></p> -->
         </div>
         <li class="accordion">My Info</li>
         <div class="panel">
@@ -364,6 +369,8 @@
  </div>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 
   <script type="text/javascript" src="main.js"></script>

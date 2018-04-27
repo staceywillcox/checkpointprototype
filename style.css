@@ -25,6 +25,7 @@ body{
 #pagewrap{
 min-height: 100%;
 position: relative;
+
 }
 
 .hide{
@@ -33,6 +34,7 @@ position: relative;
 
 #contact{
   width:70%;
+
 }
 
 #newtrippage label {
@@ -40,12 +42,21 @@ position: relative;
     float:left;
     font-size:1em;
     line-height:24px;
+    margin-top:10px;
 }
 
 
+
+#downarrow{
+  text-align: right;
+  float:right;
+  margin-right:15px;
+}
+
 #newtrippage input, textarea {
     width:70%;
-    margin-bottom:15px;
+    margin-top:10px;
+    margin-bottom:10px;
     line-height:25px;
     padding:2px 5px;
     -webkit-border-radius: 10px;
@@ -151,6 +162,7 @@ ul{
   box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
   padding:20px;
   width:100%;
+  margin-bottom: 100px;
 }
  #clock{
   margin-top:50px; 
@@ -165,6 +177,35 @@ ul{
   display: none;
 }
 
+/*AUTOCOMPLETE LIST FOR NEW TRIP PAGE*/
+
+#myInputautocomplete-list{
+  width:70%;
+  margin-left:25%;
+
+}
+
+/*END AUTOCOMPLETE LIST FOR NEW TRIP PAGE*/
+
+/*ACCORDION FOR NEW TRIP PAGE*/
+
+.accordionnewtrip {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+
+
+.panelnewtrip {
+    display: none;
+    overflow: hidden;
+}
+/*END ACCORDION FOR NEW TRIP PAGE*/
 
 /*CHECKBOXES FOR CHECK IN PAGE*/
 .checkoptions{
@@ -286,13 +327,15 @@ background-color: #ccc;
     background-color: white;
     overflow: hidden;
 }
+
+
 /*END OF PROFILE PAGE*/
 /*FOOTER*/
 
 footer{
   width:100%;
   background-color: white;
-  position: absolute;
+  position: fixed;
   left:0;
   bottom:0;
 }

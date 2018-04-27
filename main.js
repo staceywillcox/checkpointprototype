@@ -198,12 +198,12 @@ btnLogout.addEventListener('click', e => {
   var timetill = getInputVal('messagetime')
   var timestamp = Date.now();
 
- var d = new Date(date);
- console.log(d);
+ // var d = new Date(date);
+ // console.log(d);
 
-    var x = document.getElementById("myDate").value;
-    document.getElementById("pastuserdata").innerHTML = x;
-    console.log(x)
+ //    var x = document.getElementById("myDate").value;
+ //    document.getElementById("pastuserdata").innerHTML = x;
+ //    console.log(x)
   //save message
   saveMessage(track, time, timetill, history, contact, timestamp);
 
@@ -270,10 +270,12 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 
 // PAST TRACK
     
-  tracksRef.orderByChild('track').limitToFirst(3).on("child_added", function(snapshot) {
+  tracksRef.orderByChild('track').limitToFirst(100).on("child_added", function(snapshot) {
     var data = snapshot.val();
     console.log(data);
-    document.getElementById("pastuserdata").innerHTML = "Track: " + data.track + "<br>Time: " +data.time + "<br>Start: " +data.start + "<br>End: " +data.end + "<br>History: " +data.history + "<br>Contact: " +data.contact;   
+    $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.start+"</li><li>End: "+ data.end+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>");
+
+    // document.getElementById("pastuserdata").innerHTML = "Track: " + data.track + "<br>Time: " +data.time + "<br>Start: " +data.start + "<br>End: " +data.end + "<br>History: " +data.history + "<br>Contact: " +data.contact;   
 
     // document.getElementById("pastuserdata").innerHTML = data.timetill  ;
 });    
@@ -350,6 +352,21 @@ for (i = 0; i < acc.length; i++) {
             panel.style.display = "none";
         } else {
             panel.style.display = "block";
+        }
+    });
+}
+
+var acc = document.getElementsByClassName("accordionnewtrip");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panelnewtrip = this.nextElementSibling;
+        if (panelnewtrip.style.display === "block") {
+            panelnewtrip.style.display = "none";
+        } else {
+            panelnewtrip.style.display = "block";
         }
     });
 }
