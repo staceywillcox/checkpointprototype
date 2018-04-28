@@ -187,7 +187,7 @@ btnLogout.addEventListener('click', e => {
   // var start = getInputVal('start');
   //var endinput = getInputVal('end');
   // var endoutput = endinput;
-  var date = getInputVal('myDate');
+  //var date = getInputVal('myDate');
   // var month = getInputVal('month');
   // var day = getInputVal('day');
   // var year = getInputVal('year');
@@ -273,7 +273,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
   tracksRef.orderByChild('track').limitToFirst(100).on("child_added", function(snapshot) {
     var data = snapshot.val();
     console.log(data);
-    $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.start+"</li><li>End: "+ data.end+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>");
+     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.start+"</li><li>End: "+ data.end+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>");
 
     // document.getElementById("pastuserdata").innerHTML = "Track: " + data.track + "<br>Time: " +data.time + "<br>Start: " +data.start + "<br>End: " +data.end + "<br>History: " +data.history + "<br>Contact: " +data.contact;   
 
@@ -356,11 +356,11 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
-var acc = document.getElementsByClassName("accordionnewtrip");
-var i;
+var acc2 = document.getElementsByClassName("accordionnewtrip");
+var a;
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+for (a = 0; a < acc2.length; a++) {
+    acc2[a].addEventListener("click", function() {
         this.classList.toggle("active");
         var panelnewtrip = this.nextElementSibling;
         if (panelnewtrip.style.display === "block") {
@@ -371,7 +371,7 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
-// TRYING TO FIGURE OUT THE DATE AND TIMERS
+//TRYING TO FIGURE OUT THE DATE AND TIMERS
 var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
 var time = countDownDate/1000;
 console.log(time);
@@ -388,7 +388,7 @@ var today = new Date();
 var timestamp = today.valueOf();
 console.log(timestamp/1000)
 
-// END
+//END
 
 // Auto complete text input
 function autocomplete(inp, arr) {
@@ -492,4 +492,4 @@ function autocomplete(inp, arr) {
 var countries = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), countries);
+autocomplete(document.getElementById("contact"), countries);
