@@ -14,7 +14,6 @@
  <div id="pagewrap"> 
 
     <div id="loginpage" class="container hide">
-      <input id="txtName" type="text" placeholder="Name">
       <input id="txtEmail" type="email" placeholder="Email">
 
       <input id="txtPassword" type="password" placeholder="Password">
@@ -40,7 +39,7 @@
         <div class="alert"> Your trip has been saved.</div>
 
 
-        <form method="POST" action="send" id="contactForm">
+        <form method="POST" id="trackForm">
           
             <label>Track:</label>
             <input type="text" name="track" id="track" placeholder="Which track are you going on?">
@@ -53,15 +52,15 @@
         <div class="panelnewtrip">
           
           <label>Start:</label>
-            <input type="date"  value="2018-01-01">
+            <input type="date" id="startDate" value="2018-01-01">
             <label>Time:</label>
-            <input type="time"  value="12:00">
+            <input type="time" id="startTime" value="12:00">
           
           
             <label>End:</label>
-              <input type="date" id="myDate" value="2018-01-01">
+              <input type="date" id="endDate" value="2018-01-01">
                 <label>Time:</label>
-              <input type="time" id="myTime" value="12:00">
+              <input type="time" id="endTime" value="12:00">
           </div>
         </ul>
             <!-- <label>End:</label>
@@ -209,24 +208,14 @@
                 <option value="59">59</option>
               </select> -->
 
-       
-          
             <label>History:</label>
             <input type="text" name="history" id="history" placeholder="Previous experience on this track">
           
-
-          
-<!--             <label>Contact:</label>
-            <select value="Please select an emergency contact.">
-              <option name="contact" id="contact">Stacey Willcox</option>
-              <option name="contact" id="contact">Sandra Son</option>              
-            </select> -->
             <label>Contact:</label>
-          <!-- <form autocomplete="off" id="autoform"> -->
             <div class="autocomplete" style="width:100%;">
               <input id='contact' type="text" name="contact" placeholder="Emergency Contact">
             </div>
-          <!-- </form> -->
+
 
           <p>
             Wait
@@ -275,28 +264,28 @@
   <div id="checkinpage" class="container hide">
     <h1 class="brand">Check In</h1>
     <div class="bodystyle">
-      <form action="">
+      <form action="" id="status">
         <div class="checkoptions">
           <label class="checkbox">I have arrived at my destination
-            <input type="radio" name="status" value="checkin">
+            <input type="radio" name="status" id="checkedin" value="checkedin">
             <span class="checkmark"></span>
           </label>
         </div>
         <br>
         <div class="checkoptions">
           <label class="checkbox">I am taking longer than expected
-            <input type="radio" name="status" value="longer">
+            <input type="radio" name="status" id="longer" value="longer">
             <span class="checkmark"></span>
           </label>
         </div>
         <br>
         <div class="checkoptions">
           <label class="checkbox">I need help
-            <input type="radio" name="status" value="help">
+            <input type="radio" name="status" id="help" value="help">
             <span class="checkmark"></span>
           </label>
         </div>
-        <p class="full" id="status">
+        <p class="full" id="statusbtn">
           <button type="submit"  class="submitbutton">Update Status</button>
         </p>  
       </form>  
@@ -327,11 +316,23 @@
         </div>
         <li class="accordion">My Info</li>
         <div class="panel">
-          <p>My info here</p>
+          <form id="myName">
+            <input id="txtName" type="text" placeholder="Name">
+              <button class="changebutton"  type="submit">Change</button>
+          </form>
+          <p id="myuserName"></p>
         </div>
+
         <li class="accordion">Emergency Contacts</li>
         <div class="panel">
-          <p>Emergency contacts here</p>
+            <div id="existingcontacts"></div>
+          <form id="contactsForm">
+            <label>Add a new emergency contact:</label>
+            <input type="text" name="contactName" class="contactInput" id="contactName" placeholder="Name">
+            <input type="email" name="contactEmail" class="contactInput" id="contactEmail" placeholder="Email">
+              <button class="addbutton"  type="submit">Add</button>
+          </form>
+
         </div>
       </ul>
     </div>

@@ -23,7 +23,6 @@
   const btnLogout = document.getElementById('btnLogout');
   const subscribeButton = document.getElementById('subscribe');
   const unsubscribeButton = document.getElementById('unsubscribe');
-  const sendNotificationForm = document.getElementById('send-notification-form');
 
   const FIREBASE_DATABASE = firebase.database();
   const FIREBASE_AUTH = firebase.auth();
@@ -83,29 +82,6 @@ function checkSubscription(){
 }
 // END OF SUB CODE
 
-//NOTIFICATION MESSAGE CODE
-sendNotificationForm.addEventListener('submit', sendNotification);
-
-function sendNotification(e){
-  e.preventDefault();
-  const notificationMessage = document.getElementById('notification-message').value;
-
-  FIREBASE_DATABASE.ref("/notification")
-  .push({
-    user:FIREBASE_AUTH.currentUser.email,
-    message: notificationMessage,
-
-  })
-  .then(() =>{
-     document.getElementById('notification-message').value = "";
-  })
-  .catch(() => {
-    console.log("error sending notification")
-  });
-  }
-
-
-// END NOTIFICATION MESSAGE CODE
 
   // LOGIN
 
@@ -121,6 +97,7 @@ function sendNotification(e){
       //alert(user.uid)
     });
   });
+// END LOGIN
 
 // SIGN UP
   btnSignup.addEventListener('click', e =>{
@@ -132,13 +109,13 @@ function sendNotification(e){
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message));
   });
-
+//END SIGN UP
 
 //LOGOUT
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
-
 });
+//END LOGOUT
 
 //Database reference
   var rootRef = firebase.database().ref();
@@ -147,8 +124,6 @@ btnLogout.addEventListener('click', e => {
  firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
       checkSubscription();
-      console.log(firebaseUser);
-      // btnLogout.classList.remove('hide');
       newtrippage.classList.remove('hide');
       loginpage.classList.add('hide');
       console.log("User " + firebaseUser.uid + " is logged in with " + firebaseUser.email);
@@ -157,6 +132,9 @@ btnLogout.addEventListener('click', e => {
 
       
       //If a user already exists then console log but if the user is new then add it to the database
+
+
+
       rootRef.child('users').child(userId).once("value", function(snapshot){
         var ifExists = snapshot.exists();
         if(ifExists){
@@ -169,43 +147,35 @@ btnLogout.addEventListener('click', e => {
       var user = firebase.auth().currentUser;
       if (user != null){
 
+
 // SUBMITTING DATA TO THE TRACKS DATABASE
 
-  // Reference messages collection
+// Reference messages collection
   var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
 
 // listen for form submit
-  document.getElementById('contactForm').addEventListener('submit', submitForm);
+  document.getElementById('trackForm').addEventListener('submit', submitForm);
 
-//Submit form
+//SUBMIT FORM
   function submitForm(e){
 
   e.preventDefault();
+
 //get values
   var track = getInputVal('track');
   var time = getInputVal('time');
-  // var start = getInputVal('start');
-  //var endinput = getInputVal('end');
-  // var endoutput = endinput;
-  //var date = getInputVal('myDate');
-  // var month = getInputVal('month');
-  // var day = getInputVal('day');
-  // var year = getInputVal('year');
-  // var hours = getInputVal('hours');
-  // var minutes = getInputVal('minutes');
+  var startTime = getInputVal('startTime');
+  var startDate = getInputVal('startDate');
+  var endTime = getInputVal('endTime');
+  var endDate = getInputVal('endDate');
   var history = getInputVal('history');
   var contact = getInputVal('contact');
-  var timetill = getInputVal('messagetime')
+  var timetill = getInputVal('messagetime');
+  var status = getInputVal('status');
   var timestamp = Date.now();
 
- // var d = new Date(date);
- // console.log(d);
-
- //    var x = document.getElementById("myDate").value;
- //    document.getElementById("pastuserdata").innerHTML = x;
- //    console.log(x)
   //save message
-  saveMessage(track, time, timetill, history, contact, timestamp);
+  saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, status, timestamp);
 
   //Show alert
   document.querySelector('.alert').style.display = 'block';
@@ -217,9 +187,9 @@ btnLogout.addEventListener('click', e => {
   },3000);
 
   //Clear form
-  document.getElementById('contactForm').reset();
+  document.getElementById('trackForm').reset();
 }
-
+//END SUBMIT FORM
 
 //function to get form values
 function getInputVal(id){
@@ -228,18 +198,129 @@ function getInputVal(id){
 
 //Save message to firebase
 
-function saveMessage(track, time, timetill, history, contact, timestamp){
+function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, status, timestamp){
   var newMessageRef = messagesRef.push();
   newMessageRef.set({
     track:track,
     time:time,
+    startdate:startDate,
+    enddate:endDate,
+    starttime:startTime,
+    endtime:endTime,
     timetill:timetill,
     history:history,
     contact:contact,
+    status: "",
     timestamp: timestamp
+  });
+}
+//END
+
+//CHECK STATUS OF CHECK IN
+ document.getElementById('status').addEventListener('submit', submitStatusForm);
+
+ function submitStatusForm(e){
+  e.preventDefault();
+
+  var checkstatus = messagesRef.child('status');
+  if(document.getElementById('checkedin').checked){
+    checkstatus.update({
+      'status':'checkedin'
+    })
+  }
+    if(document.getElementById('longer').checked){
+    checkstatus.update({
+      'status':'longer'
+    })
+  }
+    if(document.getElementById('help').checked){
+    checkstatus.update({
+      'status':'help'
+    })
+  }
+
+ }
+//END
+
+// //PROFILE PAGE MY INFO
+
+// // Reference messages collection
+//   var myNameRef = firebase.database().ref('users').child(userId).child('name');
+
+// // listen for form submit
+//   document.getElementById('myName').addEventListener('submit', submitnameForm);
+
+// //SUBMIT FORM
+//   function submitnameForm(e){
+
+//   e.preventDefault();
+// //get values
+//   var txtname = getInputVal('txtName');
+
+
+//   //save message
+//   saveMessage(txtName);
+//     //Clear form
+//   document.getElementById('myName').reset();
+// }
+// //END SUBMIT FORM
+
+// //function to get form values
+// function getInputVal(id){
+//   return document.getElementById(id).value;
+// }
+
+// //Save message to firebase
+
+// function saveMessage(txtName){
+//   var newNameRef = myNameRef.push();
+//   newNameRef.set({
+//     name:txtName,
+ 
+//   });
+// }
+
+
+
+// SUBMITTING DATA TO THE CONTACTS DATABASE
+
+// Reference messages collection
+  var contactsRef = firebase.database().ref('users').child(userId).child('emergencycontacts');
+
+// listen for form submit
+  document.getElementById('contactsForm').addEventListener('submit', submitContactsForm);
+
+//SUBMIT FORM
+  function submitContactsForm(e){
+
+  e.preventDefault();
+//get values
+  var contactName = getInputVal('contactName');
+  var contactEmail = getInputVal('contactEmail');
+
+
+  //save message
+  saveContact(contactName, contactEmail);
+
+  //Clear form
+  document.getElementById('contactsForm').reset();
+}
+//END SUBMIT FORM
+
+//function to get form values
+function getInputVal(id){
+  return document.getElementById(id).value;
+}
+
+//Save message to firebase
+
+function saveContact(contactName, contactEmail){
+  var newcontactRef = contactsRef.push();
+  newcontactRef.set({
+  name: contactName,
+  email:contactEmail
 
   });
-
 }
       }
     } else {
@@ -259,29 +340,30 @@ function saveMessage(track, time, timetill, history, contact, timestamp){
 
 var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 
+
 // CURRENT TRACK
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
 
-  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.start + "<br>End: " +newPost.end + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
+  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
 });
+//END CURRENT TRACK
 
 
-
-// PAST TRACK
-    
+// PAST TRACKS LIST
   tracksRef.orderByChild('track').limitToFirst(100).on("child_added", function(snapshot) {
     var data = snapshot.val();
-    console.log(data);
-     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.start+"</li><li>End: "+ data.end+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>");
-
-    // document.getElementById("pastuserdata").innerHTML = "Track: " + data.track + "<br>Time: " +data.time + "<br>Start: " +data.start + "<br>End: " +data.end + "<br>History: " +data.history + "<br>Contact: " +data.contact;   
-
-    // document.getElementById("pastuserdata").innerHTML = data.timetill  ;
-});    
+     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.startdate +" at "+data.starttime+"</li><li>End: "+ data.enddate + " at "+ data.endtime+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>"); 
+  });    
+//END PAST TRACKS LIST
 
 
+contactsRef.on("child_added", function(snapshot) {
+  var newContact = snapshot.val();
 
+$("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li>Email: "+ newContact.email+"</li></ul><br>"); 
+});
+//
 });
 
 
@@ -297,6 +379,7 @@ checkinbutton.addEventListener('click', e => {
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
 });
+//END CHECKIN PAGE
 
 // NEW TRIP PAGE
 mytripbutton.addEventListener('click', e => {
@@ -307,6 +390,7 @@ mytripbutton.addEventListener('click', e => {
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
 });
+//END TRIP PAGE
 
 // WEATHER PAGE
 weatherbutton.addEventListener('click', e => {
@@ -317,6 +401,7 @@ weatherbutton.addEventListener('click', e => {
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
 });
+//END WEATHER PAGE
 
 // PROFILE PAGE
 profilebutton.addEventListener('click', e => {
@@ -327,6 +412,7 @@ profilebutton.addEventListener('click', e => {
   profilepage.classList.remove('hide');
   settingspage.classList.add('hide');    
 });
+//END PROFILE PAGE
 
 // SETTINGS PAGE
 settingsbutton.addEventListener('click', e => {
@@ -337,9 +423,11 @@ settingsbutton.addEventListener('click', e => {
   profilepage.classList.add('hide');
   settingspage.classList.remove('hide');    
 });
+//END SETTINGS PAGE
+//END GOING BETWEEN PAGES BUTTONS
 
 
-//Accordian code for profile page list menu
+//ACCORDION FOR PROFILE PAGE 
 
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -370,6 +458,8 @@ for (a = 0; a < acc2.length; a++) {
         }
     });
 }
+//END OF ACCORDION FOR PROFILE PAGE
+
 
 //TRYING TO FIGURE OUT THE DATE AND TIMERS
 var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
@@ -380,101 +470,72 @@ var x = setInterval(function() {
   var now = new Date().getTime();
   var time2 = now/1000;
   var distance = countDownDate - now;
-
 });
-
 
 var today = new Date();
 var timestamp = today.valueOf();
 console.log(timestamp/1000)
 
-//END
+//END OF DATE AND TIME 
 
-// Auto complete text input
+// AUTO COMPLETE EMERGENCY CONTACT
 function autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
   var currentFocus;
-  /*execute a function when someone writes in the text field:*/
   inp.addEventListener("input", function(e) {
       var a, b, i, val = this.value;
-      /*close any already open lists of autocompleted values*/
       closeAllLists();
       if (!val) { return false;}
       currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
-      /*for each item in the array...*/
       for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
-          /*make the matching letters bold:*/
           b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i].substr(val.length);
-          /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
               closeAllLists();
           });
           a.appendChild(b);
         }
       }
   });
-  /*execute a function presses a key on the keyboard:*/
+
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
         currentFocus++;
-        /*and and make the current item more visible:*/
         addActive(x);
       } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
         currentFocus--;
-        /*and and make the current item more visible:*/
         addActive(x);
       } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
         e.preventDefault();
         if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
           if (x) x[currentFocus].click();
         }
       }
   });
   function addActive(x) {
-    /*a function to classify an item as "active":*/
     if (!x) return false;
-    /*start by removing the "active" class on all items:*/
     removeActive(x);
     if (currentFocus >= x.length) currentFocus = 0;
     if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
     x[currentFocus].classList.add("autocomplete-active");
   }
+
   function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
     for (var i = 0; i < x.length; i++) {
       x[i].classList.remove("autocomplete-active");
     }
   }
+
   function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
     var x = document.getElementsByClassName("autocomplete-items");
     for (var i = 0; i < x.length; i++) {
       if (elmnt != x[i] && elmnt != inp) {
@@ -482,14 +543,14 @@ function autocomplete(inp, arr) {
       }
     }
   }
-  /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
       });
 }
+var emergencycontacts = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
 
-/*An array containing all the country names in the world:*/
-var countries = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
+autocomplete(document.getElementById("contact"), emergencycontacts);
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("contact"), countries);
+//END OF AUTOCOMPLETE
+
+

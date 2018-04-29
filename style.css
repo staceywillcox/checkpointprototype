@@ -53,6 +53,9 @@ position: relative;
   margin-right:15px;
 }
 
+#contactsForm{
+  width:100%;
+}
 #newtrippage input, textarea {
     width:70%;
     margin-top:10px;
@@ -64,6 +67,59 @@ position: relative;
     border-radius: 10px;
     border:1px solid #CCC;
 }
+
+.contactInput {
+    width:38%;
+    margin-top:10px;
+    margin-bottom:10px;
+    line-height:25px;
+    padding:2px 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border:1px solid #CCC;
+}
+
+.addbutton{
+  width:17%;
+    background-color: white; /* Green */
+    border: 1px solid green;
+    color: green;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+     border-radius: 10px;
+}
+
+.changebutton{
+    width:30%;
+    background-color: white; /* Green */
+    border: 1px solid green;
+    color: green;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+     border-radius: 10px;
+}
+
+#txtName{
+  width:65%;
+    margin-top:10px;
+    margin-bottom:10px;
+    line-height:25px;
+    padding:2px 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border:1px solid #CCC;
+}
+
 
 #loginpage label {
     width:25%;
@@ -179,7 +235,7 @@ ul{
 
 /*AUTOCOMPLETE LIST FOR NEW TRIP PAGE*/
 
-#myInputautocomplete-list{
+#contactautocomplete-list{
   width:70%;
   margin-left:25%;
 
@@ -283,12 +339,12 @@ ul{
   transform: rotate(45deg);
 }
 
-#status{
+/*#status{
   margin-top:25px;
   margin-bottom:20px;
   width:150px;
 
-}
+}*/
 
 /*END OF CHECK IN PAGE*/
 
