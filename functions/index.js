@@ -45,26 +45,13 @@ var mailTransport = nodemailer.createTransport({
 // TODO: Change this to your app or company name to customize the email sent.
 const APP_NAME = 'Checkpoint App';
 
-// [START sendWelcomeEmail]
-/**
- * Sends a welcome email to new user.
- */
-// [START onCreateTrigger]
+
+
 exports.sendTrackEmail = functions.database.ref('/users/{userId}/tracks/{trackId}').onCreate((snapshot) => {
-// [END onCreateTrigger]
-  // [START eventAttributes]
 
-  const snappy = snapshot.val();
-  console.log(snappy); 
-  
-
-  // [END eventAttributes]
 
   return sendTrackEmail();
 });
-// [END sendWelcomeEmail]
-
-
 
 
 // Sends a welcome email to the given user.
@@ -74,11 +61,37 @@ function sendTrackEmail() {
     to: 'kiwimade.sw@gmail.com',
   };
 
-  // The user subscribed to the newsletter.
-  mailOptions.subject = `You created a new track in ${APP_NAME}!`;
-  mailOptions.text = `Hey Stacey! You made a new track in ${APP_NAME}. You are going on the track.`;
+  mailOptions.subject = `${APP_NAME} Alert Message!`;
+  mailOptions.text = `Hey! You are Stacey's emergency contact on the ${APP_NAME}. Stacey recently created a new track with the following information.`;
   return mailTransport.sendMail(mailOptions).then(() => {
-    return console.log('New welcome email sent to Stacey');
+    return console.log('New track email sent to emergency contact');
   });
 }
+
+
+
+exports.sendUpdateEmail = functions.database.ref('/users/{userId}/tracks/status').onUpdate((snapshot) => {
+
+
+  return sendUpdateEmail();
+
+});
+
+
+
+// Sends a welcome email to the given user.
+function sendUpdateEmail() {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: 'kiwimade.sw@gmail.com',
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `${APP_NAME} Track Message!`;
+  mailOptions.text = `Hey! You are Stacey's emergency contact on the ${APP_NAME}. Stacey recently checked in as needing help. Please review the track information from the previous email and contact the emergency services if Stacey is unreachable.`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Status update sent to emergency contact');
+  });
+}
+
 

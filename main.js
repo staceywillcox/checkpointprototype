@@ -152,6 +152,19 @@ btnLogout.addEventListener('click', e => {
 
 // Reference messages collection
   var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
+  var statusRef = firebase.database().ref('users').child(userId).child('tracks').child('status');
+    var checkstatus = messagesRef.child('status');
+  statusRef.once("value")
+  .then(function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();
+         console.log(childData);
+        document.getElementById("newstatus").innerHTML = "Status: "+ childData;
+    });
+  });
+        
+ 
 
 // listen for form submit
   document.getElementById('trackForm').addEventListener('submit', submitForm);
@@ -186,6 +199,9 @@ btnLogout.addEventListener('click', e => {
   document.querySelector('.alert').style.display = 'none';  
   },3000);
 
+      checkstatus.update({
+      'status':'no status'
+    })
   //Clear form
   document.getElementById('trackForm').reset();
 }
@@ -210,13 +226,13 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     timetill:timetill,
     history:history,
     contact:contact,
-    status: "",
+    status: "no status",
     timestamp: timestamp
   });
 }
 //END
 
-//CHECK STATUS OF CHECK IN
+//PUSH STATUS OF CHECK IN
  document.getElementById('status').addEventListener('submit', submitStatusForm);
 
  function submitStatusForm(e){
@@ -225,22 +241,28 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
   var checkstatus = messagesRef.child('status');
   if(document.getElementById('checkedin').checked){
     checkstatus.update({
-      'status':'checkedin'
+      'status':'Safe'
     })
   }
     if(document.getElementById('longer').checked){
     checkstatus.update({
-      'status':'longer'
+      'status':'Taking longer'
     })
   }
     if(document.getElementById('help').checked){
     checkstatus.update({
-      'status':'help'
+      'status':'Need help'
     })
   }
 
  }
 //END
+  
+
+
+  
+
+
 
 // //PROFILE PAGE MY INFO
 
@@ -346,6 +368,8 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
 
   document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
+    var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
+    var checkstatus = messagesRef.child('status');
 });
 //END CURRENT TRACK
 
