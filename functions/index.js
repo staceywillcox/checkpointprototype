@@ -70,7 +70,7 @@ function sendTrackEmail() {
 
 
 
-exports.sendUpdateEmail = functions.database.ref('/users/{userId}/tracks/status').onUpdate((snapshot) => {
+exports.sendUpdateEmail = functions.database.ref('/users/{userId}/helpstatus').onCreate((snapshot) => {
 
 
   return sendUpdateEmail();
@@ -95,3 +95,50 @@ function sendUpdateEmail() {
 }
 
 
+exports.sendSafeEmail = functions.database.ref('/users/{userId}/safestatus').onCreate((snapshot) => {
+
+
+  return sendSafeEmail();
+
+});
+
+
+
+// Sends a welcome email to the given user.
+function sendSafeEmail() {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: 'kiwimade.sw@gmail.com',
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `${APP_NAME} Track Message!`;
+  mailOptions.text = `Hey! You are Stacey's emergency contact on the ${APP_NAME}. Stacey recently checked in as safe. No need to worry.`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Status update sent to emergency contact');
+  });
+}
+
+exports.sendLongerEmail = functions.database.ref('/users/{userId}/longerstatus').onCreate((snapshot) => {
+
+
+  return sendLongerEmail();
+
+});
+
+
+
+// Sends a welcome email to the given user.
+function sendLongerEmail() {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: 'kiwimade.sw@gmail.com',
+  };
+
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `${APP_NAME} Track Message!`;
+  mailOptions.text = `Hey! You are Stacey's emergency contact on the ${APP_NAME}. Stacey recently checked in to say she is taking longer than expected. Her new estimated time of arrival is mm:hh dd/mm/yyyy. An update email will be sent to you when she checks in again or if she doesn't check in by her estimated time of arrival.`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Status update sent to emergency contact');
+  });
+}

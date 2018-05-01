@@ -148,13 +148,14 @@ btnLogout.addEventListener('click', e => {
       if (user != null){
 
 
-// SUBMITTING DATA TO THE TRACKS DATABASE
 
-// Reference messages collection
+
+// RETRIEVING STATUS
   var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
-  var statusRef = firebase.database().ref('users').child(userId).child('tracks').child('status');
-    var checkstatus = messagesRef.child('status');
-  statusRef.once("value")
+  var useridRef = firebase.database().ref('users').child(userId);
+  var checkstatus = useridRef.child('status');
+
+  checkstatus.once("value")
   .then(function(snapshot){
     snapshot.forEach(function(childSnapshot){
       var key = childSnapshot.key;
@@ -164,11 +165,13 @@ btnLogout.addEventListener('click', e => {
     });
   });
         
- 
+ // SUBMITTING DATA TO THE TRACKS DATABASE
 
 // listen for form submit
   document.getElementById('trackForm').addEventListener('submit', submitForm);
-
+  var helpstatus = useridRef.child('helpstatus');
+  var longerstatus = useridRef.child('longerstatus');
+  var safestatus = useridRef.child('safestatus');
 //SUBMIT FORM
   function submitForm(e){
 
@@ -184,11 +187,10 @@ btnLogout.addEventListener('click', e => {
   var history = getInputVal('history');
   var contact = getInputVal('contact');
   var timetill = getInputVal('messagetime');
-  var status = getInputVal('status');
   var timestamp = Date.now();
 
   //save message
-  saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, status, timestamp);
+  saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp);
 
   //Show alert
   document.querySelector('.alert').style.display = 'block';
@@ -199,9 +201,14 @@ btnLogout.addEventListener('click', e => {
   document.querySelector('.alert').style.display = 'none';  
   },3000);
 
+//UPDATE STATUS TO NO STATUS ON NEW TRACK ADDED
       checkstatus.update({
       'status':'no status'
     })
+   helpstatus.remove();
+   longerstatus.remove();
+   safestatus.remove();
+//END      
   //Clear form
   document.getElementById('trackForm').reset();
 }
@@ -214,7 +221,7 @@ function getInputVal(id){
 
 //Save message to firebase
 
-function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, status, timestamp){
+function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp){
   var newMessageRef = messagesRef.push();
   newMessageRef.set({
     track:track,
@@ -226,33 +233,47 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     timetill:timetill,
     history:history,
     contact:contact,
-    status: "no status",
     timestamp: timestamp
   });
 }
 //END
 
-//PUSH STATUS OF CHECK IN
+//SET STATUS OF CHECK IN
  document.getElementById('status').addEventListener('submit', submitStatusForm);
 
  function submitStatusForm(e){
   e.preventDefault();
 
-  var checkstatus = messagesRef.child('status');
-  if(document.getElementById('checkedin').checked){
-    checkstatus.update({
-      'status':'Safe'
-    })
-  }
+  var status = useridRef.child('status');
+
     if(document.getElementById('longer').checked){
-    checkstatus.update({
-      'status':'Taking longer'
-    })
+       var longerstatus = useridRef.child('longerstatus');
+    longerstatus.update({
+      'status':'Need longer'
+    });
+    status.update({
+      'status':'Need longer'
+    });
   }
+
     if(document.getElementById('help').checked){
-    checkstatus.update({
+       var helpstatus = useridRef.child('helpstatus');
+    helpstatus.update({
+      'status':'Need Help'
+    });
+    status.update({
       'status':'Need help'
-    })
+    });
+  }
+
+    if(document.getElementById('checkedin').checked){
+       var safestatus = useridRef.child('safestatus');
+    safestatus.update({
+      'status':'Safe'
+    });
+    status.update({
+      'status':'Safe'
+    });
   }
 
  }
@@ -264,43 +285,54 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 
 
 
-// //PROFILE PAGE MY INFO
+//PROFILE PAGE MY INFO
+//SAVE NAME TO DATA BASE
+// Reference messages collection
+  var myNameRef = firebase.database().ref('users').child(userId).child('name');
 
-// // Reference messages collection
-//   var myNameRef = firebase.database().ref('users').child(userId).child('name');
+// listen for form submit
+  document.getElementById('myName').addEventListener('submit', submitnameForm);
 
-// // listen for form submit
-//   document.getElementById('myName').addEventListener('submit', submitnameForm);
+//SUBMIT FORM
+  function submitnameForm(e){
 
-// //SUBMIT FORM
-//   function submitnameForm(e){
-
-//   e.preventDefault();
-// //get values
-//   var txtname = getInputVal('txtName');
+  e.preventDefault();
+//get values
+  var txtName = getnameInputVal('txtName');
 
 
-//   //save message
-//   saveMessage(txtName);
-//     //Clear form
-//   document.getElementById('myName').reset();
-// }
-// //END SUBMIT FORM
+  //save message
+  saveNameMessage(txtName);
+    //Clear form
+  document.getElementById('myName').reset();
+}
+//END SUBMIT FORM
 
-// //function to get form values
-// function getInputVal(id){
-//   return document.getElementById(id).value;
-// }
+//function to get form values
+function getnameInputVal(id){
+  return document.getElementById(id).value;
+}
 
-// //Save message to firebase
+//Save message to firebase
 
-// function saveMessage(txtName){
-//   var newNameRef = myNameRef.push();
-//   newNameRef.set({
-//     name:txtName,
+function saveNameMessage(txtName){
+  var newNameRef = myNameRef.push();
+  newNameRef.set({
+    name:txtName,
  
-//   });
-// }
+  });
+
+}
+//END
+
+//RETRIEVE NAME FROM DATABASE
+  var myNameRef = firebase.database().ref('users').child(userId).child('name');
+  document.getElementById("myuserName").innerHTML = "Name: ";
+  myNameRef.on("child_added", function(snapshot) {
+    var myname = snapshot.val();
+  document.getElementById("myuserName").innerHTML = "Name: "+myname.name;
+
+  });
 
 
 
@@ -369,7 +401,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 
   document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
     var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
-    var checkstatus = messagesRef.child('status');
+    var checkstatus = useridRef.child('status');
 });
 //END CURRENT TRACK
 
