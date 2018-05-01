@@ -24,6 +24,8 @@ body{
 
 #pagewrap{
 min-height: 100%;
+width:70%;
+margin-left: 15%;
 position: relative;
 
 }
@@ -34,6 +36,19 @@ position: relative;
 
 #contact{
   width:70%;
+
+}
+
+#messagetime{
+
+    background-color: transparent; 
+    color:#485e74;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+    border-radius: 10px;
 
 }
 
@@ -154,6 +169,12 @@ position: relative;
      border-radius: 10px;
 }
 
+#innerlogin{
+margin:20% auto;
+width:70%;
+}
+
+
 .btn{
     background-color: transparent; /* Green */
     border: 1px solid white;
@@ -187,6 +208,11 @@ position: relative;
 
 .full {
   width: 80px;
+  margin: 0 auto;
+}
+
+.fulllogout {
+  width: 100px;
   margin: 0 auto;
 }
 
@@ -339,25 +365,10 @@ ul{
   transform: rotate(45deg);
 }
 
-/*#status{
-  margin-top:25px;
-  margin-bottom:20px;
-  width:150px;
-
-}*/
 
 /*END OF CHECK IN PAGE*/
 
 /*PROFILE PAGE*/
-/*#profilelist{
-  margin-top: 0;
-}
-#profilelist li {
-padding:10px;
-font-size: 1em;
-margin:2px;
-background-color: #ccc;
-}*/
 
 /*accordian*/
 .accordion {
@@ -410,18 +421,14 @@ footer{
 
 }
 
-/* LARGE SCREENS */
-@media(min-width:700px){
-  .wrapper{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+@media (max-width: 700px){
+  #pagewrap{
+    width:100%;
+    margin:0;
   }
 
-  .wrapper > *{
-    padding:2em;
-  }
+  #innerlogin{
+margin:45% auto;
+}
 
-  .company-info h3, .company-info ul, .brand{
-    text-align: left;
-  }
 }

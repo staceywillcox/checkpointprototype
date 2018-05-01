@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Checkpoint</title>
-<link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
@@ -14,12 +14,14 @@
  <div id="pagewrap"> 
 
     <div id="loginpage" class="container hide">
-      <input id="txtEmail" type="email" placeholder="Email">
-
-      <input id="txtPassword" type="password" placeholder="Password">
-      <div id="loginbuttons">
-        <button id="btnLogin" class="btn btn-action" type="submit">Log in</button>
-        <button id="btnSignup" class="btn btn-secondary" type="submit">Sign up</button>
+      <div id="innerlogin">
+        <h1 class="brand">Checkpoint</h1>
+        <input id="txtEmail" type="email" placeholder="Email">
+        <input id="txtPassword" type="password" placeholder="Password">
+        <div id="loginbuttons">
+          <button id="btnLogin" class="btn btn-action" type="submit">Log in</button>
+          <button id="btnSignup" class="btn btn-secondary" type="submit">Sign up</button>
+        </div>
       </div>
     </div>
 
@@ -63,150 +65,7 @@
               <input type="time" id="endTime" value="12:00">
           </div>
         </ul>
-            <!-- <label>End:</label>
-              <select name="day" id="day">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4"> 4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-              </select>
-
-              <select name="month" id="month">
-                <option value="Jan">Jan</option>
-                <option value="Feb">Feb</option>
-                <option value="Mar">Mar</option>
-                <option value="Apr"> Apr</option>
-                <option value="May">May</option>
-                <option value="Jun">Jun</option>
-                <option value="Jul">Jul</option>
-                <option value="Aug">Aug</option>
-                <option value="Sep">Sep</option>
-                <option value="Oct">Oct</option>
-                <option value="Nov">Nov</option>
-                <option value="Dec">Dec</option>
-              </select>
-
-              <select name="year" id="year">
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021"> 2021</option>
-              </select>
-              <select name="hours" id="hours">
-                <option value="01">1</option>
-                <option value="02">2</option>
-                <option value="03">3</option>
-                <option value="04">4</option>
-                <option value="05">5</option>
-                <option value="06">6</option>
-                <option value="07">7</option>
-                <option value="08">8</option>
-                <option value="09">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="00">24</option>
-              </select>  
-
-              <select name="minutes" id="minutes">
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-                <option value="09">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-                <option value="32">32</option>
-                <option value="33">33</option>
-                <option value="34">34</option>
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="45">45</option>
-                <option value="46">46</option>
-                <option value="47">47</option>
-                <option value="48">48</option>
-                <option value="49">49</option>   
-                <option value="50">10</option>
-                <option value="51">51</option>
-                <option value="52">52</option>
-                <option value="53">53</option>
-                <option value="54">54</option>
-                <option value="55">55</option>
-                <option value="56">56</option>
-                <option value="57">57</option>
-                <option value="58">58</option>
-                <option value="59">59</option>
-              </select> -->
+          
 
             <label>History:</label>
             <input type="text" name="history" id="history" placeholder="Previous experience on this track">
@@ -328,7 +187,7 @@
         <div class="panel">
             <div id="existingcontacts"></div>
           <form id="contactsForm">
-            <label>Add a new emergency contact:</label>
+            <label>Add a new emergency contact:</label><br>
             <input type="text" name="contactName" class="contactInput" id="contactName" placeholder="Name">
             <input type="email" name="contactEmail" class="contactInput" id="contactEmail" placeholder="Email">
               <button class="addbutton"  type="submit">Add</button>
@@ -343,21 +202,16 @@
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
     <div class="bodystyle">
-
-      <form id="send-notification-form" class="contact">
-        <label for="notification-message" class="sr-only">Notification Message</label>
-        <textarea id="notification-message" placeholder="What would you like to say?"></textarea>
-        <button type="submit" aria-label="Send" id="send-notification" class="submitbutton">Send</button>
-      </form>
-        <button id="btnLogout" class="btn btn-action">Logout</button>
-        <button id="subscribe" class="hide">Subscribe</button> 
-         <button id="unsubscribe" class="hide">Unsubscribe</button> 
+        
     </div>
+    <div class="fulllogout">
+    <button id="btnLogout" class="btn btn-action">Logout</button>
+  </div>
   </div>
 
 
   <!--FOOTER  -->
-  <footer>
+  <footer id="footer">
     <div>
       <ul class="wrapper">
         <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>

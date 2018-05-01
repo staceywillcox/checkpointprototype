@@ -21,66 +21,11 @@
   const btnLogin = document.getElementById('btnLogin');
   const btnSignup = document.getElementById('btnSignup');
   const btnLogout = document.getElementById('btnLogout');
-  const subscribeButton = document.getElementById('subscribe');
-  const unsubscribeButton = document.getElementById('unsubscribe');
+
 
   const FIREBASE_DATABASE = firebase.database();
   const FIREBASE_AUTH = firebase.auth();
   const messaging = firebase.messaging();
-
-//SUBSCRIPTION CODE
-  messaging.onTokenRefresh(handleTokenRefresh);
-
-subscribeButton.addEventListener('click', e =>{
-
-    messaging.requestPermission()
-    .then(()=> handleTokenRefresh())
-    .then(() => checkSubscription())
-    .catch((err) => console.log("user didn't give permission"));
-})
-
-
-function handleTokenRefresh(){
-  return messaging.getToken()
-      .then((token) => {
-
-      FIREBASE_DATABASE.ref('/tokens').push({
-        token: token,
-        uid: FIREBASE_AUTH.currentUser.uid
-      });
-
-    });
-
-}  
-
-unsubscribeButton.addEventListener('click', e =>{
-  messaging.getToken()
-   .then((token) => messaging.deleteToken(token))
-   .then(() => FIREBASE_DATABASE.ref('/tokens').orderByChild('uid').equalTo(FIREBASE_AUTH.currentUser.uid)
-    .once('value'))
-   .then((snapshot) => {
-    console.log(snapshot.val());
-    const key = Object.keys(snapshot.val())[0];
-    return FIREBASE_DATABASE.ref('/tokens').child(key).remove();
-   })
-   .then(() => checkSubscription())
-   .catch((err) => console.log("unsubscribe failed"));
-})
-
-function checkSubscription(){
-  FIREBASE_DATABASE.ref('/tokens').orderByChild('uid').equalTo(FIREBASE_AUTH.currentUser.uid).once('value')
-  .then((snapshot) => {
-    if (snapshot.val()){
-      unsubscribeButton.classList.remove('hide');
-      subscribeButton.classList.add('hide');
-    } else{
-      unsubscribeButton.classList.add('hide');
-      subscribeButton.classList.remove('hide');
-    }
-  });
-
-}
-// END OF SUB CODE
 
 
   // LOGIN
@@ -114,6 +59,12 @@ function checkSubscription(){
 //LOGOUT
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut();
+  checkinpage.classList.add('hide');
+  mytrippage.classList.add('hide');
+  newtrippage.classList.add('hide');
+  weatherpage.classList.add('hide');
+  profilepage.classList.add('hide');
+  settingspage.classList.add('hide'); 
 });
 //END LOGOUT
 
@@ -123,7 +74,7 @@ btnLogout.addEventListener('click', e => {
 //Add realtime listener
  firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
-      checkSubscription();
+
       newtrippage.classList.remove('hide');
       loginpage.classList.add('hide');
       console.log("User " + firebaseUser.uid + " is logged in with " + firebaseUser.email);
@@ -147,7 +98,8 @@ btnLogout.addEventListener('click', e => {
       var user = firebase.auth().currentUser;
       if (user != null){
 
-
+ 
+      footer.classList.remove('hide');
 
 
 // RETRIEVING STATUS
@@ -379,7 +331,8 @@ function saveContact(contactName, contactEmail){
       }
     } else {
       console.log('not logged in');
-      // btnLogout.classList.add('hide');
+
+      footer.classList.add('hide');
       newtrippage.classList.add('hide');
       loginpage.classList.remove('hide');
       mytrippage.classList.add('hide'); 
