@@ -231,6 +231,15 @@ ul{
   font-size: 3em;
 }
 
+.brand2{
+  text-align: center;
+  padding:10px;
+  color:#fff;
+  margin:0;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 3em;
+}
+
 .track{
   display: none;
 }
@@ -431,4 +440,16 @@ footer{
 margin:45% auto;
 }
 
+}
+
+@media (max-width: 350px){
+
+.brand2{
+  font-size: 2.5em;
+}
+
+#innerlogin{
+margin:20% auto;
+width:85%;
+}
 }
