@@ -109,6 +109,7 @@ btnLogout.addEventListener('click', e => {
   var useridRef = firebase.database().ref('users').child(userId);
   var checkstatus = useridRef.child('status');
 
+//Shows current status
   checkstatus.once("value")
   .then(function(snapshot){
     snapshot.forEach(function(childSnapshot){
@@ -118,7 +119,13 @@ btnLogout.addEventListener('click', e => {
         document.getElementById("newstatus").innerHTML = "Status: "+ childData;
     });
   });
-        
+
+//Shows changed status without page reload
+  checkstatus.on("child_changed", function(snapshot) {
+    var status = snapshot.val();
+  document.getElementById("newstatus").innerHTML = "Status: "+ status;
+
+  });
  // SUBMITTING DATA TO THE TRACKS DATABASE
 
 // listen for form submit
@@ -187,7 +194,8 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     timetill:timetill,
     history:history,
     contact:contact,
-    timestamp: timestamp
+    timestamp: timestamp,
+    trackChecked: false
   });
 }
 //END
@@ -236,7 +244,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 //PROFILE PAGE MY INFO
 //SAVE NAME TO DATA BASE
 // Reference messages collection
-  var myNameRef = firebase.database().ref('users').child(userId).child('name');
+  var myNameRef = firebase.database().ref('users').child(userId);
 
 // listen for form submit
   document.getElementById('myName').addEventListener('submit', submitnameForm);
@@ -264,8 +272,7 @@ function getnameInputVal(id){
 //Save message to firebase
 
 function saveNameMessage(txtName){
-  var newNameRef = myNameRef.push();
-  newNameRef.set({
+  myNameRef.set({
     name:txtName,
  
   });
@@ -275,10 +282,15 @@ function saveNameMessage(txtName){
 
 //RETRIEVE NAME FROM DATABASE
   var myNameRef = firebase.database().ref('users').child(userId).child('name');
-  document.getElementById("myuserName").innerHTML = "Name: ";
-  myNameRef.on("child_added", function(snapshot) {
+    myNameRef.once("value", function(snapshot) {
     var myname = snapshot.val();
-  document.getElementById("myuserName").innerHTML = "Name: "+myname.name;
+  document.getElementById("myuserName").innerHTML = "Name: "+ myname.name;
+
+  });
+  document.getElementById("myuserName").innerHTML = "Name: ";
+  myNameRef.on("child_changed", function(snapshot) {
+    var myname = snapshot.val();
+  document.getElementById("myuserName").innerHTML = "Name: "+myname;
 
   });
 
