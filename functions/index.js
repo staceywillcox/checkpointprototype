@@ -1,28 +1,3 @@
-
-
-// // var functions = require('firebase-functions');
-// // const admin = require('firebase-admin');
-// // admin.initializeApp();
-
-// // exports.sendNotification = functions.database.ref('/notification/{notificationId}').onCreate((snapshot) => {
-
-
-
-// //   // Setup notification
-// //   const NOTIFICATION_SNAPSHOT = snapshot.val();
-// //   const payload = {
-// //     notification: {
-// //       title: `New Message from ${NOTIFICATION_SNAPSHOT.child('user').val()}!`,
-// //       body: NOTIFICATION_SNAPSHOT.child('message').val(),
-// //       click_action: `https://${functions.config().firebase.authDomain}`
-// //     }
-// //   };
-// //   console.info(payload);
-// // });
-
-
-
-
 // WELCOME EMAIL
 'use strict';
 

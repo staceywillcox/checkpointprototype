@@ -13,6 +13,7 @@
   firebase.initializeApp(config);
 
 
+
   //Get elements
  
   const txtName = document.getElementById('txtName');
@@ -65,6 +66,7 @@ btnLogout.addEventListener('click', e => {
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
   settingspage.classList.add('hide'); 
+  location.reload();
 });
 //END LOGOUT
 
@@ -72,14 +74,14 @@ btnLogout.addEventListener('click', e => {
   var rootRef = firebase.database().ref();
 
 //Add realtime listener
- firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser){
+ firebase.auth().onAuthStateChanged(user => {
+    if(user){
 
       newtrippage.classList.remove('hide');
       loginpage.classList.add('hide');
-      console.log("User " + firebaseUser.uid + " is logged in with " + firebaseUser.email);
-      var userId = firebaseUser.uid;
-      var userEmail = firebaseUser.email;
+      console.log("User " + user.uid + " is logged in with " + user.email);
+      var userId = user.uid;
+      var userEmail = user.email;
 
       
       //If a user already exists then console log but if the user is new then add it to the database
@@ -103,7 +105,7 @@ btnLogout.addEventListener('click', e => {
 
 
 // RETRIEVING STATUS
-  var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
+  var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
   var useridRef = firebase.database().ref('users').child(userId);
   var checkstatus = useridRef.child('status');
 
@@ -121,9 +123,9 @@ btnLogout.addEventListener('click', e => {
 
 // listen for form submit
   document.getElementById('trackForm').addEventListener('submit', submitForm);
-  var helpstatus = useridRef.child('helpstatus');
-  var longerstatus = useridRef.child('longerstatus');
-  var safestatus = useridRef.child('safestatus');
+  // var helpstatus = useridRef.child('helpstatus');
+  // var longerstatus = useridRef.child('longerstatus');
+  // var safestatus = useridRef.child('safestatus');
 //SUBMIT FORM
   function submitForm(e){
 
@@ -174,7 +176,7 @@ function getInputVal(id){
 //Save message to firebase
 
 function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp){
-  var newMessageRef = messagesRef.push();
+  var newMessageRef = tracksRef.push();
   newMessageRef.set({
     track:track,
     time:time,
@@ -200,9 +202,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 
     if(document.getElementById('longer').checked){
        var longerstatus = useridRef.child('longerstatus');
-    longerstatus.update({
-      'status':'Need longer'
-    });
+
     status.update({
       'status':'Need longer'
     });
@@ -210,9 +210,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 
     if(document.getElementById('help').checked){
        var helpstatus = useridRef.child('helpstatus');
-    helpstatus.update({
-      'status':'Need Help'
-    });
+
     status.update({
       'status':'Need help'
     });
@@ -220,9 +218,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 
     if(document.getElementById('checkedin').checked){
        var safestatus = useridRef.child('safestatus');
-    safestatus.update({
-      'status':'Safe'
-    });
+
     status.update({
       'status':'Safe'
     });
@@ -322,7 +318,7 @@ function getInputVal(id){
 
 function saveContact(contactName, contactEmail){
   var newcontactRef = contactsRef.push();
-  newcontactRef.set({
+  contactsRef.child("contact").set({
   name: contactName,
   email:contactEmail
 
@@ -345,6 +341,7 @@ function saveContact(contactName, contactEmail){
 //RETRIEVING TRACKS DATA FROM DATABASE
 // MY TRIP PAGE
 
+
 var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 
 
@@ -353,7 +350,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
 
   document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
-    var messagesRef = firebase.database().ref('users').child(userId).child('tracks');
+    var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
     var checkstatus = useridRef.child('status');
 });
 //END CURRENT TRACK
