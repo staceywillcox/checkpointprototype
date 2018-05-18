@@ -255,8 +255,9 @@ ul{
   width:100%;
   margin-bottom: 100px;
 }
- #clock{
-  margin-top:50px; 
+ #demo{
+  margin-top:5px;
+  margin-bottom: 20px; 
  }
 
 .alert{

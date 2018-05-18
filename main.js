@@ -108,6 +108,7 @@ btnLogout.addEventListener('click', e => {
   var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
   var useridRef = firebase.database().ref('users').child(userId);
   var checkstatus = useridRef.child('status');
+  var trackChecked = useridRef.child('trackChecked');
 
 //Shows current status
   checkstatus.once("value")
@@ -133,6 +134,7 @@ btnLogout.addEventListener('click', e => {
   // var helpstatus = useridRef.child('helpstatus');
   // var longerstatus = useridRef.child('longerstatus');
   // var safestatus = useridRef.child('safestatus');
+
 //SUBMIT FORM
   function submitForm(e){
 
@@ -162,6 +164,13 @@ btnLogout.addEventListener('click', e => {
   document.querySelector('.alert').style.display = 'none';  
   },3000);
 
+
+//UPDATE TRACKCHECKED
+      trackChecked.update({
+      'trackChecked':'false',
+      'emailSent': 'false'
+    })
+//END 
 //UPDATE STATUS TO NO STATUS ON NEW TRACK ADDED
       checkstatus.update({
       'status':'no status'
@@ -169,7 +178,8 @@ btnLogout.addEventListener('click', e => {
    helpstatus.remove();
    longerstatus.remove();
    safestatus.remove();
-//END      
+//END     
+
   //Clear form
   document.getElementById('trackForm').reset();
 }
@@ -195,7 +205,6 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     history:history,
     contact:contact,
     timestamp: timestamp,
-    trackChecked: false
   });
 }
 //END
@@ -293,7 +302,58 @@ function saveNameMessage(txtName){
   document.getElementById("myuserName").innerHTML = "Name: "+myname;
 
   });
+//END
 
+//RETREIVE TIME FROM DATABASE
+var trackEndTime = firebase.database().ref('users').child(userId).child('tracks').limitToLast(1);
+trackEndTime.on("child_added", function(snapshot) {
+  var track = snapshot.val();
+  var endDateRef = track.enddate;
+  var endTimeRef = track.endtime;
+  var timeTillRef = track.timetill;
+  console.log(endDateRef);
+  console.log(timeTillRef);
+
+
+//TRYING TO FIGURE OUT THE DATE AND TIMERS
+var countDownDate = new Date(endDateRef + " "+endTimeRef+":00").getTime();
+var time = countDownDate;
+var sendMessage = (time) - (-timeTillRef*1000);
+console.log(time);
+console.log(sendMessage);
+
+
+var x = setInterval(function() {
+  var now = new Date().getTime();
+
+  var time2 = now;
+  var distance = sendMessage - now;
+
+
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  //console.log(distance);
+
+      // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "Emergency Message has been sent if you did not check in";
+    }
+});
+
+var today = new Date();
+var timestamp = today.valueOf();
+console.log(timestamp)
+});
+//END OF DATE AND TIME 
 
 
 // SUBMITTING DATA TO THE CONTACTS DATABASE
@@ -353,9 +413,7 @@ function saveContact(contactName, contactEmail){
 //RETRIEVING TRACKS DATA FROM DATABASE
 // MY TRIP PAGE
 
-
 var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
-
 
 // CURRENT TRACK
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
@@ -479,22 +537,7 @@ for (a = 0; a < acc2.length; a++) {
 //END OF ACCORDION FOR PROFILE PAGE
 
 
-//TRYING TO FIGURE OUT THE DATE AND TIMERS
-var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
-var time = countDownDate/1000;
-console.log(time);
 
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var time2 = now/1000;
-  var distance = countDownDate - now;
-});
-
-var today = new Date();
-var timestamp = today.valueOf();
-console.log(timestamp/1000)
-
-//END OF DATE AND TIME 
 
 // AUTO COMPLETE EMERGENCY CONTACT
 function autocomplete(inp, arr) {
@@ -572,3 +615,9 @@ autocomplete(document.getElementById("contact"), emergencycontacts);
 //END OF AUTOCOMPLETE
 
 
+//CONVERTING TIMESTAMPS
+
+
+
+
+//END
