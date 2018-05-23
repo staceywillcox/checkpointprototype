@@ -57,6 +57,7 @@
                 var trackStartDate = childSnapshot.child('startdate').val();
                 var trackEndDate = childSnapshot.child('enddate').val();
                 var trackHistory = childSnapshot.child('history').val();
+                var trackid = childSnapshot.child('trackid').val();
         
                     
                 checkStatus();
@@ -77,6 +78,8 @@
                        Start Time: ${trackStartTime} on ${trackStartDate}
                        End Time:  ${trackEndTime} on ${trackEndDate}
                        Previous track history: ${trackHistory}
+
+                       To view ${userName}'s current track on a map please use the unique ID ${trackid} on Checkpoint Guest Login page.
 
                   You will receive a confirmation email when ${userName} checks in safely or an alert email if they do not check in on time. `;
                   return mailTransport.sendMail(mailOptions).then(() => {

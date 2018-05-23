@@ -135,10 +135,12 @@ btnLogout.addEventListener('click', e => {
   // var longerstatus = useridRef.child('longerstatus');
   // var safestatus = useridRef.child('safestatus');
 
+
+
 //SUBMIT FORM
   function submitForm(e){
 
-  e.preventDefault();
+  //e.preventDefault();
 
 //get values
   var track = getInputVal('track');
@@ -175,8 +177,8 @@ btnLogout.addEventListener('click', e => {
       checkstatus.update({
       'status':'no status'
     })
-   helpstatus.remove();
-   longerstatus.remove();
+   //helpstatus.remove();
+   //longerstatus.remove();
    safestatus.remove();
 //END     
 
@@ -192,6 +194,8 @@ function getInputVal(id){
 
 //Save message to firebase
 
+var tracksRef = firebase.database().ref('paths');
+
 function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp){
   var newMessageRef = tracksRef.push();
   newMessageRef.set({
@@ -205,6 +209,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     history:history,
     contact:contact,
     timestamp: timestamp,
+    trackid:" "
   });
 }
 //END
@@ -419,7 +424,7 @@ var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
 
-  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact ;
+  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact +"<br>Track ID: " + newPost.trackid;
     var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
     var checkstatus = useridRef.child('status');
 });
@@ -429,7 +434,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 // PAST TRACKS LIST
   tracksRef.orderByChild('track').limitToFirst(100).on("child_added", function(snapshot) {
     var data = snapshot.val();
-     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.startdate +" at "+data.starttime+"</li><li>End: "+ data.enddate + " at "+ data.endtime+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li></ul><br>"); 
+     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.startdate +" at "+data.starttime+"</li><li>End: "+ data.enddate + " at "+ data.endtime+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li><li>Track ID: "+data.trackid+"</li></ul><br>"); 
   });    
 //END PAST TRACKS LIST
 
@@ -469,14 +474,14 @@ mytripbutton.addEventListener('click', e => {
 //END TRIP PAGE
 
 // WEATHER PAGE
-weatherbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.remove('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
+// weatherbutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.remove('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.add('hide');    
+// });
 //END WEATHER PAGE
 
 // PROFILE PAGE
@@ -491,14 +496,14 @@ profilebutton.addEventListener('click', e => {
 //END PROFILE PAGE
 
 // SETTINGS PAGE
-settingsbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.remove('hide');    
-});
+// settingsbutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.add('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.remove('hide');    
+// });
 //END SETTINGS PAGE
 //END GOING BETWEEN PAGES BUTTONS
 
