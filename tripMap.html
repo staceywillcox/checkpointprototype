@@ -1,23 +1,66 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>JPeat | 352p2</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-<!-- IMPORT FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src= "mapScript.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Checkpoint</title>
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+  <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+     <link rel="icon" type="image/png" href="favicon.png">
 
-  </head>
-  <body>
-  <div id="checkinpage" class="container hide">
-    <h1 class="brand">New Trip - Map</h1>
+</head>
+<body>
+ <div id="pagewrap"> 
+
+    <div id="loginpage" class="container hide">
+      <div id="innerlogin">
+        <div id="logo"><img src="logo.png"></div>
+        <h1 class="brand2">Checkpoint</h1>
+        <input id="txtEmail" type="email" placeholder="Email">
+        <input id="txtPassword" type="password" placeholder="Password">
+        <div id="loginbuttons">
+          <button id="btnLogin" class="btn btn-action" type="submit">Log in</button>
+          <button id="btnSignup" class="btn btn-secondary" type="submit">Sign up</button>
+        </div>
+      </div>
+    </div>
+
+  <div id="mytrippage" class="container hide">
+    <h1 class="brand">My Trip</h1>
+    <div class="bodystyle">
+<!--       <p id="user_data"></p> -->
+    </div>
   </div>
 
-    <button id="geo">    
-      <img id="logo" src="images/tLogo.png"></img>
+
+  <div id="newtrippage" class="container hide">
+    <h1 class="brand">New Trip</h1>
+
+      <div class="bodystyle">
+
+        <div class="alert"> Your trip has been saved.</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+  <button id="geo">    
       <h1> Geolocate </h1>
     </button>
     <button id="help"> ? </button>
@@ -49,6 +92,7 @@
     </div>
 
     <div id="map"></div>
+
 
 
     
@@ -669,11 +713,161 @@ window.onclick = function(event) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     </script>
-    <script async defer
+
+
+          <div class="track"><p>Your track here</p></div>
+          <p class="full">
+              <button href="map.html" class="submitbutton" type="submit">Next</button>
+          </p>
+        </form>
+      </div>
+  </div>
+
+  <!-- CHECK IN PAGE -->
+  <div id="checkinpage" class="container hide">
+    <h1 class="brand">Check In</h1>
+    <div class="bodystyle">
+      <form action="" id="status">
+        <div class="checkoptions">
+          <label class="checkbox">I have arrived at my destination
+            <input type="radio" name="status" id="checkedin" value="checkedin">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <br>
+        <div class="checkoptions">
+          <label class="checkbox">I am taking longer than expected
+            <input type="radio" name="status" id="longer" value="longer">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <br>
+        <div class="checkoptions">
+          <label class="checkbox">I need help
+            <input type="radio" name="status" id="help" value="help">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <p class="full" id="statusbtn">
+          <button type="submit"  class="submitbutton">Update Status</button>
+        </p>  
+      </form>  
+    </div>
+  </div>
+
+<!-- WEATHER PAGE -->
+<div id="weatherpage" class="container hide">
+  <h1 class="brand">Weather</h1>
+    <div class="bodystyle"></div>
+  </div>
+
+<!-- PROFILE PAGE -->
+  <div id="profilepage" class="container hide">
+  <h1 class="brand">Profile</h1>
+    <div class="bodystyle">
+      <ul id="profilelist">
+        <li class="accordion">Current Trip</li>
+        <div class="panel">
+                <p id="user_data"></p>
+                <h4>Time remaining:</h4>
+                <p id='demo'></p>
+
+        </div>
+        <li class="accordion">Past Trips</li>
+        <div class="panel">
+                <div id="pastuserdata"></div>
+          <!-- <p id="pastuserdata"></p> -->
+        </div>
+        <li class="accordion">My Info</li>
+        <div class="panel">
+          <form id="myName">
+            <input id="txtName" type="text" placeholder="Name">
+              <button class="changebutton"  type="submit">Change</button>
+          </form>
+          <p id="myuserName"></p>
+          <p id="newstatus"></p>
+        </div>
+
+        <li class="accordion">Emergency Contacts</li>
+        <div class="panel">
+            <div id="existingcontacts"></div>
+          <form id="contactsForm">
+            <label>Add a new emergency contact:</label><br>
+            <input type="text" name="contactName" class="contactInput" id="contactName" placeholder="Name">
+            <input type="email" name="contactEmail" class="contactInput" id="contactEmail" placeholder="Email">
+              <button class="addbutton"  type="submit">Add</button>
+          </form>
+
+        </div>
+      </ul>
+    </div>
+  </div>
+
+<!-- SETTINGS PAGE -->
+    <div id="settingspage" class="container hide">
+  <h1 class="brand">Settings</h1>
+    <div class="bodystyle">
+        
+    </div>
+
+    <div class="fulllogout">
+    <button id="btnLogout" class="btn btn-action">Logout</button>
+  </div>
+  </div>
+
+
+  <!--FOOTER  -->
+  <footer id="footer">
+    <div>
+<!--       <ul class="wrapper">
+        <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>
+        <li id="checkinbutton"><img src="checkin.png"><br>check in</li>
+        <a href="map.html"> <li id="weatherbutton"><img src="weather.png"><br>map</li></a>
+        <li id="profilebutton"><img src="profile.png"><br>profile</li>
+        <li id="settingsbutton"><img src="settings.png"><br>settings</li>
+      </ul> -->
+      <ul class="wrapper">
+        <li id="mytripbutton"><img src="n.png"></li>
+        <li id="checkinbutton"><img src="c.png"></li>
+        <li id="profilebutton"><img src="p.png"></li>
+        <!-- <li id="weatherbutton"><img src="weather.png"></li> -->
+        
+        <!-- <li id="settingsbutton"><img src="settings.png"></li> -->
+      </ul>
+    </div>
+  </footer>
+ </div>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+
+  <script type="text/javascript" src="main.js"></script>
+      <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDotdQHLhCXr2pZ0QIZZrZ0Jo4L8pEhl_w&callback=initMap">
     </script>
-  </body>
+
+</body>
 </html>
