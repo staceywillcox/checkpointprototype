@@ -10,6 +10,13 @@
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> -->
   <link rel="stylesheet" href="ellastyle.css">
 
+<!-- MATERIAL DESIGN LITE -->
+
+<link rel="stylesheet" href="./MDL/material.min.css">
+<script src="./MDL/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- ********************  -->
 
   <link rel="manifest" href="/manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -25,8 +32,15 @@
       <div id="innerlogin">
         <div id="logo"><img src="logo.png"></div>
         <h1 class="brand2">Checkpoint</h1>
-        <input id="txtEmail" type="email" placeholder="Email">
-        <input id="txtPassword" type="password" placeholder="Password">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="email" id="txtEmail">
+            <label class="mdl-textfield__label" for="txtEmail">Email...</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="txtPassword">
+            <label class="mdl-textfield__label" for="txtEmail">Password...</label>
+          </div>
+          
         <div id="loginbuttons">
           <button id="btnLogin" class="btn btn-action" type="submit">Log in</button>
           <button id="btnSignup" class="btn btn-secondary" type="submit">Sign up</button>
