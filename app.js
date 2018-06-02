@@ -54,6 +54,7 @@ settingsbutton.addEventListener('click', e => {
   settingspage.classList.remove('hide');    
 });
 //END SETTINGS PAGE
+
 //END GOING BETWEEN PAGES BUTTONS
 
 
@@ -90,7 +91,19 @@ for (a = 0; a < acc2.length; a++) {
 }
 //END OF ACCORDION FOR PROFILE PAGE
 
+var acc3 = document.getElementsByClassName("accordionlogin");
+var v;
 
-
+for (v = 0; v < acc3.length; v++) {
+    acc3[v].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panelnewtrip = this.nextElementSibling;
+        if (panelnewtrip.style.display === "block") {
+            panelnewtrip.style.display = "none";
+        } else {
+            panelnewtrip.style.display = "block";
+        }
+    });
+}
 
 

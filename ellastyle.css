@@ -154,10 +154,12 @@ position: relative;
 #logo{margin: auto; text-align: center; }
 
 #loginpage label {
-    color: white;
+    /*color: white;*/
 
 }
 #loginpage input, textarea {
+    /*color: white;*/
+    text-align: center;
 /*    width:70%;
     margin-bottom:5px;
     line-height:25px;
@@ -228,11 +230,11 @@ width:70%;
 #loginpage input{
   width:100%;
 }
-
+/*
 #loginbuttons{
   width:210px;
   margin:0 auto;
-}
+}*/
 
 .full {
   width: 80px;
@@ -408,7 +410,7 @@ ul{
 /*PROFILE PAGE*/
 
 /*accordian*/
-.accordion {
+.accordion, .accordionlogin {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -421,7 +423,7 @@ ul{
     transition: 0.4s;
 }
 
-.active, .accordion:hover {
+.active, .accordion:hover, .accordionlogin:hover {
     background-color: #ccc; 
 }
 
@@ -483,4 +485,12 @@ margin:45% auto;
 margin:20% auto;
 width:85%;
 }
+}
+
+
+
+/* ************* MDL **************** */
+
+.mdl-cell {
+  text-align: center;
 }
