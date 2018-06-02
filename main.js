@@ -188,7 +188,7 @@ btnLogout.addEventListener('click', e => {
       checkstatus.update({
       'status':'no status'
     })
-<<<<<<< HEAD
+
 
     var lateCheckIn = useridRef.child('lateCheckIn');
 
@@ -196,11 +196,11 @@ btnLogout.addEventListener('click', e => {
       'status':'false'
     });
 
-=======
+
    //helpstatus.remove();
    //longerstatus.remove();
    safestatus.remove();
->>>>>>> 27b5a201665d48f476fe4297bfc05e798f3e3ab7
+
 //END     
 
   //Clear form
@@ -470,145 +470,6 @@ $("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li
 
 
 
-<<<<<<< HEAD
-// // GOING BETWEEN PAGES
-
-// // CHECKIN PAGE
-// checkinbutton.addEventListener('click', e => {
-//   checkinpage.classList.remove('hide');
-//   mytrippage.classList.add('hide');
-//   newtrippage.classList.add('hide');
-//   weatherpage.classList.add('hide');
-//   profilepage.classList.add('hide');
-//   settingspage.classList.add('hide');    
-// });
-// //END CHECKIN PAGE
-
-// // NEW TRIP PAGE
-// mytripbutton.addEventListener('click', e => {
-//   checkinpage.classList.add('hide');
-//   newtrippage.classList.remove('hide');
-//   mytrippage.classList.add('hide');
-//   weatherpage.classList.add('hide');
-//   profilepage.classList.add('hide');
-//   settingspage.classList.add('hide');    
-// });
-// //END TRIP PAGE
-
-// // WEATHER PAGE
-=======
-// GOING BETWEEN PAGES
-
-// CHECKIN PAGE
-checkinbutton.addEventListener('click', e => {
-  checkinpage.classList.remove('hide');
-  mytrippage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
-//END CHECKIN PAGE
-
-// NEW TRIP PAGE
-mytripbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.remove('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
-//END TRIP PAGE
-
-// WEATHER PAGE
->>>>>>> 27b5a201665d48f476fe4297bfc05e798f3e3ab7
-// weatherbutton.addEventListener('click', e => {
-//   checkinpage.classList.add('hide');
-//   newtrippage.classList.add('hide');
-//   mytrippage.classList.add('hide');
-//   weatherpage.classList.remove('hide');
-//   profilepage.classList.add('hide');
-//   settingspage.classList.add('hide');    
-// });
-<<<<<<< HEAD
-// //END WEATHER PAGE
-
-// // PROFILE PAGE
-// profilebutton.addEventListener('click', e => {
-//   checkinpage.classList.add('hide');
-//   newtrippage.classList.add('hide');
-//   mytrippage.classList.add('hide');
-//   weatherpage.classList.add('hide');
-//   profilepage.classList.remove('hide');
-//   settingspage.classList.add('hide');    
-// });
-// //END PROFILE PAGE
-
-// // SETTINGS PAGE
-=======
-//END WEATHER PAGE
-
-// PROFILE PAGE
-profilebutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.remove('hide');
-  settingspage.classList.add('hide');    
-});
-//END PROFILE PAGE
-
-// SETTINGS PAGE
->>>>>>> 27b5a201665d48f476fe4297bfc05e798f3e3ab7
-// settingsbutton.addEventListener('click', e => {
-//   checkinpage.classList.add('hide');
-//   newtrippage.classList.add('hide');
-//   mytrippage.classList.add('hide');
-//   weatherpage.classList.add('hide');
-//   profilepage.classList.add('hide');
-//   settingspage.classList.remove('hide');    
-// });
-<<<<<<< HEAD
-// //END SETTINGS PAGE
-// //END GOING BETWEEN PAGES BUTTONS
-
-
-// //ACCORDION FOR PROFILE PAGE 
-
-// var acc = document.getElementsByClassName("accordion");
-// var i;
-
-// for (i = 0; i < acc.length; i++) {
-//     acc[i].addEventListener("click", function() {
-//         this.classList.toggle("active");
-//         var panel = this.nextElementSibling;
-//         if (panel.style.display === "block") {
-//             panel.style.display = "none";
-//         } else {
-//             panel.style.display = "block";
-//         }
-//     });
-// }
-
-// var acc2 = document.getElementsByClassName("accordionnewtrip");
-// var a;
-
-// for (a = 0; a < acc2.length; a++) {
-//     acc2[a].addEventListener("click", function() {
-//         this.classList.toggle("active");
-//         var panelnewtrip = this.nextElementSibling;
-//         if (panelnewtrip.style.display === "block") {
-//             panelnewtrip.style.display = "none";
-//         } else {
-//             panelnewtrip.style.display = "block";
-//         }
-//     });
-// }
-// //END OF ACCORDION FOR PROFILE PAGE
-
-
 
 
 // // AUTO COMPLETE EMERGENCY CONTACT
@@ -685,127 +546,5 @@ profilebutton.addEventListener('click', e => {
 // autocomplete(document.getElementById("contact"), emergencycontacts);
 
 // //END OF AUTOCOMPLETE
-=======
-//END SETTINGS PAGE
-//END GOING BETWEEN PAGES BUTTONS
-
-
-//ACCORDION FOR PROFILE PAGE 
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
-
-var acc2 = document.getElementsByClassName("accordionnewtrip");
-var a;
-
-for (a = 0; a < acc2.length; a++) {
-    acc2[a].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panelnewtrip = this.nextElementSibling;
-        if (panelnewtrip.style.display === "block") {
-            panelnewtrip.style.display = "none";
-        } else {
-            panelnewtrip.style.display = "block";
-        }
-    });
-}
-//END OF ACCORDION FOR PROFILE PAGE
-
-
-
-
-// AUTO COMPLETE EMERGENCY CONTACT
-function autocomplete(inp, arr) {
-  var currentFocus;
-  inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      closeAllLists();
-      if (!val) { return false;}
-      currentFocus = -1;
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
-      this.parentNode.appendChild(a);
-      for (i = 0; i < arr.length; i++) {
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          b = document.createElement("DIV");
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          b.addEventListener("click", function(e) {
-              inp.value = this.getElementsByTagName("input")[0].value;
-              closeAllLists();
-          });
-          a.appendChild(b);
-        }
-      }
-  });
-
-  inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        currentFocus--;
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-          if (x) x[currentFocus].click();
-        }
-      }
-  });
-  function addActive(x) {
-    if (!x) return false;
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    x[currentFocus].classList.add("autocomplete-active");
-  }
-
-  function removeActive(x) {
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
-    }
-  }
-
-  function closeAllLists(elmnt) {
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
-      }
-    }
-  }
-  document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-      });
-}
-var emergencycontacts = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
-
-autocomplete(document.getElementById("contact"), emergencycontacts);
-
-//END OF AUTOCOMPLETE
->>>>>>> 27b5a201665d48f476fe4297bfc05e798f3e3ab7
-
-
-//CONVERTING TIMESTAMPS
-
-
-
 
 //END
