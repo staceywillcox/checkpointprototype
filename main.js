@@ -13,6 +13,11 @@
   firebase.initializeApp(config);
 
 
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
+  }
 
   //Get elements
  
@@ -110,6 +115,14 @@ btnLogout.addEventListener('click', e => {
   var checkstatus = useridRef.child('status');
   var trackChecked = useridRef.child('trackChecked');
 
+//Displays late status option if user is late and normal check in if they are not
+
+
+
+
+
+
+
 //Shows current status
   checkstatus.once("value")
   .then(function(snapshot){
@@ -131,9 +144,7 @@ btnLogout.addEventListener('click', e => {
 
 // listen for form submit
   document.getElementById('trackForm').addEventListener('submit', submitForm);
-  // var helpstatus = useridRef.child('helpstatus');
-  // var longerstatus = useridRef.child('longerstatus');
-  // var safestatus = useridRef.child('safestatus');
+
 
 //SUBMIT FORM
   function submitForm(e){
@@ -175,9 +186,13 @@ btnLogout.addEventListener('click', e => {
       checkstatus.update({
       'status':'no status'
     })
-   helpstatus.remove();
-   longerstatus.remove();
-   safestatus.remove();
+
+    var lateCheckIn = useridRef.child('lateCheckIn');
+
+    lateCheckIn.update({
+      'status':'false'
+    });
+
 //END     
 
   //Clear form
@@ -192,6 +207,8 @@ function getInputVal(id){
 
 //Save message to firebase
 
+var tracksRef = firebase.database().ref('paths');
+
 function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp){
   var newMessageRef = tracksRef.push();
   newMessageRef.set({
@@ -205,6 +222,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     history:history,
     contact:contact,
     timestamp: timestamp,
+    trackid:" "
   });
 }
 //END
@@ -217,27 +235,20 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
 
   var status = useridRef.child('status');
 
-    if(document.getElementById('longer').checked){
-       var longerstatus = useridRef.child('longerstatus');
-
-    status.update({
-      'status':'Need longer'
-    });
-  }
-
-    if(document.getElementById('help').checked){
-       var helpstatus = useridRef.child('helpstatus');
-
-    status.update({
-      'status':'Need help'
-    });
-  }
 
     if(document.getElementById('checkedin').checked){
-       var safestatus = useridRef.child('safestatus');
+ 
 
     status.update({
       'status':'Safe'
+    });
+  }
+
+    if(document.getElementById('lateChecked').checked){
+        var lateCheckIn = useridRef.child('lateCheckIn');
+
+    lateCheckIn.update({
+      'status':'true'
     });
   }
 
@@ -346,7 +357,14 @@ var x = setInterval(function() {
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("demo").innerHTML = "Emergency Message has been sent if you did not check in";
+          var lateCheckIn = useridRef.child('lateCheckIn');
+            latecheckin.classList.remove('hide');
+            ontime.classList.add('hide');
     }
+      else{
+            latecheckin.classList.add('hide');
+            ontime.classList.remove('hide');
+          }
 });
 
 var today = new Date();
@@ -373,7 +391,7 @@ console.log(timestamp)
   var contactEmail = getInputVal('contactEmail');
 
 
-  //save message
+  //save contact
   saveContact(contactName, contactEmail);
 
   //Clear form
@@ -444,175 +462,175 @@ $("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li
 
 
 
-// GOING BETWEEN PAGES
+// // GOING BETWEEN PAGES
 
-// CHECKIN PAGE
-checkinbutton.addEventListener('click', e => {
-  checkinpage.classList.remove('hide');
-  mytrippage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
-//END CHECKIN PAGE
+// // CHECKIN PAGE
+// checkinbutton.addEventListener('click', e => {
+//   checkinpage.classList.remove('hide');
+//   mytrippage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   weatherpage.classList.add('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.add('hide');    
+// });
+// //END CHECKIN PAGE
 
-// NEW TRIP PAGE
-mytripbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.remove('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
-//END TRIP PAGE
+// // NEW TRIP PAGE
+// mytripbutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.remove('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.add('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.add('hide');    
+// });
+// //END TRIP PAGE
 
-// WEATHER PAGE
-weatherbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.remove('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
-});
-//END WEATHER PAGE
+// // WEATHER PAGE
+// weatherbutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.remove('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.add('hide');    
+// });
+// //END WEATHER PAGE
 
-// PROFILE PAGE
-profilebutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.remove('hide');
-  settingspage.classList.add('hide');    
-});
-//END PROFILE PAGE
+// // PROFILE PAGE
+// profilebutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.add('hide');
+//   profilepage.classList.remove('hide');
+//   settingspage.classList.add('hide');    
+// });
+// //END PROFILE PAGE
 
-// SETTINGS PAGE
-settingsbutton.addEventListener('click', e => {
-  checkinpage.classList.add('hide');
-  newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
-  weatherpage.classList.add('hide');
-  profilepage.classList.add('hide');
-  settingspage.classList.remove('hide');    
-});
-//END SETTINGS PAGE
-//END GOING BETWEEN PAGES BUTTONS
-
-
-//ACCORDION FOR PROFILE PAGE 
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
-
-var acc2 = document.getElementsByClassName("accordionnewtrip");
-var a;
-
-for (a = 0; a < acc2.length; a++) {
-    acc2[a].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panelnewtrip = this.nextElementSibling;
-        if (panelnewtrip.style.display === "block") {
-            panelnewtrip.style.display = "none";
-        } else {
-            panelnewtrip.style.display = "block";
-        }
-    });
-}
-//END OF ACCORDION FOR PROFILE PAGE
+// // SETTINGS PAGE
+// settingsbutton.addEventListener('click', e => {
+//   checkinpage.classList.add('hide');
+//   newtrippage.classList.add('hide');
+//   mytrippage.classList.add('hide');
+//   weatherpage.classList.add('hide');
+//   profilepage.classList.add('hide');
+//   settingspage.classList.remove('hide');    
+// });
+// //END SETTINGS PAGE
+// //END GOING BETWEEN PAGES BUTTONS
 
 
+// //ACCORDION FOR PROFILE PAGE 
+
+// var acc = document.getElementsByClassName("accordion");
+// var i;
+
+// for (i = 0; i < acc.length; i++) {
+//     acc[i].addEventListener("click", function() {
+//         this.classList.toggle("active");
+//         var panel = this.nextElementSibling;
+//         if (panel.style.display === "block") {
+//             panel.style.display = "none";
+//         } else {
+//             panel.style.display = "block";
+//         }
+//     });
+// }
+
+// var acc2 = document.getElementsByClassName("accordionnewtrip");
+// var a;
+
+// for (a = 0; a < acc2.length; a++) {
+//     acc2[a].addEventListener("click", function() {
+//         this.classList.toggle("active");
+//         var panelnewtrip = this.nextElementSibling;
+//         if (panelnewtrip.style.display === "block") {
+//             panelnewtrip.style.display = "none";
+//         } else {
+//             panelnewtrip.style.display = "block";
+//         }
+//     });
+// }
+// //END OF ACCORDION FOR PROFILE PAGE
 
 
-// AUTO COMPLETE EMERGENCY CONTACT
-function autocomplete(inp, arr) {
-  var currentFocus;
-  inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      closeAllLists();
-      if (!val) { return false;}
-      currentFocus = -1;
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
-      this.parentNode.appendChild(a);
-      for (i = 0; i < arr.length; i++) {
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          b = document.createElement("DIV");
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          b.addEventListener("click", function(e) {
-              inp.value = this.getElementsByTagName("input")[0].value;
-              closeAllLists();
-          });
-          a.appendChild(b);
-        }
-      }
-  });
 
-  inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        currentFocus--;
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-          if (x) x[currentFocus].click();
-        }
-      }
-  });
-  function addActive(x) {
-    if (!x) return false;
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    x[currentFocus].classList.add("autocomplete-active");
-  }
 
-  function removeActive(x) {
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
-    }
-  }
+// // AUTO COMPLETE EMERGENCY CONTACT
+// function autocomplete(inp, arr) {
+//   var currentFocus;
+//   inp.addEventListener("input", function(e) {
+//       var a, b, i, val = this.value;
+//       closeAllLists();
+//       if (!val) { return false;}
+//       currentFocus = -1;
+//       a = document.createElement("DIV");
+//       a.setAttribute("id", this.id + "autocomplete-list");
+//       a.setAttribute("class", "autocomplete-items");
+//       this.parentNode.appendChild(a);
+//       for (i = 0; i < arr.length; i++) {
+//         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+//           b = document.createElement("DIV");
+//           b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+//           b.innerHTML += arr[i].substr(val.length);
+//           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+//           b.addEventListener("click", function(e) {
+//               inp.value = this.getElementsByTagName("input")[0].value;
+//               closeAllLists();
+//           });
+//           a.appendChild(b);
+//         }
+//       }
+//   });
 
-  function closeAllLists(elmnt) {
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
-      }
-    }
-  }
-  document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-      });
-}
-var emergencycontacts = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
+//   inp.addEventListener("keydown", function(e) {
+//       var x = document.getElementById(this.id + "autocomplete-list");
+//       if (x) x = x.getElementsByTagName("div");
+//       if (e.keyCode == 40) {
+//         currentFocus++;
+//         addActive(x);
+//       } else if (e.keyCode == 38) { //up
+//         currentFocus--;
+//         addActive(x);
+//       } else if (e.keyCode == 13) {
+//         e.preventDefault();
+//         if (currentFocus > -1) {
+//           if (x) x[currentFocus].click();
+//         }
+//       }
+//   });
+//   function addActive(x) {
+//     if (!x) return false;
+//     removeActive(x);
+//     if (currentFocus >= x.length) currentFocus = 0;
+//     if (currentFocus < 0) currentFocus = (x.length - 1);
+//     x[currentFocus].classList.add("autocomplete-active");
+//   }
 
-autocomplete(document.getElementById("contact"), emergencycontacts);
+//   function removeActive(x) {
+//     for (var i = 0; i < x.length; i++) {
+//       x[i].classList.remove("autocomplete-active");
+//     }
+//   }
 
-//END OF AUTOCOMPLETE
+//   function closeAllLists(elmnt) {
+//     var x = document.getElementsByClassName("autocomplete-items");
+//     for (var i = 0; i < x.length; i++) {
+//       if (elmnt != x[i] && elmnt != inp) {
+//         x[i].parentNode.removeChild(x[i]);
+//       }
+//     }
+//   }
+//   document.addEventListener("click", function (e) {
+//       closeAllLists(e.target);
+//       });
+// }
+// var emergencycontacts = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
+
+// autocomplete(document.getElementById("contact"), emergencycontacts);
+
+// //END OF AUTOCOMPLETE
 
 
 //CONVERTING TIMESTAMPS

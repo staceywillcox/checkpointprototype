@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Checkpoint</title>
-  <link rel="manifest" href="/manifest.json">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="./manifest.json">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> -->
+  <link rel="stylesheet" href="ellastyle.css">
+
 
 </head>
 <body>
@@ -41,7 +42,7 @@
         <div class="alert"> Your trip has been saved.</div>
 
 
-        <form method="POST" id="trackForm">
+        <form id="trackForm">
           
             <label>Track:</label>
             <input type="text" name="track" id="track" placeholder="Which track are you going on?">
@@ -124,26 +125,19 @@
     <h1 class="brand">Check In</h1>
     <div class="bodystyle">
       <form action="" id="status">
-        <div class="checkoptions">
+        <div class="checkoptions" id="ontime">
           <label class="checkbox">I have arrived at my destination
-            <input type="radio" name="status" id="checkedin" value="checkedin">
+            <input type="checkbox" name="status" id="checkedin" value="checkedin">
+            <span class="checkmark"></span>
+          </label>
+        </div><br>
+        <div class="checkoptions hide" id="latecheckin">
+          <label class="checkbox">Late Check In
+            <input type="checkbox" name="status" id="lateChecked" value="lateChecked">
             <span class="checkmark"></span>
           </label>
         </div>
-        <br>
-        <div class="checkoptions">
-          <label class="checkbox">I am taking longer than expected
-            <input type="radio" name="status" id="longer" value="longer">
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <br>
-        <div class="checkoptions">
-          <label class="checkbox">I need help
-            <input type="radio" name="status" id="help" value="help">
-            <span class="checkmark"></span>
-          </label>
-        </div>
+   
         <p class="full" id="statusbtn">
           <button type="submit"  class="submitbutton">Update Status</button>
         </p>  
@@ -218,7 +212,7 @@
       <ul class="wrapper">
         <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>
         <li id="checkinbutton"><img src="checkin.png"><br>check in</li>
-        <li id="weatherbutton"><img src="weather.png"><br>weather</li>
+        <a href="map.html"> <li id="weatherbutton"><img src="weather.png"><br>map</li></a>
         <li id="profilebutton"><img src="profile.png"><br>profile</li>
         <li id="settingsbutton"><img src="settings.png"><br>settings</li>
       </ul>
@@ -226,12 +220,13 @@
   </footer>
  </div>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
 
-
+  <script type="text/javascript" src="jq.js"></script>
+    <script type="text/javascript" src="app.js"></script>
   <script type="text/javascript" src="main.js"></script>
+
 
 </body>
 </html>

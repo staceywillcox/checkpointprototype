@@ -25,6 +25,7 @@
     .then(function(listUsersResult) {
       listUsersResult.users.forEach(function(userRecord) {
         var userId = userRecord.uid;
+        var lateCheckIn = firebase.database().ref('users').child(userId).child('lateCheckIn');
         console.log("user id", userRecord.uid);
     
 
@@ -57,6 +58,7 @@
                 var trackStartDate = childSnapshot.child('startdate').val();
                 var trackEndDate = childSnapshot.child('enddate').val();
                 var trackHistory = childSnapshot.child('history').val();
+                var trackid = childSnapshot.child('trackid').val();
         
                     
                 checkStatus();
@@ -77,6 +79,8 @@
                        Start Time: ${trackStartTime} on ${trackStartDate}
                        End Time:  ${trackEndTime} on ${trackEndDate}
                        Previous track history: ${trackHistory}
+
+                       To view ${userName}'s current track on a map please use the unique ID ${trackid} on Checkpoint Guest Login page.
 
                   You will receive a confirmation email when ${userName} checks in safely or an alert email if they do not check in on time. `;
                   return mailTransport.sendMail(mailOptions).then(() => {
@@ -113,39 +117,12 @@
                   };
 
                   mailOptions.subject = `${APP_NAME} Alert Message!`;
-                  mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently checked in as safe. No need to worry.`;
+                  mailOptions.html =`<h3> Hey ${name}!</h3><p>You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently checked in as safe. No need to worry.</p>`;
+                  // mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently checked in as safe. No need to worry.`;
                   return mailTransport.sendMail(mailOptions).then(() => {
-                    return console.log('Status update sent to emergency contact');
+                    return console.log('Safe email sent to emergency contact');
                   });
                 }//end sendSafeEmail
-
-                      // Needing help status email
-                function sendUpdateEmail() {
-                  const mailOptions = {
-                    from: `${APP_NAME} <noreply@firebase.com>`,
-                    to: `${email}`,
-                  };
-                  mailOptions.subject = `${APP_NAME} Alert Message!`;
-                  mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently checked in as needing help. Please review the track information from the previous email and contact the emergency services if ${userName} is unreachable.`;
-                  return mailTransport.sendMail(mailOptions).then(() => {
-                    return console.log('Status update sent to emergency contact');
-                  });
-                }//end sendUpdateEmail
-
-                //Needing longer
-                function sendLongerEmail() {
-                  const mailOptions = {
-                    from: `${APP_NAME} <noreply@firebase.com>`,
-                    to: `${email}`,
-                  };
-
-                  // The user subscribed to the newsletter.
-                  mailOptions.subject = `${APP_NAME} Alert Message!`;
-                  mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently checked in to say she is taking longer than expected. Her new estimated time of arrival is mm:hh dd/mm/yyyy. An update email will be sent to you when she checks in again or if she doesn't check in by her estimated time of arrival.`;
-                  return mailTransport.sendMail(mailOptions).then(() => {
-                    return console.log('Status update sent to emergency contact');
-                  });
-                }// end sendLongerEmail
 
 
                 //SEND AN EMAIL IF A NEW TRACK IS CREATED HERE
@@ -169,6 +146,12 @@
                   });//end snapshot function
                 }//end checkForNewTrack
 
+                var distance;
+                var lateStatus;
+                lateCheckIn.once("value")
+                 .then(function(snapshot){
+                lateStatus = snapshot.child("status").val();
+                });
 
 
                 function checkStatus(){
@@ -214,9 +197,12 @@
                                 });
                               } 
                               else{
+
                                 console.log('No more emails need to be sent');
 
                               }
+
+
                             }//end if safe
                             else{
                               console.log("The status was not 'safe'");
@@ -224,12 +210,11 @@
                               var x = setInterval(function() {
                                 var now = new Date().getTime();
                                 var time2 = now;
-                                var distance = sendMessage - now;
+                                distance = sendMessage - now;
+
 
                                 // If the count down is over, write some text 
-                                if (distance < 0) {
-
-                                    if(emailSent == 'false'){
+                                if (distance < 0 && emailSent == 'false') {
                                       clearInterval(x);
                                       sendEmergencyEmail();
                                       console.log(emailSent);
@@ -238,37 +223,20 @@
                                         emailSent:'true'
                                       });
                                       console.log("Emergency message sent");
-                                    } //end if
-                                  
-                                    else{
 
-                                    }//end else
-                                
                                 }//end if distance 
 
-                                else{
-                                
-                                }
+                                if (distance < 0 && lateStatus == "true") {
+                                  clearInterval(x);
+                                      sendSafeEmail();
+                                      console.log("Late Check In");
+                                 }
 
                               });//setinterval end
+
+                                  
                             }//else end
-                          
-
-                          if(childData == "Need longer"){
-                            sendLongerEmail();
-                            console.log("Need Longer Email was sent");
-                          }
-                          else{
-                            console.log("The status was not 'longer'");
-                          }
-
-                          if(childData == "Need help"){
-                            sendUpdateEmail();
-                            console.log("Help Email was sent");
-                          }
-                          else{
-                            console.log("The status was not 'help'");
-                          }
+    
                         });
                         }// if childdata end
 
