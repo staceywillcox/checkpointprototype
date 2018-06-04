@@ -24,9 +24,10 @@ body{
   padding:0;
 }
 
-a{
+a {
   text-decoration: none;
   color:inherit;
+  /*font-size: 1em !important;*/
 }
 
 #pagewrap{
@@ -59,13 +60,13 @@ position: relative;
 
 }
 
-#newtrippage label {
+/*#newtrippage label {
     width:25%;
     float:left;
     font-size:1.5em;
     line-height:24px;
     margin-top:10px;
-}
+}*/
 
 
 
@@ -78,7 +79,7 @@ position: relative;
 #contactsForm{
   width:100%;
 }
-#newtrippage input, textarea {
+/*#newtrippage input, textarea {
     width:70%;
     font-size: 1em;
     margin-top:10px;
@@ -89,7 +90,7 @@ position: relative;
     -moz-border-radius: 10px;
     border-radius: 10px;
     border:1px solid #CCC;
-}
+}*/
 
 .contactInput {
     width:38%;
@@ -154,11 +155,11 @@ position: relative;
 #logo{margin: auto; text-align: center; }
 
 #loginpage label {
-    /*color: white;*/
+    color: white;
 
 }
 #loginpage input, textarea {
-    /*color: white;*/
+    color: white;
     text-align: center;
 /*    width:70%;
     margin-bottom:5px;
@@ -249,6 +250,7 @@ width:70%;
 ul{
   list-style: none;
   padding:0;
+  margin: 0;
 }
 
 
@@ -325,6 +327,7 @@ ul{
 .panelnewtrip {
     display: none;
     overflow: hidden;
+        background-color: #fafafa;
 }
 /*END ACCORDION FOR NEW TRIP PAGE*/
 
@@ -428,9 +431,9 @@ ul{
 }
 
 .panel {
-    padding: 0 18px;
+    padding: 10px 18px;
     display: none;
-    background-color: white;
+    background-color: #fafafa;
     overflow: hidden;
 }
 
@@ -451,7 +454,7 @@ footer{
 .wrapper{
   display: flex;
   flex-direction: row;
-  margin:0px;
+  margin: auto;
 }
 
 .wrapper li{
@@ -459,7 +462,7 @@ footer{
   font-size: 0.8em;
   text-align: center;
   align-self: flex-end;
-
+  margin: auto;
 }
 
 
@@ -493,4 +496,71 @@ width:85%;
 
 .mdl-cell {
   text-align: center;
+}
+
+.mdl-cell h5 {
+  /*text-align: left;*/
+  /*float: left;*/
+}
+
+/*.mdl-grid {
+  margin: 0;
+}*/
+
+
+
+
+/* ************* JORDYPEATMAP **************** */
+
+#map {
+  height: 45%;
+
+}
+
+
+
+
+/*    Modal      */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    transition: 1s ease;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+select {
+  margin-top: 20px;
 }

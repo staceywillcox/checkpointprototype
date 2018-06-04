@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JPeat | 352p2</title>
+    <title>Checkpoint | Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 <!-- IMPORT FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src= "mapScript.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
+<!-- MATERIAL DESIGN LITE -->
+
+<link rel="stylesheet" href="./MDL/material.min.css">
+<script src="./MDL/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- ********************  -->
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+        <link rel="stylesheet" type="text/css" href="ellastyle.css">
 
   </head>
   <body>
+  <div id="mytrippage">
+    <h1 class="brand">Create Track</h1>
+  </div>
 
-    <button id="geo">    
-      <img id="logo" src="images/tLogo.png"></img>
-      <h1> Geolocate </h1>
-    </button>
-    <button id="help"> ? </button>
-
-    <b> Enable Editing? </b><input type="checkbox" id="editEnable" onclick="enableDisable();" unchecked>
-
-    <b> Track Number: </b> <input type="text" id="pathNum">
-    <button id="submit" onclick="EndTrackData();"> end track </button>
-    <button id="submit" onclick="RetrieveTrack();"> load track </button>
-    <button id="submit" onclick="DrawTrack();"> display track </button>
-    <button id="submit" style="margin-left: 5%;" onclick="DeleteTrack();"> delete track </button>
-    
-    <div id="myModal" class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h1> Create a Track </h1>
-        <p>1. Type in a track number</p>
-        <p>2. Click anywhere on the map to create a track
-        <p>3. When you're done, make sure to click 'end track'
-        <p><i>If you click using an existing track number it will be overwritten.</i>
-        <h1> Load a Track </h1>
-        <p>1. Type in a track number</p>
-        <p>2. Click 'load track', it will tell you if that track doesn't exist
-        <p>3. Once the track has loaded, click 'display track';
-      </div>
-
+    <div id="geo">    
     </div>
+
+
+
+    <ul id="tracklist">
+        <li class="accordion">Instructions</li>
+        <div class="panel">
+        <h5> Create a Track </h5>
+        <p>1. Tap on the map to start drawing a track, with each tap creating a connecting line
+        <p>2. When you're done, make sure to tap 'end track'.
+        <p>3. Find your new track's unique ID under 'Track Settings'!
+        <h5> Load/Delete a Track </h5>
+        <p>1. Enter your track number via your profile or email</p>
+        <p>2.a. Tap 'Load'. Your track should then automatically load on the map!
+        <p>2.b. Tap 'Delete'. Your track will be removed from the database.  
+        <p> <i><b> You will be alerted if the track doesn't exist. </b></i>
+
+        </div>
+        <li class="accordion">Track Settings</li>
+        <div class="panel">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input id="pathNum" class="mdl-textfield__input" type="text">
+                <label class="mdl-textfield__label" for="pathNum">Track Number</label>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--1-col">
+              <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="RetrieveTrack();">
+                Load
+              </button>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col">
+              <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="DeleteTrack();">
+                Delete
+            </button>
+        </div>
+          </div>
+        </div>
+    </ul>
+         
+
+
 
     <div id="map"></div>
 
 
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col">
+          <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="EndTrackData();">
+            End Track
+          </button>
+        </div>
+      </div>
     
 
  <!-- ******  MAP ****** -->
@@ -315,22 +349,16 @@
         var geolocationControl = new GeolocationControl(geolocationDiv, map);
 
         poly = new google.maps.Polyline({
-          strokeColor: '#000000',
+          strokeColor: '#ff0000',
           strokeOpacity: 1.0,
           strokeWeight: 3
         });
         poly.setMap(map); 
+        map.addListener('click', addLatLng); 
 
       }
 
 
-
-     function enableDisable() {
-        var canEdit = document.getElementById("editEnable");
-        console.log(canEdit);
-        if(canEdit.checked == true)
-          map.addListener('click', addLatLng); 
-     } 
 
 // ****************  CLICKING POLYLINE  ******************
 
@@ -481,6 +509,7 @@ var userID;
       // });
 
 
+
 // **********************************************************************
 // ************************ RETRIEVE UNIQUE ID **************************
           pathsRef.orderByChild('paths').limitToLast(1).once("value")
@@ -488,6 +517,13 @@ var userID;
             snapshot.forEach(function(childSnapshot){
               uniqueIDKey = childSnapshot.key;
               console.log(uniqueIDKey);
+              document.getElementById("pathNum").value = uniqueIDKey;
+
+              var el = document.getElementById('pathNum');
+              if(el) {
+                  el.className += el.className ? ' is-focused' : 'is-focused';
+              }
+
 
             });
           });
@@ -496,7 +532,7 @@ var userID;
           users.orderByChild('tracks').limitToLast(1).once("value").then(function(snapshot){
             snapshot.forEach(function(childSnapshot){
               userIDKey = childSnapshot.key;
-              console.log(userIDKey);
+              // console.log(userIDKey);
               users.child(userIDKey).update({
                 trackid: uniqueIDKey
               });
@@ -507,6 +543,7 @@ var userID;
 
 
         //} 
+        alert("Track created!");
 
       }
 
@@ -530,7 +567,7 @@ var userID;
     
     // Little delay so that the above info can be ready for this
     setTimeout(function(){
-           if (totalMarkers == null || totalMarkers == 0){
+          if (totalMarkers == null || totalMarkers == 0){
             alert("This track number doesn't exist!");
             return;
           }     
@@ -565,6 +602,13 @@ var userID;
 
       }, 1500);
 
+    setTimeout(function(){
+      if (totalMarkers == null || totalMarkers == 0){
+        return;
+      }
+      else
+        DrawTrack();  
+      }, 1500);
 
   }
 
@@ -593,7 +637,7 @@ function DrawTrack() {
       var displayLoadedTrack = new google.maps.Polyline({
           path: loadedTrack,
           geodesic: true,
-          strokeColor: '#FF0000',
+          strokeColor: '#89e78d',
           strokeOpacity: 1.0,
           strokeWeight: 2
         });
@@ -665,10 +709,54 @@ window.onclick = function(event) {
 
 
 
+function copyText() {
+  /* Get the text field */
+  var copyText = document.getElementById("trackCopy");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
 
     
 
     </script>
+
+
+
+
+
+
+  <!--FOOTER  -->
+  <footer id="footer">
+    <div>
+      <ul class="wrapper">
+        
+        <li id="mytripbutton"><a href="index.html"><img src="mytrip.png"><br>new trip</a></li>
+        <li id="checkinbutton"><a href="index.html"><img src="checkin.png"><br>check in</a></li>
+        <li id="weatherbutton"><img src="weather.png"><br>map</li>
+        <li id="profilebutton"><a href="index.html"><img src="profile.png"><br>profile</a></li>
+        <li id="settingsbutton"><a href="index.html"><img src="settings.png"><br>settings</a></li>
+        
+      </ul>
+  
+    </div>
+  </footer>
+ </div>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
+
+  <script type="text/javascript" src="jq.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  <!-- <script type="text/javascript" src="main.js"></script> -->
+
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDotdQHLhCXr2pZ0QIZZrZ0Jo4L8pEhl_w&callback=initMap">
     </script>

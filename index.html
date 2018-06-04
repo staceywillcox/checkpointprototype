@@ -74,79 +74,130 @@
 
         <form method="POST" id="trackForm" action="map.html">
 
-          
-            <label>Track:</label>
-            <input type="text" name="track" id="track" placeholder="Which track are you going on?">
-         
-            <label>Time:</label>
-            <input type="text" name="time" id="time" placeholder="How long does the track take?">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">            
+              <h5>Track:</h5>
+            </div>      
+            <div class="mdl-cell mdl-cell--3-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input id="track" class="mdl-textfield__input" type="text" name="track" >
+                <label class="mdl-textfield__label" for="track">Which track are you going on?</label>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col">
+              <h5>Time:</h5>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input id="time" class="mdl-textfield__input" type="text" name="time" >
+                <label class="mdl-textfield__label" for="time">How long does the track take?</label>
+              </div>
+            </div>
+          </div>
+
+         <hr>
+
         
         <ul id="">
-        <li class="accordionnewtrip">Duration:<span id="downarrow">&#9662;</span></li>
+        <li class="accordionnewtrip"><h6>Duration:<span id="downarrow">&#9662;</span></h5></li>
         <div class="panelnewtrip">
-          
-          <label>Start:</label>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">   
+            <h6>Start:
             <input type="date" id="startDate" value="2018-01-01">
+            </h6>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col"> 
             <label>Time:</label>
             <input type="time" id="startTime" value="12:00">
-          
-          
-            <label>End:</label>
-              <input type="date" id="endDate" value="2018-01-01">
-                <label>Time:</label>
-              <input type="time" id="endTime" value="12:00">
           </div>
+          <div class="mdl-cell mdl-cell--4-col"> 
+            <h6>End:
+            <input type="date" id="endDate" value="2018-01-01">
+            </h6>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col"> 
+            <label>Time:</label>
+            <input type="time" id="endTime" value="12:00">
+          </div>
+          </div>
+
         </ul>
           
-
-            <label>History:</label>
-            <input type="text" name="history" id="history" placeholder="Previous experience on this track">
-          
-            <label>Contact:</label>
-            <div class="autocomplete" style="width:100%;">
-              <input id='contact' type="text" name="contact" placeholder="Emergency Contact">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">            
+              <h6>History:</h6>
+            </div>      
+            <div class="mdl-cell mdl-cell--3-col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input id="history" class="mdl-textfield__input" type="text" name="history">
+                <label class="mdl-textfield__label" for="history">Previous experience on this track</label>
+              </div>
             </div>
 
+            <div class="mdl-cell mdl-cell--1-col">            
+              <h6>Contact:</h6>
+            </div>      
+            <div class="mdl-cell mdl-cell--3-col">
+              <div class="autocomplete" style="width:100%;">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input id="contact" class="mdl-textfield__input" type="text" name="contact">
+                  <label class="mdl-textfield__label" for="contact">Emergency Contact's email</label>
+                </div>
+              </div>
+            </div>   
+          </div>   
 
-          <p>
-            Wait
-              <select name="messagetime" id="messagetime">
-                <option value="300">5 minutes</option>
-                <option value="600">10 minutes</option>
-                <option value="900">15 minutes</option>
-                <option value="1200"> 30 minutes</option>
-                <option value="2700">45 minutes</option>
-                <option value="3600">1 hour</option>
-                <option value="6000">2 hours</option>
-                <option value="7200">3 hours</option>
-                <option value="14400">4 hours</option>
-                <option value="18000">5 hours</option>
-                <option value="21600">6 hours</option>
-                <option value="25200">7 hours</option>
-                <option value="28800">8 hours</option>
-                <option value="32400">9 hours</option>
-                <option value="36000">10 hours</option>
-                <option value="39600">11 hours</option>
-                <option value="43200">12 hours</option>
-                <option value="46800">13 hours</option>
-                <option value="50400">14 hours</option>
-                <option value="54000">15 hours</option>
-                <option value="57600">16 hours</option>
-                <option value="61200">17 hours</option>
-                <option value="64800">18 hours</option>
-                <option value="68400">19 hours</option>
-                <option value="72000">20 hours</option>
-                <option value="75600">21 hours</option>
-                <option value="79200">22 hours</option>
-                <option value="82800">23 hours</option>
-                <option value="86400">24 hours</option>
-              </select>
-              after estimated check in time before sending emergency message.
-          </p>
-          <div class="track"><p>Your track here</p></div>
-          <p class="full">
-              <button href="map.html" class="submitbutton" type="submit">Next</button>
-          </p>
+
+          <hr>
+
+
+          <div class="mdl-grid"  style="background-color: #f2f8f2;">    
+           <div class="mdl-cell mdl-cell--4-col"> 
+            <h5 style="margin: 0;"> Wait
+                <select name="messagetime" id="messagetime">
+                  <option value="300">5 minutes</option>
+                  <option value="600">10 minutes</option>
+                  <option value="900">15 minutes</option>
+                  <option value="1200"> 30 minutes</option>
+                  <option value="2700">45 minutes</option>
+                  <option value="3600">1 hour</option>
+                  <option value="6000">2 hours</option>
+                  <option value="7200">3 hours</option>
+                  <option value="14400">4 hours</option>
+                  <option value="18000">5 hours</option>
+                  <option value="21600">6 hours</option>
+                  <option value="25200">7 hours</option>
+                  <option value="28800">8 hours</option>
+                  <option value="32400">9 hours</option>
+                  <option value="36000">10 hours</option>
+                  <option value="39600">11 hours</option>
+                  <option value="43200">12 hours</option>
+                  <option value="46800">13 hours</option>
+                  <option value="50400">14 hours</option>
+                  <option value="54000">15 hours</option>
+                  <option value="57600">16 hours</option>
+                  <option value="61200">17 hours</option>
+                  <option value="64800">18 hours</option>
+                  <option value="68400">19 hours</option>
+                  <option value="72000">20 hours</option>
+                  <option value="75600">21 hours</option>
+                  <option value="79200">22 hours</option>
+                  <option value="82800">23 hours</option>
+                  <option value="86400">24 hours</option>
+                </select>
+              </h5>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col"> 
+                after estimated check in time before sending emergency message.
+              </div>
+            <div class="track"><p>Your track here</p></div>
+            <div class="mdl-cell mdl-cell--4-col"> 
+              <p class="full">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="map.html" class="submitbutton" type="submit">Next</button>
+              </p>
+            </div>
+        </div>
         </form>
       </div>
   </div>
