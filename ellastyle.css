@@ -47,6 +47,15 @@ position: relative;
 
 }
 
+#checkinFormbox{
+ background-color: #f2f8f2;
+ padding:10px;
+ padding-bottom: 20px;
+}
+.helptext{
+  color:#787878;
+}
+
 #messagetime, #contact, input[type="date"], input[type="time"]{
 
     background-color: transparent; 
@@ -201,20 +210,23 @@ margin:20% auto;
 width:70%;
 }
 
+#durationMenu{
 
-#btnLogout{
-    background-color: transparent; /* #70a075 */
+}
+
+/*#btnLogout{
+    background-color: transparent; 
     border: 1px solid #70a075;
     color: #70a075;
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
-    /*display: inline-block;*/
+ 
     font-size: 0.9em;
     width: 100px;
     cursor: pointer;
     border-radius: 10px;
-}
+}*/
 
 .btn{
     background-color: black; /* #70a075 */
@@ -304,21 +316,15 @@ ul{
 .alert{
   text-align: center;
   padding: 2px;
-  background-color: #79c879;
+  background-color: #ff1a1a;
   color: #fff;
-  margin-bottom:10px;
   display: none;
 }
 
-/*AUTOCOMPLETE LIST FOR NEW TRIP PAGE*/
-
-/*#contactautocomplete-list{
-  width:70%;
-  margin-left:25%;
-
-}*/
-
-/*END AUTOCOMPLETE LIST FOR NEW TRIP PAGE*/
+#clearHistory{
+  color:#ff1a1a ;
+  text-align: right;
+}
 
 /*ACCORDION FOR NEW TRIP PAGE*/
 
@@ -475,6 +481,14 @@ footer{
   margin: auto;
 }
 
+footer li:active{
+  background-color: lightgrey;
+
+}
+
+.active{
+  background-color: lightgrey;
+}
 
 @media (max-width: 700px){
   #pagewrap{

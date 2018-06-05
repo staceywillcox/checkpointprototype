@@ -19,11 +19,16 @@ registerbutton.addEventListener('click', e => {
 // CHECKIN PAGE
 checkinbutton.addEventListener('click', e => {
   checkinpage.classList.remove('hide');
-  mytrippage.classList.add('hide');
   newtrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
+  settingspage.classList.add('hide');   
+
+  checkinbutton.classList.add('active'); 
+  mytripbutton.classList.remove('active'); 
+  weatherbutton.classList.remove('active'); 
+  profilebutton.classList.remove('active'); 
+  settingsbutton.classList.remove('active'); 
 });
 //END CHECKIN PAGE
 
@@ -31,10 +36,15 @@ checkinbutton.addEventListener('click', e => {
 mytripbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.remove('hide');
-  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
-  settingspage.classList.add('hide');    
+  settingspage.classList.add('hide');  
+
+  checkinbutton.classList.remove('active'); 
+  mytripbutton.classList.add('active'); 
+  weatherbutton.classList.remove('active'); 
+  profilebutton.classList.remove('active'); 
+  settingsbutton.classList.remove('active');   
 });
 //END TRIP PAGE
 
@@ -42,10 +52,15 @@ mytripbutton.addEventListener('click', e => {
 weatherbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
   weatherpage.classList.remove('hide');
   profilepage.classList.add('hide');
   settingspage.classList.add('hide');    
+
+  checkinbutton.classList.remove('active'); 
+  mytripbutton.classList.remove('active'); 
+  weatherbutton.classList.add('active'); 
+  profilebutton.classList.remove('active'); 
+  settingsbutton.classList.remove('active'); 
 });
 //END WEATHER PAGE
 
@@ -53,10 +68,15 @@ weatherbutton.addEventListener('click', e => {
 profilebutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.remove('hide');
-  settingspage.classList.add('hide');    
+  settingspage.classList.add('hide');  
+
+  checkinbutton.classList.remove('active'); 
+  mytripbutton.classList.remove('active'); 
+  weatherbutton.classList.remove('active'); 
+  profilebutton.classList.add('active'); 
+  settingsbutton.classList.remove('active');   
 });
 //END PROFILE PAGE
 
@@ -64,10 +84,15 @@ profilebutton.addEventListener('click', e => {
 settingsbutton.addEventListener('click', e => {
   checkinpage.classList.add('hide');
   newtrippage.classList.add('hide');
-  mytrippage.classList.add('hide');
   weatherpage.classList.add('hide');
   profilepage.classList.add('hide');
-  settingspage.classList.remove('hide');    
+  settingspage.classList.remove('hide');  
+
+  checkinbutton.classList.remove('active'); 
+  mytripbutton.classList.remove('active'); 
+  weatherbutton.classList.remove('active'); 
+  profilebutton.classList.remove('active'); 
+  settingsbutton.classList.add('active');   
 });
 //END SETTINGS PAGE
 

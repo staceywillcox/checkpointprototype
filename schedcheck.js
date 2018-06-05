@@ -71,17 +71,17 @@
                   };
 
                   mailOptions.subject = `${APP_NAME} Track Message!`;
-                  mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${name} recently created a new track with the following information.
+                  mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${userName} recently created a new track with the following information.
 
-                       Track Name: ${trackName}
-                       Track Duration: ${trackTime}
-                       Start Time: ${trackStartTime} on ${trackStartDate}
-                       End Time:  ${trackEndTime} on ${trackEndDate}
-                       Previous track history: ${trackHistory}
+Track Name: ${trackName}
+Track Duration: ${trackTime}
+Start Time: ${trackStartTime} on ${trackStartDate}
+End Time:  ${trackEndTime} on ${trackEndDate}
+Previous track history: ${trackHistory}
 
-                       To view ${userName}'s current track on a map please use the unique ID ${trackid} on Checkpoint Guest Login page.
+To view ${userName}'s current track on a map please use the unique ID ${trackid} on Checkpoint Guest Login page.
 
-                  You will receive a confirmation email when ${userName} checks in safely or an alert email if they do not check in on time. `;
+You will receive a confirmation email when ${userName} checks in safely or an alert email if they do not check in on time. `;
                   return mailTransport.sendMail(mailOptions).then(() => {
                     return console.log('New track email sent to emergency contact');
                   });
@@ -97,11 +97,14 @@
                   mailOptions.subject = `${APP_NAME} Track Message!`;
                   mailOptions.text = `Hey ${name}! You are ${userName}'s emergency contact on the ${APP_NAME}. ${name} failed to check in by their estimated time of arrival. If you cannot make contact with ${userName} then please contact the emergency services and provide them with the following information.
 
-                       Track Name: ${trackName}
-                       Track Duration: ${trackTime}
-                       Start Time: ${trackStartTime} on ${trackStartDate}
-                       End Time:  ${trackEndTime} on ${trackEndDate}
-                       Previous track history: ${trackHistory}`;
+Track Name: ${trackName}
+Track Duration: ${trackTime}
+Start Time: ${trackStartTime} on ${trackStartDate}
+End Time:  ${trackEndTime} on ${trackEndDate}
+Previous track history: ${trackHistory}
+Track ID: ${trackid} 
+
+You can see ${userName}'s track on a map by loging in as a guest on our website https://checkpoint-85d60.firebaseapp.com or on our app and pasting the track ID into the track viewer.`;
                   return mailTransport.sendMail(mailOptions).then(() => {
                     return console.log('Emergency email sent to emergency contact');
                   });

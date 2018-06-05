@@ -133,8 +133,9 @@
   <div id="newtrippage" class="container hide">
     <h1 class="brand">New Trip</h1>
       <div class="bodystyle">
-        <div class="alert"> Your trip has been saved.</div>
+
         <form method="POST" id="trackForm" action="map.html">
+          <p class="helptext">Fill out the form to create a new track!</p>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--1-col">            
               <h5>Track:</h5>
@@ -159,8 +160,8 @@
          <hr>
 
         
-        <ul id="">
-          <li class="accordionnewtrip"><h6>Duration:<span id="downarrow">&#9662;</span></h5></li>
+        <ul id="durationMenu" class="mdl-cell mdl-cell--4-col">
+          <li class="accordionnewtrip"><h6 style="margin-left: 15px;">Duration:<span id="downarrow">&#9662;</span></h6></li>
           <div class="panelnewtrip">
             <div class="mdl-grid">
               <div class="mdl-cell mdl-cell--4-col">   
@@ -209,6 +210,7 @@
             <div class="mdl-cell mdl-cell--3-col">
                 <select name="contact" id="contact"></select>
             </div>   
+            <p class="helptext">To add and view your emergency contacts, go to your profile and open Emergency Contacts.</p>
           </div>   
 
 
@@ -257,7 +259,7 @@
             <div class="track"><p>Your track here</p></div>
             <div class="mdl-cell mdl-cell--4-col"> 
               <p class="full">
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="map.html" class="submitbutton" type="submit">Next</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  class="submitbutton" type="submit">Next</button>
               </p>
             </div>
         </div>
@@ -269,39 +271,38 @@
   <div id="checkinpage" class="container hide">
     <h1 class="brand">Check In</h1>
     <div class="bodystyle">
-      <form action="" id="status">
-        <div class="checkoptions" id="ontime">
-          <p id='demo2'></p>
-          <div class="mdl-grid">
-            <div class="mdl-cell--4-col">
-              <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">I have arrived at my destination</h5>
-<!--                 <div class="mdl"> -->
-                  <input type="checkbox" name="status" id="checkedin" value="checkedin">
+      <p class="helptext">Select 'Check In' when you are finished to notify your emergency contact that you are safe.<br><br> When you are running late, select 'Late Check In'. </p>
+      <div id="checkinFormbox">
+        <form action="" id="status">
+          <div class="checkoptions" id="ontime">
+            <p id='demo2' style="text-align: center;"></p>
+            <div class="mdl-grid">
+              <div class="mdl-cell--4-col">
+                <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">Check In</h5>
+  <!--                 <div class="mdl"> -->
+                    <input type="checkbox" name="status" id="checkedin" value="checkedin">
+                    <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div><br>
+          <div class="checkoptions hide" id="latecheckin">
+            <div class="mdl-grid">
+              <div class="mdl-cell--4-col">
+                <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">Late Check In</h5>
+                  <input type="checkbox" name="status" id="lateChecked" value="lateChecked">
                   <span class="checkmark"></span>
-              </label>
+                </label>
+              </div>
             </div>
           </div>
-        </div><br>
-        <div class="checkoptions hide" id="latecheckin">
-          <div class="mdl-grid">
-            <div class="mdl-cell--4-col">
-              <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">Late Check In</h5>
-                <input type="checkbox" name="status" id="lateChecked" value="lateChecked">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <div class="mdl-cell--4-col" style="margin-top: 20%">
-              <p class="full" id="statusbtn">
-                <button id="statusbtn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action"  type="submit">
-                  Update
-                </button>
-              </p> 
-            </div>
+          <div class="mdl-cell--4-col" style="margin-top: 20%">
+            <p class="full" id="statusbtn">
+              <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action">Update</button>
+            </p>  
           </div>
-        </div>
-   
- 
-      </form>  
+        </form>  
+      </div>
     </div>
   </div>
 
@@ -315,17 +316,20 @@
   <div id="profilepage" class="container hide">
   <h1 class="brand">Profile</h1>
     <div class="bodystyle">
+        <p class="helptext">In your profile you can view current and past trips, edit your information and add/delete emergency contacts.</p>
       <ul id="profilelist">
         <li class="accordion"><h5>Current Trip<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
                 <p id="user_data"></p>
-                <h4>Time remaining:</h4>
+                <p><b>Time remaining:</b></p>
                 <p id='demo'></p>
 
         </div>
         <li class="accordion"><h5>Past Trips<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
-                <div id="pastuserdata"></div>
+          <p id="clearHistory">Clear track history</p>
+          <div class="alert"><p>Deleted!<p></div>
+          <div id="pastuserdata"></div>
           <!-- <p id="pastuserdata"></p> -->
         </div>
         <li class="accordion"><h5>My Info<span id="downarrow">&#9662;</span></h5></li>
@@ -344,7 +348,7 @@
           <hr>
           <form id="contactsForm">
             <div class="mdl-grid" style="background-color: #f2f8f2;">
-              <!-- <div class="mdl-cell mdl-cell--4-col"> -->
+             
                 <h6 style="margin: 0;"> Add a new emergency contact: </h6>
 
               <div class="mdl-cell mdl-cell--4-col">
@@ -378,11 +382,17 @@
     <div id="settingspage" class="container hide">
   <h1 class="brand">Settings</h1>
     <div class="bodystyle">
-        
+
+      <p class="helptext">
+        Checkpoint Version 1.0.0<br>
+        Developed by Stacey Willcox, Jordan Peat and Ella Stensness<br>
+        2018</p>
+
     </div>
 
     <div class="fulllogout">
-    <button id="btnLogout" class="btn btn-action">Logout</button>
+        <button id="btnLogout" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action">Logout</button>
+    
   </div>
   </div>
 
@@ -393,7 +403,7 @@
       <ul class="wrapper">
         <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>
         <li id="checkinbutton"><img src="checkin.png"><br>check in</li>
-        <a href="map.html" style="color: black !important;"> <li id="weatherbutton"><img src="weather.png"><br>map</li></a>
+         <li id="weatherbutton"><a href="map.html" style="color: black !important;"><img src="mapicon.png"><br>map</a></li>
         <li id="profilebutton"><img src="profile.png"><br>profile</li>
         <li id="settingsbutton"><img src="settings.png"><br>settings</li>
       </ul>

@@ -200,14 +200,6 @@ btnLogout.addEventListener('click', e => {
   //save message
   saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp);
 
-  //Show alert
-  document.querySelector('.alert').style.display = 'block';
-
-
-  //Hide alert after 3 seconds
-  setTimeout(function(){
-  document.querySelector('.alert').style.display = 'none';  
-  },3000);
 
 
 //UPDATE TRACKCHECKED
@@ -533,88 +525,31 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 contactsRef.on("child_added", function(snapshot) {
   var newContact = snapshot.val();
 
-$("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li>Email: "+ newContact.email+"</li></ul><br>"); 
+$("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li>Email: "+ newContact.email+"</li></ul><br><p class='deletecontact'>Delete Contact</p>"); 
 });
+
+// CLEAR TRACK HISTORY
+var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
+  clearHistory.addEventListener('click', e =>{
+    tracksRef.remove();
+
+      //Show alert
+  document.querySelector('.alert').style.display = 'block';
+
+
+  //Hide alert after 3 seconds
+  setTimeout(function(){
+  document.querySelector('.alert').style.display = 'none';  
+  },3000);
+
+  location.reload();
+  });
+
 //
 });
 
 
 
 
-
-// // AUTO COMPLETE EMERGENCY CONTACT
-// function autocomplete(inp, arr) {
-//   var currentFocus;
-//   inp.addEventListener("input", function(e) {
-//       var a, b, i, val = this.value;
-//       closeAllLists();
-//       if (!val) { return false;}
-//       currentFocus = -1;
-//       a = document.createElement("DIV");
-//       a.setAttribute("id", this.id + "autocomplete-list");
-//       a.setAttribute("class", "autocomplete-items");
-//       this.parentNode.appendChild(a);
-//       for (i = 0; i < arr.length; i++) {
-//         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-//           b = document.createElement("DIV");
-//           b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-//           b.innerHTML += arr[i].substr(val.length);
-//           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-//           b.addEventListener("click", function(e) {
-//               inp.value = this.getElementsByTagName("input")[0].value;
-//               closeAllLists();
-//           });
-//           a.appendChild(b);
-//         }
-//       }
-//   });
-
-//   inp.addEventListener("keydown", function(e) {
-//       var x = document.getElementById(this.id + "autocomplete-list");
-//       if (x) x = x.getElementsByTagName("div");
-//       if (e.keyCode == 40) {
-//         currentFocus++;
-//         addActive(x);
-//       } else if (e.keyCode == 38) { //up
-//         currentFocus--;
-//         addActive(x);
-//       } else if (e.keyCode == 13) {
-//         e.preventDefault();
-//         if (currentFocus > -1) {
-//           if (x) x[currentFocus].click();
-//         }
-//       }
-//   });
-//   function addActive(x) {
-//     if (!x) return false;
-//     removeActive(x);
-//     if (currentFocus >= x.length) currentFocus = 0;
-//     if (currentFocus < 0) currentFocus = (x.length - 1);
-//     x[currentFocus].classList.add("autocomplete-active");
-//   }
-
-//   function removeActive(x) {
-//     for (var i = 0; i < x.length; i++) {
-//       x[i].classList.remove("autocomplete-active");
-//     }
-//   }
-
-//   function closeAllLists(elmnt) {
-//     var x = document.getElementsByClassName("autocomplete-items");
-//     for (var i = 0; i < x.length; i++) {
-//       if (elmnt != x[i] && elmnt != inp) {
-//         x[i].parentNode.removeChild(x[i]);
-//       }
-//     }
-//   }
-//   document.addEventListener("click", function (e) {
-//       closeAllLists(e.target);
-//       });
-// }
-// var emergencycontacts = ["Stacey Willcox","Sandra Son","Kerryn Song","Cheryl Willcox","Noa Bigger"];
-
-// autocomplete(document.getElementById("contact"), emergencycontacts);
-
-// //END OF AUTOCOMPLETE
 
 //END
