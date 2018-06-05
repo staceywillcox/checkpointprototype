@@ -28,8 +28,7 @@
         var lateCheckIn = firebase.database().ref('users').child(userId).child('lateCheckIn');
         console.log("user id", userRecord.uid);
     
-        var selectedContact = document.getElementById('contact').value;
-        var emergencyemail = firebase.database().ref('users').child(userId).child('emergencycontacts').child(selectedContact);
+        var emergencyemail = firebase.database().ref('users').child(userId).child('chosenContact');
 
         emergencyemail.once("value")
         .then(function(snapshot){
@@ -180,8 +179,14 @@
                         var sendMessage = (time) - (-timeTillRef*1000);
                         // console.log(time);
                         // console.log(sendMessage);
-
+                        var lateEmailSent;
                         if(childData){
+                          var lateEmailSentRef = firebase.database().ref('users').child(userId).child('lateCheckIn');
+                          lateEmailSentRef.once("value")
+                          .then(function(snapshot){
+                           lateEmailSent = snapshot.child("lateEmailSent").val();
+                          });
+
                           var emailSentRef = firebase.database().ref('users').child(userId).child('trackChecked');
 
                           emailSentRef.once("value")
@@ -226,10 +231,16 @@
 
                                 }//end if distance 
 
-                                if (distance < 0 && lateStatus == "true") {
+                                if (distance < 0 && lateStatus == "true" && lateEmailSent == "false") {
                                   clearInterval(x);
                                       sendSafeEmail();
                                       console.log("Late Check In");
+                                      var lateCheckIn = firebase.database().ref().child('users').child(userId).child('lateCheckIn');
+
+                                        lateCheckIn.update({
+                                          'lateEmailSent':'true'
+                                        });
+
                                  }
 
                               });//setinterval end

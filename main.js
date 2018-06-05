@@ -222,7 +222,8 @@ btnLogout.addEventListener('click', e => {
     var lateCheckIn = useridRef.child('lateCheckIn');
 
     lateCheckIn.update({
-      'status':'false'
+      'status':'false',
+      'lateEmailSent':'false'
     });
 
 
@@ -245,6 +246,7 @@ function getInputVal(id){
 //Save message to firebase
 
 var tracksRef = firebase.database().ref('paths');
+var saveChosenContact = firebase.database().ref('users').child(userId);
 
 function saveMessage(track, time, startTime, startDate, endTime, endDate, timetill, history, contact, timestamp){
   var newMessageRef = tracksRef.push();
@@ -261,8 +263,45 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     timestamp: timestamp,
     trackid:" "
   });
+
+    saveChosenContact.child('chosenContact').set({
+    name: inputName,
+    email: inputEmail
+
+  });
 }
 //END
+
+
+
+      //CONTACT CODE
+      var contactsRef = firebase.database().ref('users').child(userId).child('emergencycontacts');
+      var selectedContactRef = firebase.database().ref('users').child(userId).child('selectedContact');
+
+           contactsRef.once("value")
+      .then(function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          var key = childSnapshot.key;
+          var newContact = childSnapshot.val();
+
+          var contactValue = document.getElementById('contact').value;
+
+        });
+          var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactInputName);
+
+          selectedContactData.once("value", function(snapshot) {
+            var selectedContactValue = snapshot.val();
+            inputName = selectedContactValue.name;
+            inputEmail = selectedContactValue.email;
+            console.log(inputName + " " + inputEmail);
+
+        
+          
+        });
+      });
+
+      // END CONTACT CODE
+
 
 //SET STATUS OF CHECK IN
  document.getElementById('status').addEventListener('submit', submitStatusForm);
