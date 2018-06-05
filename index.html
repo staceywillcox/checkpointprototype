@@ -290,19 +290,24 @@
                 <span class="checkmark"></span>
               </label>
             </div>
+            <div class="mdl-cell--4-col" style="margin-top: 20%">
+              <p class="full" id="statusbtn">
+                <button id="statusbtn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action"  type="submit">
+                  Update
+                </button>
+              </p> 
+            </div>
           </div>
         </div>
    
-        <p class="full" id="statusbtn">
-          <button type="submit"  class="submitbutton">Update Status</button>
-        </p>  
+ 
       </form>  
     </div>
   </div>
 
 <!-- WEATHER PAGE -->
 <div id="weatherpage" class="container hide">
-  <h1 class="brand">Weather</h1>
+  <h1 class="brand">Map</h1>
     <div class="bodystyle"></div>
   </div>
 
@@ -335,9 +340,10 @@
 
         <li class="accordion"><h5>Emergency Contacts<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
-            <div id="existingcontacts"></div>
+          <div id="existingcontacts"></div>
+          <hr>
           <form id="contactsForm">
-            <div class="mdl-grid">
+            <div class="mdl-grid" style="background-color: #f2f8f2;">
               <!-- <div class="mdl-cell mdl-cell--4-col"> -->
                 <h6 style="margin: 0;"> Add a new emergency contact: </h6>
 

@@ -513,7 +513,7 @@ var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
 
-  document.getElementById("user_data").innerHTML = "Track: " + newPost.track + "<br>Time: " +newPost.time + "<br>Start: " +newPost.startdate + " at "+newPost.starttime + "<br>End: " +newPost.enddate + " at " +newPost.endtime + "<br>History: " +newPost.history + "<br>Contact: " +newPost.contact +"<br>Track ID: " + newPost.trackid;
+  document.getElementById("user_data").innerHTML = "<b>Track:</b> " + newPost.track + "<br><b>Time:</b> " +newPost.time + "<br><b>Start:</b> " +newPost.startdate + " at "+newPost.starttime + "<br><b>End:</b> " +newPost.enddate + " at " +newPost.endtime + "<br><b>History:</b> " +newPost.history + "<br><b>Contact:</b> " +newPost.contact +"<br><b>Track ID:</b> " + newPost.trackid;
     var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
     var checkstatus = useridRef.child('status');
 });
@@ -523,7 +523,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 // PAST TRACKS LIST
   tracksRef.orderByChild('track').limitToFirst(100).on("child_added", function(snapshot) {
     var data = snapshot.val();
-     $("#pastuserdata").append("<br><ul><li>Track: " + data.track + "</li><li>Time: "+ data.time+"</li><li>Start: "+ data.startdate +" at "+data.starttime+"</li><li>End: "+ data.enddate + " at "+ data.endtime+"</li><li>History: "+ data.history+"</li><li>Contact: "+ data.contact+"</li><li>Track ID: "+data.trackid+"</li></ul><br>"); 
+     $("#pastuserdata").append("<br><ul><li><b>Track:</b> " + data.track + "</li><li><b>Time:</b> "+ data.time+"</li><li><b>Start:</b> "+ data.startdate +" at "+data.starttime+"</li><li><b>End:</b> "+ data.enddate + " at "+ data.endtime+"</li><li><b>History:</b> "+ data.history+"</li><li><b>Contact:</b> "+ data.contact+"</li><li><b>Track ID:</b> "+data.trackid+"</li></ul><br>"); 
   });    
 //END PAST TRACKS LIST
 
