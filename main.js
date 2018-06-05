@@ -48,7 +48,7 @@ var inputEmail;
     const auth = firebase.auth();
     //Sign in
     const promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message))
+    promise.catch(e => alert(e.message))
     .then(function(user){
       //alert(user.uid)
     });
@@ -58,13 +58,13 @@ var inputEmail;
 // SIGN UP
   btnSignup.addEventListener('click', e =>{
     //get email and pass
-    const name = textName.value;
+    const name = txtName.value;
     const email = txtEmail.value;
     const pass = txtPassword.value;
     const auth = firebase.auth();
     //Sign in
     const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));
+    promise.catch(e => alert(e.message));
   });
 //END SIGN UP
 
@@ -212,27 +212,23 @@ btnLogout.addEventListener('click', e => {
 
 //UPDATE TRACKCHECKED
       trackChecked.update({
-      'trackChecked':'false',
-      'emailSent': 'false'
-    })
+      trackChecked:'false',
+      emailSent: 'false'
+    });
 //END 
 //UPDATE STATUS TO NO STATUS ON NEW TRACK ADDED
       checkstatus.update({
-      'status':'no status'
-    })
+      status:'no status'
+    });
 
 
     var lateCheckIn = useridRef.child('lateCheckIn');
 
     lateCheckIn.update({
-      'status':'false',
-      'lateEmailSent':'false'
+      status:'false',
+      lateEmailSent:'false'
     });
 
-
-   //helpstatus.remove();
-   //longerstatus.remove();
-   safestatus.remove();
 
 //END     
 
@@ -267,11 +263,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
     trackid:" "
   });
 
-    saveChosenContact.child('chosenContact').set({
-    name: inputName,
-    email: inputEmail
 
-  });
 }
 //END
 
@@ -287,20 +279,25 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
           var key = childSnapshot.key;
           var newContact = childSnapshot.val();
 
-          var contactValue = document.getElementById('contact').value;
+          // var contactValue = document.getElementById('contact').value;
 
         });
           var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactInputName);
-
+          console.log(contactInputName);
           selectedContactData.once("value", function(snapshot) {
             var selectedContactValue = snapshot.val();
             inputName = selectedContactValue.name;
             inputEmail = selectedContactValue.email;
             console.log(inputName + " " + inputEmail);
 
-        
+            
           
         });
+              saveChosenContact.child('chosenContact').set({
+                name: inputName,
+                email: inputEmail
+
+              });
       });
 
       // END CONTACT CODE
@@ -430,6 +427,8 @@ var x = setInterval(function() {
     // Output the result in an element with id="demo"
     document.getElementById("demo").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
+    document.getElementById("demo2").innerHTML ="Time Remaining: "+ days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
   //console.log(distance);
 
       // If the count down is over, write some text 
@@ -515,7 +514,7 @@ var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
 // CURRENT TRACK
 tracksRef.on("child_added", function(snapshot, prevChildKey) {
   var newPost = snapshot.val();
-
+  contactInputName = newPost.contact;
   document.getElementById("user_data").innerHTML = "<b>Track:</b> " + newPost.track + "<br><b>Time:</b> " +newPost.time + "<br><b>Start:</b> " +newPost.startdate + " at "+newPost.starttime + "<br><b>End:</b> " +newPost.enddate + " at " +newPost.endtime + "<br><b>History:</b> " +newPost.history + "<br><b>Contact:</b> " +newPost.contact +"<br><b>Track ID:</b> " + newPost.trackid;
     var tracksRef = firebase.database().ref('users').child(userId).child('tracks');
     var checkstatus = useridRef.child('status');
