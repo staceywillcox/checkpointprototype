@@ -79,7 +79,7 @@
       </div> -->
     
 
- <!-- ******  MAP ****** -->
+<!-- ******  MAP ****** -->
     <script>
       var map; 
       var infoWindow;
@@ -349,6 +349,7 @@
           strokeWeight: 3
         });
         poly.setMap(map); 
+        i = 0;
         // map.addListener('click', addLatLng); 
 
       }
@@ -571,11 +572,11 @@ var userID;
             console.log("Marker " + x);
             database.ref('paths/' + pathID + "/marker" + x + "/pos/lat").once('value').then(function(snapshot) {
               rLat.push(snapshot.val());
-              //console.log("Lat: " + rLat[x]);
+              // console.log("Lat: " + rLat[x]);
             });
             database.ref('paths/' + pathID + "/marker" + x + "/pos/lng").once('value').then(function(snapshot) {
               rLng.push(snapshot.val());
-              //console.log("Lng: " + rLng[x]);
+              // console.log("Lng: " + rLng[x]);
             });
           }
 
@@ -592,7 +593,7 @@ var userID;
       console.log(loadedTrack);
       
       if (totalMarkers > 0){
-        alert("Track loaded!");
+        alert("Track successfully loaded!");
       }     
 
       }, 1500);
@@ -603,7 +604,7 @@ var userID;
       }
       else
         DrawTrack();  
-      }, 1500);
+      }, 2500);
 
   }
 
@@ -668,6 +669,8 @@ function DeleteTrack() {
   // https://stackoverflow.com/questions/15148803/in-firebase-is-there-a-way-to-get-the-number-of-children-of-a-node-without-load
 
 // **********************. ******** .*************************
+
+
 
 
 
