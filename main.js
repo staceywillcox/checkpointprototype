@@ -13,11 +13,11 @@
   firebase.initializeApp(config);
 
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-             .register('./service-worker.js')
-             .then(function() { console.log('Service Worker Registered'); });
-  }
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker
+  //            .register('./service-worker.js')
+  //            .then(function() { console.log('Service Worker Registered'); });
+  // }
 
   //Get elements
  
@@ -287,7 +287,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
           var contactValue = document.getElementById('contact').value;
 
         });
-          var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactInputName);
+          var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactName);
 
           selectedContactData.once("value", function(snapshot) {
             var selectedContactValue = snapshot.val();

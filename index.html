@@ -132,17 +132,9 @@
 
   <div id="newtrippage" class="container hide">
     <h1 class="brand">New Trip</h1>
-
       <div class="bodystyle">
-
         <div class="alert"> Your trip has been saved.</div>
-
-
-
-        <form id="trackForm">
-
         <form method="POST" id="trackForm" action="map.html">
-
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--1-col">            
               <h5>Track:</h5>
@@ -168,36 +160,36 @@
 
         
         <ul id="">
-        <li class="accordionnewtrip"><h6>Duration:<span id="downarrow">&#9662;</span></h5></li>
-        <div class="panelnewtrip">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--4-col">   
-            <h6>Start:
-            <input type="date" id="startDate" value="2018-01-01">
-            </h6>
-          </div>
-          <div class="mdl-cell mdl-cell--4-col"> 
-            <h6>
-              <label>Time:</label>
-              <input type="time" id="startTime" value="12:00">
-            </h6>
-          </div>
+          <li class="accordionnewtrip"><h6>Duration:<span id="downarrow">&#9662;</span></h5></li>
+          <div class="panelnewtrip">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--4-col">   
+                <h6>Start:
+                <input type="date" id="startDate" value="2018-01-01">
+                </h6>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col"> 
+                <h6>
+                  <label>Time:</label>
+                  <input type="time" id="startTime" value="12:00">
+                </h6>
+              </div>
 
-          <hr>
+              <hr>
 
-          <div class="mdl-cell mdl-cell--4-col"> 
-            <h6>End:
-            <input type="date" id="endDate" value="2018-01-01">
-            </h6>
+              <div class="mdl-cell mdl-cell--4-col"> 
+                <h6>End:
+                <input type="date" id="endDate" value="2018-01-01">
+                </h6>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col"> 
+                <h6>
+                  <label>Time:</label>
+                  <input type="time" id="endTime" value="12:00">
+                </h6>
+              </div>
+            </div>
           </div>
-          <div class="mdl-cell mdl-cell--4-col"> 
-            <h6>
-              <label>Time:</label>
-              <input type="time" id="endTime" value="12:00">
-            </h6>
-          </div>
-          </div>
-
         </ul>
           
           <div class="mdl-grid">
@@ -215,20 +207,7 @@
               <h6>Contact:</h6>
             </div>      
             <div class="mdl-cell mdl-cell--3-col">
-          <!-- <div class="autocomplete" style="width:100%;"> -->
-<!--            <div class="mdl-textfield mdl-js-textfield mdl-textfieldfloating-label">
-                  <input id="contact" class="mdl-textfield__input" type="text" name="contact">
-                  <label class="mdl-textfield__label" for="contact">Emergency Contact's email</label>
-                </div> -->
-          <!-- </div> -->
-
-                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
-              
-
-                <select name="contact" id="contact">
-                  
-                </select>
-                <!-- </div> -->
+                <select name="contact" id="contact"></select>
             </div>   
           </div>   
 
@@ -358,10 +337,30 @@
         <div class="panel">
             <div id="existingcontacts"></div>
           <form id="contactsForm">
-            <label>Add a new emergency contact:</label><br>
-            <input type="text" name="contactName" class="contactInput" id="contactName" placeholder="Name">
-            <input type="email" name="contactEmail" class="contactInput" id="contactEmail" placeholder="Email">
-              <button class="addbutton"  type="submit">Add</button>
+            <div class="mdl-grid">
+              <!-- <div class="mdl-cell mdl-cell--4-col"> -->
+                <h6 style="margin: 0;"> Add a new emergency contact: </h6>
+
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input id="contactName" class="mdl-textfield__input" type="text" name="contactName" >
+                  <label class="mdl-textfield__label" for="contactName">Contact's Name</label>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input id="contactEmail" class="mdl-textfield__input" type="email" name="contactEmail" >
+                  <label class="mdl-textfield__label" for="contactEmail">Contact's Email</label>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action"  type="submit">
+                  Add
+                </button>
+              </div>
+            </div>
+
+              
           </form>
 
         </div>
@@ -388,7 +387,7 @@
       <ul class="wrapper">
         <li id="mytripbutton"><img src="mytrip.png"><br>new trip</li>
         <li id="checkinbutton"><img src="checkin.png"><br>check in</li>
-        <a href="map.html"> <li id="weatherbutton"><img src="weather.png"><br>map</li></a>
+        <a href="map.html" style="color: black !important;"> <li id="weatherbutton"><img src="weather.png"><br>map</li></a>
         <li id="profilebutton"><img src="profile.png"><br>profile</li>
         <li id="settingsbutton"><img src="settings.png"><br>settings</li>
       </ul>

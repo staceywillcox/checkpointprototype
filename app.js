@@ -74,6 +74,14 @@ settingsbutton.addEventListener('click', e => {
 //END GOING BETWEEN PAGES BUTTONS
 
 
+
+
+
+
+
+
+
+
 //ACCORDION FOR PROFILE PAGE 
 
 var acc = document.getElementsByClassName("accordion");
