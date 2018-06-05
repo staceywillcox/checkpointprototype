@@ -1,5 +1,21 @@
 // GOING BETWEEN PAGES
 
+// LOGIN PAGE
+
+loginbutton.addEventListener('click', e => {
+  innerlogin.classList.add('hide');
+  innerlogin2.classList.remove('hide');
+});
+
+registerbutton.addEventListener('click', e => {
+  innerlogin.classList.remove('hide');
+  innerlogin2.classList.add('hide');
+});
+
+//END LOGIN PAGE
+
+
+
 // CHECKIN PAGE
 checkinbutton.addEventListener('click', e => {
   checkinpage.classList.remove('hide');
@@ -105,5 +121,20 @@ for (v = 0; v < acc3.length; v++) {
         }
     });
 }
+
+// var acc4 = document.getElementsByClassName("accordionguest");
+// var k;
+
+// for (k = 0; k < acc4.length; k++) {
+//     acc4[k].addEventListener("click", function() {
+//         this.classList.toggle("active");
+//         var panelnewtrip = this.nextElementSibling;
+//         if (panelnewtrip.style.display === "block") {
+//             panelnewtrip.style.display = "none";
+//         } else {
+//             panelnewtrip.style.display = "block";
+//         }
+//     });
+// }
 
 

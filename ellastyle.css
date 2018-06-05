@@ -148,9 +148,10 @@ position: relative;
   background-image: url("https://image.ibb.co/keBp6T/green.jpg");
     background-position: center;
     background-size: cover;
-    padding: 100%;
     min-height: 100%;
+    /*padding: 100%;*/
 }
+
 
 #logo{margin: auto; text-align: center; }
 
@@ -161,14 +162,23 @@ position: relative;
 #loginpage input, textarea {
     color: white;
     text-align: center;
-/*    width:70%;
-    margin-bottom:5px;
-    line-height:25px;
-    padding:2px 5px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    border:1px solid #CCC;*/
+}
+
+#loginpage2 label {
+    color: white;
+
+}
+#loginpage2 input, textarea {
+    color: white;
+    text-align: center;
+}
+
+#registerbutton {
+  margin: 30% 0 20% 0;
+}
+
+#btnSignup{
+  margin-bottom: 5%;
 }
 
 
@@ -186,7 +196,7 @@ position: relative;
      border-radius: 10px;
 }
 
-#innerlogin{
+#innerlogin, #innerlogin2{
 margin:20% auto;
 width:70%;
 }
@@ -413,7 +423,7 @@ ul{
 /*PROFILE PAGE*/
 
 /*accordian*/
-.accordion, .accordionlogin {
+.accordion, .accordionlogin, .accordionguest {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -426,7 +436,7 @@ ul{
     transition: 0.4s;
 }
 
-.active, .accordion:hover, .accordionlogin:hover {
+.active, .accordion:hover, .accordionlogin:hover, .accordionguest {
     background-color: #ccc; 
 }
 
@@ -472,8 +482,8 @@ footer{
     margin:0;
   }
 
-  #innerlogin{
-margin:45% auto;
+ #innerlogin{
+    padding:45% auto;
 }
 
 }
@@ -507,6 +517,13 @@ width:85%;
   margin: 0;
 }*/
 
+.mdl-button-accent {
+  background-color: #6ca2a8 !important;
+}
+/*
+a {
+  color: white!important;
+}*/
 
 
 

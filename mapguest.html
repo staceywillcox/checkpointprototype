@@ -35,39 +35,33 @@
     <ul id="tracklist">
         <li class="accordion">Instructions</li>
         <div class="panel">
-        <h5> Create a Track </h5>
-        <p>1. Tap on the map to start drawing a track, with each tap creating a connecting line
-        <p>2. When you're done, make sure to tap 'end track'.
-        <p>3. Find your new track's unique ID under 'Track Settings'!
-        <h5> Load/Delete a Track </h5>
-        <p>1. Enter your track number via your profile or email</p>
-        <p>2.a. Tap 'Load'. Your track should then automatically load on the map!
-        <p>2.b. Tap 'Delete'. Your track will be removed from the database.  
+        <h5> Load a Track </h5>
+        <p>1. Enter your track number via your emergency contact email</p>
+        <p>2. Tap 'Load'. Your track should then automatically load on the map!
         <p> <i><b> You will be alerted if the track doesn't exist. You may need to retry the load if it doesn't appear.</b></i>
 
         </div>
-
-
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--2-col">
+            <div class="mdl-cell mdl-cell--3-col">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input id="pathNum" class="mdl-textfield__input" type="text">
                 <label class="mdl-textfield__label" for="pathNum">Track Number</label>
               </div>
             </div>
 
+
             <div class="mdl-cell mdl-cell--1-col">
               <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="RetrieveTrack();">
                 Load
               </button>
             </div>
-            <div class="mdl-cell mdl-cell--1-col">
+<!--             <div class="mdl-cell mdl-cell--1-col">
               <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="DeleteTrack();">
                 Delete
             </button>
-
-        </div>
-      </div>
+            </div> -->
+          </div>
+        <!-- </div> -->
     </ul>
          
 
@@ -76,13 +70,13 @@
     <div id="map"></div>
 
 
-      <div class="mdl-grid">
+<!--       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col">
           <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="EndTrackData();">
             End Track
           </button>
         </div>
-      </div>
+      </div> -->
     
 
  <!-- ******  MAP ****** -->
@@ -355,7 +349,7 @@
           strokeWeight: 3
         });
         poly.setMap(map); 
-        map.addListener('click', addLatLng); 
+        // map.addListener('click', addLatLng); 
 
       }
 
@@ -672,39 +666,6 @@ function DeleteTrack() {
 
 
   // https://stackoverflow.com/questions/15148803/in-firebase-is-there-a-way-to-get-the-number-of-children-of-a-node-without-load
-
-// **********************. ******** .*************************
-
-
-
-
-// **********************. MODAL .*************************
-
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("help");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
 
 // **********************. ******** .*************************
 

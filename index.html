@@ -28,34 +28,99 @@
 <body>
  <div id="pagewrap"> 
 
-    <div id="loginpage" class="container hide">
-      <div id="innerlogin">
-        <div id="logo"><img src="logo.png"></div>
-        <h1 class="brand2">Checkpoint</h1>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="txtName2">
-            <label class="mdl-textfield__label" for="txtName2">Name...</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="email" id="txtEmail">
-            <label class="mdl-textfield__label" for="txtEmail">Email...</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="txtPassword">
-            <label class="mdl-textfield__label" for="txtEmail">Password...</label>
-          </div>
 
-        <div id="loginbuttons">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action"  type="submit" id="btnLogin">
-            Login
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn btn-secondary"  type="submit" id="btnSignup">
-            Sign Up
-          </button>
+<!-- LOG IN PAGE -->
 
+    <div id="loginpage" class="container">
+      <div id="innerlogin" class="container">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">
+            <div id="logo"><img src="logo.png"></div>
+            <h1 class="brand2">Checkpoint</h1>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">  
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="txtName2">
+              <label class="mdl-textfield__label" for="txtName2">Name...</label>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" id="txtEmail">
+              <label class="mdl-textfield__label" for="txtEmail">Email...</label>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" id="txtPassword">
+              <label class="mdl-textfield__label" for="txtEmail">Password...</label>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-secondary"  type="submit" id="btnSignup">
+              Sign Up
+            </button>
+            <p> Already have an account? <a id="loginbutton"> Log In </a> 
+            Emergency Contact? <a id="guestloginbutton" href="mapguest.html"> Guest Log In </a> </p>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+
+<!-- ********************  -->
+
+
+
+
+<!-- REGISTER PAGE -->
+
+    <!-- <div id="loginpage2" class="container hide"> -->
+      <div id="innerlogin2" class="container hide">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">
+            <div id="logo"><img src="logo.png"></div>
+            <h1 class="brand2">Checkpoint</h1>
+          </div>
+<!--           <div class="mdl-cell mdl-cell--4-col">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"  type="submit" id="btnGuestLogin">
+              Emergency Login
+            </button>
+          </div> -->
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" id="txtEmailLogin">
+              <label class="mdl-textfield__label" for="txtEmailLogin">Email...</label>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" id="txtPasswordLogin">
+              <label class="mdl-textfield__label" for="txtPasswordLogin">Password...</label>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action"  type="submit" id="btnLogin">
+              Login
+            </button>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">  
+            <button id="registerbutton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              Back to Register
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
+<!-- ********************  -->
+
+
+
+
 
   <div id="mytrippage" class="container hide">
     <h1 class="brand">My Trip</h1>

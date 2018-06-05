@@ -24,6 +24,8 @@
   const txtName = document.getElementById('txtName');
   const txtEmail = document.getElementById('txtEmail');
   const txtPassword = document.getElementById('txtPassword');
+  const txtEmailLogin = document.getElementById('txtEmailLogin');
+  const txtPasswordLogin = document.getElementById('txtPasswordLogin');
   const btnLogin = document.getElementById('btnLogin');
   const btnSignup = document.getElementById('btnSignup');
   const btnLogout = document.getElementById('btnLogout');
@@ -38,8 +40,8 @@
 
   btnLogin.addEventListener('click', e =>{
     //get email and pass
-    const email = txtEmail.value;
-    const pass = txtPassword.value;
+    const email = txtEmailLogin.value;
+    const pass = txtPasswordLogin.value;
     const auth = firebase.auth();
     //Sign in
     const promise = auth.signInWithEmailAndPassword(email, pass);
@@ -53,6 +55,7 @@
 // SIGN UP
   btnSignup.addEventListener('click', e =>{
     //get email and pass
+    const name = textName.value;
     const email = txtEmail.value;
     const pass = txtPassword.value;
     const auth = firebase.auth();
