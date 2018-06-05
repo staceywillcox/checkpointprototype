@@ -35,6 +35,9 @@
   const FIREBASE_AUTH = firebase.auth();
   const messaging = firebase.messaging();
 
+var contactInputName;
+var inputName;
+var inputEmail;
 
   // LOGIN
 
@@ -287,7 +290,7 @@ function saveMessage(track, time, startTime, startDate, endTime, endDate, timeti
           var contactValue = document.getElementById('contact').value;
 
         });
-          var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactName);
+          var selectedContactData = firebase.database().ref('users').child(userId).child('emergencycontacts').child(contactInputName);
 
           selectedContactData.once("value", function(snapshot) {
             var selectedContactValue = snapshot.val();
