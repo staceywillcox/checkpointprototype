@@ -28,8 +28,8 @@
         var lateCheckIn = firebase.database().ref('users').child(userId).child('lateCheckIn');
         console.log("user id", userRecord.uid);
     
-
-        var emergencyemail = firebase.database().ref('users').child(userId).child('emergencycontacts').child("contact");
+        var selectedContact = document.getElementById('contact').value;
+        var emergencyemail = firebase.database().ref('users').child(userId).child('emergencycontacts').child(selectedContact);
 
         emergencyemail.once("value")
         .then(function(snapshot){

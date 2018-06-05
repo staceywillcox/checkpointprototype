@@ -87,7 +87,8 @@ btnLogout.addEventListener('click', e => {
       console.log("User " + user.uid + " is logged in with " + user.email);
       var userId = user.uid;
       var userEmail = user.email;
-
+      var txtName2 = document.getElementById('txtName2').value;
+      var myNameRef = firebase.database().ref('users').child(userId);
       
       //If a user already exists then console log but if the user is new then add it to the database
 
@@ -99,6 +100,11 @@ btnLogout.addEventListener('click', e => {
           console.log('already in system')
         } else{
           rootRef.child('users').child(userId).push({id: userId, email: userEmail});
+
+            myNameRef.set({
+             name:txtName2,
+ 
+            });
         }
       })
 
@@ -118,8 +124,28 @@ btnLogout.addEventListener('click', e => {
 //Displays late status option if user is late and normal check in if they are not
 
 
+  var contactsRef = firebase.database().ref('users').child(userId).child('emergencycontacts');
+//DATALIST OF EMERGENCY CONTACTS FOR NEW TRIP PAGE
+  contactsRef.once("value")
+  .then(function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+      var key = childSnapshot.key;
+      var newContact = childSnapshot.val();
+      console.log(newContact);
+      $("#contact").append("<option>" + newContact.name + "</option>"); 
+    });
+  });
 
 
+
+
+// contactsRef.once("value", function(snapshot) {
+//   var newContact = snapshot.val();
+
+// $("#contact123").append("<option>" + newContact.name + "</option>"); 
+// });
+
+// END DATALIST
 
 
 
@@ -416,7 +442,7 @@ function getInputVal(id){
 
 function saveContact(contactName, contactEmail){
   var newcontactRef = contactsRef.push();
-  contactsRef.child("contact").set({
+  contactsRef.child(contactName).set({
   name: contactName,
   email:contactEmail
 
