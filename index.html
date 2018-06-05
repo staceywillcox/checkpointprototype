@@ -177,17 +177,24 @@
             </h6>
           </div>
           <div class="mdl-cell mdl-cell--4-col"> 
-            <label>Time:</label>
-            <input type="time" id="startTime" value="12:00">
+            <h6>
+              <label>Time:</label>
+              <input type="time" id="startTime" value="12:00">
+            </h6>
           </div>
+
+          <hr>
+
           <div class="mdl-cell mdl-cell--4-col"> 
             <h6>End:
             <input type="date" id="endDate" value="2018-01-01">
             </h6>
           </div>
           <div class="mdl-cell mdl-cell--4-col"> 
-            <label>Time:</label>
-            <input type="time" id="endTime" value="12:00">
+            <h6>
+              <label>Time:</label>
+              <input type="time" id="endTime" value="12:00">
+            </h6>
           </div>
           </div>
 
@@ -215,13 +222,13 @@
                 </div> -->
           <!-- </div> -->
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
               
 
                 <select name="contact" id="contact">
                   
                 </select>
-                </div>
+                <!-- </div> -->
             </div>   
           </div>   
 
@@ -285,16 +292,26 @@
     <div class="bodystyle">
       <form action="" id="status">
         <div class="checkoptions" id="ontime">
-          <label class="checkbox">I have arrived at my destination
-            <input type="checkbox" name="status" id="checkedin" value="checkedin">
-            <span class="checkmark"></span>
-          </label>
+          <div class="mdl-grid">
+            <p id='demo'></p>
+            <div class="mdl-cell--4-col">
+              <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">I have arrived at my destination</h5>
+<!--                 <div class="mdl"> -->
+                  <input type="checkbox" name="status" id="checkedin" value="checkedin">
+                  <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
         </div><br>
         <div class="checkoptions hide" id="latecheckin">
-          <label class="checkbox">Late Check In
-            <input type="checkbox" name="status" id="lateChecked" value="lateChecked">
-            <span class="checkmark"></span>
-          </label>
+          <div class="mdl-grid">
+            <div class="mdl-cell--4-col">
+              <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">Late Check In</h5>
+                <input type="checkbox" name="status" id="lateChecked" value="lateChecked">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
         </div>
    
         <p class="full" id="statusbtn">
@@ -315,19 +332,19 @@
   <h1 class="brand">Profile</h1>
     <div class="bodystyle">
       <ul id="profilelist">
-        <li class="accordion">Current Trip</li>
+        <li class="accordion"><h5>Current Trip<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
                 <p id="user_data"></p>
                 <h4>Time remaining:</h4>
                 <p id='demo'></p>
 
         </div>
-        <li class="accordion">Past Trips</li>
+        <li class="accordion"><h5>Past Trips<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
                 <div id="pastuserdata"></div>
           <!-- <p id="pastuserdata"></p> -->
         </div>
-        <li class="accordion">My Info</li>
+        <li class="accordion"><h5>My Info<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
           <form id="myName">
             <input id="txtName" type="text" placeholder="Name">
@@ -337,7 +354,7 @@
           <p id="newstatus"></p>
         </div>
 
-        <li class="accordion">Emergency Contacts</li>
+        <li class="accordion"><h5>Emergency Contacts<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
             <div id="existingcontacts"></div>
           <form id="contactsForm">

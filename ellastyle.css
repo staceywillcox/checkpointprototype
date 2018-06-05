@@ -47,7 +47,7 @@ position: relative;
 
 }
 
-#messagetime{
+#messagetime, #contact, input[type="date"], input[type="time"]{
 
     background-color: transparent; 
     color:#485e74;
@@ -508,8 +508,9 @@ width:85%;
   text-align: center;
 }
 
-.mdl-cell h5 {
-  /*text-align: left;*/
+.mdl-cell h6 {
+  text-align: left;
+  margin-left: 10%;
   /*float: left;*/
 }
 
