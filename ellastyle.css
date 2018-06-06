@@ -127,9 +127,9 @@ position: relative;
      border-radius: 10px;
 }
 
-.changebutton{
+/*.changebutton{
     width:30%;
-    background-color: white; /* #70a075 */
+    background-color: white;
     border: 1px solid #70a075;
     color: #70a075;
     padding: 5px 10px;
@@ -139,10 +139,10 @@ position: relative;
     margin: 2px 2px;
     cursor: pointer;
      border-radius: 10px;
-}
+}*/
 
 #txtName{
-  width:65%;
+/*  width:65%;
     margin-top:10px;
     margin-bottom:10px;
     line-height:25px;
@@ -150,7 +150,7 @@ position: relative;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    border:1px solid #CCC;
+    border:1px solid #CCC;*/
 }
 
 #loginpage {
@@ -384,7 +384,7 @@ ul{
   margin:auto 0;
   height: 50px;
   width: 50px;
-  background-color: #eee;
+  background-color: darkgrey;
   border-radius: 50%;
 }
 
@@ -532,13 +532,23 @@ width:85%;
   margin: 0;
 }*/
 
-.mdl-button-accent {
+
+/*.mdl-button--colored {
+  color: white !important;
+}*/
+
+.mdl-button--accent {
+  color: white !important;
   background-color: #6ca2a8 !important;
 }
-/*
+
 a {
-  color: white!important;
-}*/
+  color: white !important;
+}
+
+footer a {
+  color: black !important;
+}
 
 
 

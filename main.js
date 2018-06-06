@@ -162,14 +162,14 @@ btnLogout.addEventListener('click', e => {
       var key = childSnapshot.key;
       var childData = childSnapshot.val();
          console.log(childData);
-        document.getElementById("newstatus").innerHTML = "Status: "+ childData;
+        document.getElementById("newstatus").innerHTML = "<b>Status:</b> "+ childData;
     });
   });
 
 //Shows changed status without page reload
   checkstatus.on("child_changed", function(snapshot) {
     var status = snapshot.val();
-  document.getElementById("newstatus").innerHTML = "Status: "+ status;
+  document.getElementById("newstatus").innerHTML = "<b>Status:</b> "+ status;
 
   });
  // SUBMITTING DATA TO THE TRACKS DATABASE
@@ -372,13 +372,13 @@ function saveNameMessage(txtName){
   var myNameRef = firebase.database().ref('users').child(userId).child('name');
     myNameRef.once("value", function(snapshot) {
     var myname = snapshot.val();
-  document.getElementById("myuserName").innerHTML = "Name: "+ myname.name;
+  document.getElementById("myuserName").innerHTML = "<b>Name:</b> "+ myname.name;
 
   });
-  document.getElementById("myuserName").innerHTML = "Name: ";
+  document.getElementById("myuserName").innerHTML = "<b>Name:</b> ";
   myNameRef.on("child_changed", function(snapshot) {
     var myname = snapshot.val();
-  document.getElementById("myuserName").innerHTML = "Name: "+myname;
+  document.getElementById("myuserName").innerHTML = "<b>Name:</b> "+myname;
 
   });
 //END
@@ -525,7 +525,7 @@ tracksRef.on("child_added", function(snapshot, prevChildKey) {
 contactsRef.on("child_added", function(snapshot) {
   var newContact = snapshot.val();
 
-$("#existingcontacts").append("<br><ul><li>Name: " + newContact.name + "</li><li>Email: "+ newContact.email+"</li></ul><br><p class='deletecontact'>Delete Contact</p>"); 
+$("#existingcontacts").append("<br><ul><li><b>Name:</b> " + newContact.name + "</li><li><b>Email:</b> "+ newContact.email+"</li></ul><br>"); 
 });
 
 // CLEAR TRACK HISTORY

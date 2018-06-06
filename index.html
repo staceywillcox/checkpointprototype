@@ -278,7 +278,7 @@
             <p id='demo2' style="text-align: center;"></p>
             <div class="mdl-grid">
               <div class="mdl-cell--4-col">
-                <label class="checkbox"><h5 style="padding-top: 2%; text-align: center;">Check In</h5>
+                <label class="checkbox"><h3 style="padding-top: 2%; text-align: center;">Check In</h3>
   <!--                 <div class="mdl"> -->
                     <input type="checkbox" name="status" id="checkedin" value="checkedin">
                     <span class="checkmark"></span>
@@ -308,7 +308,7 @@
 
 <!-- WEATHER PAGE -->
 <div id="weatherpage" class="container hide">
-  <h1 class="brand">Map</h1>
+  <h1 class="brand">Create Track</h1>
     <div class="bodystyle"></div>
   </div>
 
@@ -334,12 +334,28 @@
         </div>
         <li class="accordion"><h5>My Info<span id="downarrow">&#9662;</span></h5></li>
         <div class="panel">
-          <form id="myName">
-            <input id="txtName" type="text" placeholder="Name">
-              <button class="changebutton"  type="submit">Change</button>
-          </form>
+          <p class="helptext">Change your name and check your status.</p>
           <p id="myuserName"></p>
           <p id="newstatus"></p>
+          <hr>
+          <form id="myName">
+            
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--2-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input id="txtName" class="mdl-textfield__input" type="text" name="txtName">
+                  <label class="mdl-textfield__label" for="txtName">Name </label>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--2-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action changebutton"  type="submit">
+                  Change
+                </button>
+              </div>
+            </div>
+                
+          </form>
+
         </div>
 
         <li class="accordion"><h5>Emergency Contacts<span id="downarrow">&#9662;</span></h5></li>
@@ -391,7 +407,7 @@
     </div>
 
     <div class="fulllogout">
-        <button id="btnLogout" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored btn btn-action">Logout</button>
+        <button id="btnLogout" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn btn-action">Logout</button>
     
   </div>
   </div>
